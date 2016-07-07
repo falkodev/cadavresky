@@ -1,0 +1,146 @@
+@import 'custom-variables';
+@import 'color';
+@import 'main';
+@import 'header';
+@import 'bower_components/bootstrap-sass/assets/stylesheets/bootstrap';
+
+/* make sidebar nav vertical */ 
+@media (min-width: 768px) {
+  .sidebar-nav .navbar .navbar-collapse {
+    padding: 0;
+    max-height: none;
+  }
+  .sidebar-nav .navbar ul {
+    float: none;
+  }
+  .sidebar-nav .navbar ul:not {
+    display: block;
+  }
+  .sidebar-nav .navbar li {
+    float: none;
+    display: block;
+  }
+  .sidebar-nav .navbar li a {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+}
+
+@media (max-width: 767px) {
+    #logo-default {
+        display: none;
+    }
+    
+    .sidebar-nav .navbar .navbar-collapse {
+        border-color: transparent;
+    }
+    
+    .navbar-nav {
+        margin: 15px -15px;
+    }
+}
+
+.navbar-default {
+    background-color: white;
+    border-color: white;
+    .menu {
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+    .navbar-nav {
+        >li {
+            width: 120px;
+            padding-bottom: 10px;
+            
+            a {
+                padding: 0px 2px;
+            }
+          
+            .menu-whoswho {
+                background-color: $red;
+
+                &:hover, &:focus, &:active {
+                    background-color: $red;
+                    color: black;
+                    text-decoration: line-through;
+                }
+            }
+          
+            .menu-projectology {
+                background-color: $purple;
+
+                &:hover, &:focus, &:active {
+                    background-color: $purple;
+                    color: black;
+                    text-decoration: line-through;
+                }
+            }
+          
+            .menu-zoo {
+                background-color: $yellow;
+
+                &:hover, &:focus, &:active {
+                    background-color: $yellow;
+                    color: black;
+                    text-decoration: line-through;
+                }
+            }
+          
+            .menu-shop {
+                background-color: $green;
+
+                &:hover, &:focus, &:active {
+                    background-color: $green;
+                    color: black;
+                    text-decoration: line-through;
+                }
+            }
+          
+            .menu-goodies {
+                background-color: $orange;
+
+                &:hover, &:focus, &:active {
+                    background-color: $orange;
+                    color: black;
+                    text-decoration: line-through;
+                }
+            }
+          
+            .menu-contact {
+                background-color: $pink;
+
+                &:hover, &:focus, &:active {
+                    background-color: $pink;
+                    color: black;
+                    text-decoration: line-through;
+                }
+            }
+      } 
+  }
+}
+
+body {
+    font-family: sans-serif;
+}
+
+.row {
+    margin-left: 10px;
+    margin-right: 0px;
+}
+
+.logo {
+    width: 120px;
+}
+
+#logo-default {
+    margin: 25px 25px 100px 0px;
+}
+
+#logo-mobile {
+    margin: -15px 0px 0px -15px;
+}
+
+.content {
+    margin-top: 25px;
+}
+
