@@ -23,7 +23,7 @@ var config = {
                 test: /\.jsx?$/,
                 include: path.join(__dirname, 'app/Resources/js'),
                 loader: 'react-hot!babel'
-            }
+            },
         ]
     }
 };

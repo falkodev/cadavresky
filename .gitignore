@@ -21,5 +21,7 @@ web/libs
 web/dist
 web/css
 app/dist
-
-
+/web/js
+/web/js
+web/images
+/undefined
