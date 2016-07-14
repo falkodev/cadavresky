@@ -5,7 +5,12 @@
 @import 'bower_components/bootstrap-sass/assets/stylesheets/bootstrap';
 
 /* make sidebar nav vertical */ 
-@media (min-width: 768px) {
+@media (min-width: $screen-sm-min) {
+    .content {
+        margin-top: 50px;
+        margin-right: 50px
+    }
+
     .sidebar-nav .navbar .navbar-collapse {
         padding: 0;
         max-height: none;
@@ -35,13 +40,32 @@
     }
 }
 
-@media (max-width: 767px) {
+@media (max-width: $screen-xs-max) {
     #logo-default {
         display: none;
     }
     
+    .content {
+        margin-top: 0px;
+        margin-right: 0px
+    }
+
     .sidebar-nav .navbar .navbar-collapse {
         border-color: transparent;
+
+        ul {
+            left: -200px;
+            width: 0%;
+            padding: 10px 50px 0px 10px;
+            transition: all .5s ease-in-out;
+        }
+
+        &.collapse.in {
+            ul {
+                left: 0;
+                width: 100%;
+            }
+        }
     }
     
     .navbar-nav {
@@ -51,11 +75,23 @@
 
     .navbar-default {
         margin-top: 15px;
+
+        .navbar-toggle {
+            border: none;
+            float: left;
+
+            &:hover, &:focus {
+                background-color: transparent;
+                .icon-bar {
+                    background-color: $black;
+                }
+            }
+        }
     }
 
     .navbar-default .navbar-nav > li {
         padding-bottom: 10px;
-        width: 100%;
+//        width: 100%;
     }
 }
 
@@ -118,10 +154,6 @@
                     text-decoration: line-through;
                 }
             }
-          
-
-          
-
       } 
   }
 }
@@ -143,44 +175,10 @@ body {
 }
 
 #logo-default {
-    margin: 25px 25px 100px 0px;
+    margin: 25px 25px 100px -15px;
     width: 120px;
 }
 
 #logo-mobile {
-    margin: -15px 0px 0px -15px;
     width: 45px;
 }
-
-.content {
-    margin-top: 25px;
-    margin-right: 50px
-}
-
-//.example-appear {
-//   opacity: 0.01;
-//}
-//
-//.example-appear.example-appear-active {
-//   opacity: 1;
-//   transition: opacity 500ms ease-in;
-//}
-
-.example-enter {
-  opacity: 0.01;
-}
-
-.example-enter.example-enter-active {
-  opacity: 1;
-  transition: opacity 500ms ease-in;
-}
-
-.example-leave {
-  opacity: 1;
-}
-
-.example-leave.example-leave-active {
-  opacity: 0.01;
-  transition: opacity 300ms ease-in;
-}
-

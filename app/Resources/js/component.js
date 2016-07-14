@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { Grid, Row, Col, Nav, Navbar, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 
 const Component = React.createClass({
@@ -12,18 +11,18 @@ const Component = React.createClass({
                         <div className="sidebar-nav">
                             <Navbar>
                                 <Navbar.Header>
-                                  <Navbar.Brand>
-                                    <a href="#">React-Bootstrap</a>
-                                  </Navbar.Brand>
+                                    <Navbar.Toggle children=<img className="logo" id="logo-mobile" src="../images/CADAVRESKY-logo-mobile.png"/>/>
                                 </Navbar.Header>
-                                <Nav className="menu navbar-fixed-top">
-                                    <NavItem href="#" className="menu-whoswho active">Who's who</NavItem>
-                                    <NavItem href="#" className="menu-projectology">Projectology</NavItem>
-                                    <NavItem href="#" className="menu-zoo">The zoo</NavItem>
-                                    <NavItem href="#" className="menu-shop">Shop</NavItem>
-                                    <NavItem href="#" className="menu-goodies">Goodies</NavItem>
-                                    <NavItem href="#" className="menu-contact">Contact</NavItem>
-                                </Nav>
+                                <Navbar.Collapse>
+                                    <Nav className="menu navbar-fixed-top">
+                                        <NavItem href="#" className="menu-whoswho active">Who's who</NavItem>
+                                        <NavItem href="#" className="menu-projectology">Projectology</NavItem>
+                                        <NavItem href="#" className="menu-zoo">The zoo</NavItem>
+                                        <NavItem href="#" className="menu-shop">Shop</NavItem>
+                                        <NavItem href="#" className="menu-goodies">Goodies</NavItem>
+                                        <NavItem href="#" className="menu-contact">Contact</NavItem>
+                                    </Nav>
+                                </Navbar.Collapse>
                             </Navbar>
                         </div>
                     </Col>
