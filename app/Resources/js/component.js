@@ -1,8 +1,27 @@
 import React from 'react';
 import { Grid, Row, Col, Nav, Navbar, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 
+const logo = "../images/CADAVRESKY-logo-mobile.png";
+const text = "../images/CADAVRESKY-text-mobile.png";
 const Component = React.createClass({
-    render: function () {
+    getInitialState: function() {
+        return {
+            imgSrc: logo,
+            imgWidth: "45px"
+        };
+    },
+    toggleLogoMobileSrc: function() {
+        this.state.imgSrc == logo ? this.setState({
+            imgSrc: text,
+            imgWidth: "150px"
+        }):
+        this.setState({
+            imgSrc: logo,
+            imgWidth: "45px"
+        })
+        ;
+    },
+    render: function() {
         return (
             <Grid fluid>
                 <Row>
@@ -11,7 +30,7 @@ const Component = React.createClass({
                         <div className="sidebar-nav">
                             <Navbar>
                                 <Navbar.Header>
-                                    <Navbar.Toggle children=<img className="logo" id="logo-mobile" src="../images/CADAVRESKY-logo-mobile.png"/>/>
+                                    <Navbar.Toggle children={<img className="logo" id="logo-mobile" src={this.state.imgSrc} width={this.state.imgWidth}/>} onClick={ this.toggleLogoMobileSrc }/>
                                 </Navbar.Header>
                                 <Navbar.Collapse>
                                     <Nav className="menu navbar-fixed-top">
