@@ -3,7 +3,7 @@
 exports.config = {
   paths: {
     'public': 'web',
-    'watched': ['app/Resources']
+    'watched': ['app/Resources', 'bower_components/bootstrap-sass/assets/fonts']
   },
   files: {
      javascripts: {
@@ -20,12 +20,11 @@ exports.config = {
     ignored: [
       /\/_/, // File beginning by "_" like _settings.scss
       // Brunch does include all Bower components by default, we blacklist unneeded ones.
-      //'bower_components/foundation/'
+      'bower_components/bootstrap-sass/assets/javascripts/'
     ],
-    assets: /^app\/Resources\/assets/
+    assets: [/^app\/Resources\/assets/, /bower_components\/bootstrap-sass\/assets/]
   },
   plugins: {
-
     babel: {
       pattern: /\.(js|jsx)$/
     },

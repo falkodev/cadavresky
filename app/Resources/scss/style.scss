@@ -8,7 +8,7 @@
 @media (min-width: $screen-sm-min) {
     .content {
         margin-top: 50px;
-        margin-right: 50px
+        margin-right: 50px;
     }
 
     .sidebar-nav .navbar .navbar-collapse {
@@ -21,7 +21,6 @@
     .sidebar-nav .navbar ul {
         float: none;
         margin: 100px 0px 0px 25px;
-//        margin: 25rem 0px 0px 25px;
     }
     .sidebar-nav .navbar ul:not {
         display: block;
@@ -79,12 +78,21 @@
         .navbar-toggle {
             border: none;
             float: left;
+            z-index: 1000;
 
             &:hover, &:focus {
                 background-color: transparent;
                 .icon-bar {
                     background-color: $black;
                 }
+            }
+
+            &#toggle-text-mobile {
+                width: 100%;
+            }
+
+            &#toggle-logo-mobile {
+                margin-top: -70px;
             }
         }
     }
@@ -177,4 +185,17 @@ body {
 #logo-default {
     margin: 25px 25px 100px -15px;
     width: 120px;
+}
+
+#text-mobile {
+    float: left;
+}
+
+#close-menu-icon {
+    border: none;
+    margin-right: -10px;
+}
+
+#div-text-mobile {
+    margin-top: 20px;
 }
