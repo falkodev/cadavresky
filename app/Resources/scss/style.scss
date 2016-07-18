@@ -117,10 +117,22 @@
             a {
                 background-color: transparent;
                 color: black;
-                text-decoration: line-through;
+                display: inline-block;
+                position: relative;
+
                 &:hover, &:focus, &:active {
                     background-color: transparent;
                     color: black;
+                }
+
+                &:before {
+                  content: "";
+                  position: absolute;
+                  top: 40%;
+                  left: 2px;
+                  right: 0;
+                  height: 4px; /* height = weight */
+                  background: black; /* line color */
                 }
             }
         }
@@ -160,6 +172,18 @@
                 &:hover, &:focus, &:active {
                     color: black;
                     text-decoration: line-through;
+                    display: inline-block;
+                    position: relative;
+
+                    &:before {
+                      content: "";
+                      position: absolute;
+                      top: 40%;
+                      left: 2px;
+                      right: 0;
+                      height: 4px; /* height = weight */
+                      background: black; /* line color */
+                    }
                 }
             }
       } 
@@ -198,4 +222,9 @@ body {
 
 #div-text-mobile {
     margin-top: 20px;
+}
+
+.content {
+    margin-top: 0px;
+    margin-right: 0px
 }
