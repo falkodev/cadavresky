@@ -1,14 +1,18 @@
 import React from 'react';
-import { Grid, Row, Col, Nav, Navbar, NavItem, NavDropdown, MenuItem, Button, Fade, Glyphicon } from 'react-bootstrap';
+import { Grid, Row, Col, Nav, Navbar, NavItem, NavDropdown, MenuItem, Button, Fade, Collapse } from 'react-bootstrap';
 
 const Component = React.createClass({
     getInitialState: function() {
         return {
-            open: false
+            open: false,
+            transparentContent: false
         };
     },
     toggleMenu: function() {
-        this.setState({ open: !this.state.open });
+        this.setState({
+            open: !this.state.open,
+            transparentContent: !this.state.transparentContent,
+        });
     },
     render: function() {
         return (
@@ -19,16 +23,18 @@ const Component = React.createClass({
                         <div className="sidebar-nav">
                             <Navbar>
                                 <Navbar.Header>
-                                    <Fade in={this.state.open}>
+                                    <div>
+                                    <Collapse dimension="height" in={this.state.open}>
                                         <Navbar.Toggle id="toggle-text-mobile" children={
                                             <div id="div-text-mobile">
-                                                <img id="text-mobile" src="../images/CADAVRESKY-text-mobile.png" width="150px"/> <span id="close-menu-icon" className="pull-right"><Glyphicon glyph="remove"/></span>
+                                                <img id="text-mobile" src="../images/CADAVRESKY-logo-mobile-opened.png" width="120px"/> <span id="close-menu-icon" className="pull-right"><img id="close-menu" src="../images/close-menu.png" width="10px"/></span>
                                             </div> }
                                         onClick={ this.toggleMenu }/>
+                                    </Collapse>
+                                    <Fade timeout={1} in={!this.state.open}>
+                                        <Navbar.Toggle id="toggle-logo-mobile" children={ <img className="logo" id="logo-mobile" src="../images/CADAVRESKY-logo-mobile-closed.png" width="45px"/> } onClick={ this.toggleMenu }/>
                                     </Fade>
-                                    <Fade in={!this.state.open}>
-                                        <Navbar.Toggle id="toggle-logo-mobile" children={ <img className="logo" id="logo-mobile" src="../images/CADAVRESKY-logo-mobile.png" width="45px"/> } onClick={ this.toggleMenu }/>
-                                    </Fade>
+                                    </div>
                                 </Navbar.Header>
                                 <Navbar.Collapse>
                                     <Nav className="menu navbar-fixed-top">
@@ -44,7 +50,7 @@ const Component = React.createClass({
                         </div>
                     </Col>
                     <Col sm={10}>
-                        <div className="content">
+                        <div className={ this.state.transparentContent ?  "content transparent" : "content" }>
                         <p>Il était une fois en 2015, une envie naquit au coin de la rue. L’idée un peu surréaliste de créer une jungle vestimentaire, en grattant les strates de nos restes populaires.</p>
 
                         <p>CADAVRESKY c’est le pied de nez au bras tendu des tendances actuelles. Sans concession, ni contre-façon.</p>
