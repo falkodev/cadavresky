@@ -40,26 +40,62 @@
 
         .menu-whoswho {
             background-color: $red;
+            background-image: url('../images/menu_categories/unselected/B1.png');
+            background-size: cover;
+
+            &.active {
+                background-image: url('../images/menu_categories/selected/B1.png');
+            }
         }
           
         .menu-projectology {
             background-color: $purple;
+            background-image: url('../images/menu_categories/unselected/B2.png');
+            background-size: cover;
+
+            &.active {
+                background-image: url('../images/menu_categories/selected/B2.png');
+            }
         }
 
         .menu-zoo {
             background-color: $yellow;
+            background-image: url('../images/menu_categories/unselected/B3.png');
+            background-size: cover;
+
+            &.active {
+                background-image: url('../images/menu_categories/selected/B3.png');
+            }
         }
 
         .menu-shop {
             background-color: $green;
+            background-image: url('../images/menu_categories/unselected/B4.png');
+            background-size: cover;
+
+            &.active {
+                background-image: url('../images/menu_categories/selected/B4.png');
+            }
         }
 
         .menu-goodies {
             background-color: $orange;
+            background-image: url('../images/menu_categories/unselected/B5.png');
+            background-size: cover;
+
+            &.active {
+                background-image: url('../images/menu_categories/selected/B5.png');
+            }
         }
 
         .menu-contact {
             background-color: $pink;
+            background-image: url('../images/menu_categories/unselected/B6.png');
+            background-size: cover;
+
+            &.active {
+                background-image: url('../images/menu_categories/selected/B6.png');
+            }
         }
 
         >li {
@@ -71,7 +107,6 @@
                 color: black;
                 &:hover, &:focus, &:active {
                     color: black;
-                    text-decoration: line-through;
                     display: inline-block;
                     position: relative;
 
@@ -115,10 +150,6 @@
         float: none;
         display: block;
         width: 120px;
-    }
-    .sidebar-nav .navbar li a {
-        padding-top: 12px;
-        padding-bottom: 12px;
     }
     .navbar-header {
         display: none;
@@ -237,4 +268,21 @@ body {
 #close-menu-icon {
     border: none;
     margin-right: -25px;
+}
+
+#nav-logos {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+#logo-instagram {
+    width: 40px;
+    height: 40px;
+}
+
+#logo-facebook {
+    width: 26px;
+    height: 26px;
+    margin-top: 7px;
 }

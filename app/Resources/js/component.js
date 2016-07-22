@@ -44,6 +44,10 @@ const Component = React.createClass({
                                         <NavItem href="#" className="menu-shop">Shop</NavItem>
                                         <NavItem href="#" className="menu-goodies">Goodies</NavItem>
                                         <NavItem href="#" className="menu-contact">Contact</NavItem>
+                                        <li id="nav-logos">
+                                            <a href="http://www.instagram.com"><img id="logo-instagram" src="../images/instagram-logo.png"/></a>&nbsp;
+                                            <a href="http://www.facebook.com"><img id="logo-facebook" src="../images/facebook-logo.png"/></a>
+                                        </li>
                                     </Nav>
                                 </Navbar.Collapse>
                             </Navbar>
