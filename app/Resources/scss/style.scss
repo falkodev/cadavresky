@@ -1,8 +1,7 @@
-@import 'custom-variables';
-@import 'color';
-@import 'main';
-@import 'header';
-@import 'bower_components/bootstrap-sass/assets/stylesheets/bootstrap';
+@import '_custom-variables.scss';
+@import '_color.scss';
+$icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap";
 
 .navbar-default {
     background-color: white;

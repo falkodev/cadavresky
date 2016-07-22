@@ -5,7 +5,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{% block title %}Cadavresky{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
-        <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
+        {% if app.environment == 'dev' %}
+              <link rel="stylesheet" href="http://127.0.0.1:3000/static/style.css"></script>
+          {% else %}
+              <link rel="stylesheet" href="{{ asset('dist/style.css') }}" />
+          {% endif %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
