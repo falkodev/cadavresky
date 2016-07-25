@@ -29,13 +29,14 @@ var config = {
                 loaders: ['react-hot', 'babel?presets[]=es2015&presets[]=react'],
                 presets: ['es2015', 'react']
             },
-            ,
             {
                 test: /\.scss$/,
                 loader: ExtractTextPlugin.extract('css!sass')
             },
             {
-                test: /\.jpe?g$|\.gif$|\.png$|\.svg$|\.woff$|\.woff2?$|\.ttf$|\.eot$|\.svg$/, loader: "file" }
+                test: /\.jpe?g$|\.gif$|\.png$|\.svg$|\.woff$|\.woff2?$|\.ttf$|\.eot$|\.svg$/, 
+                loader: "file?name=[name].[ext]" 
+            }
         ]
     }
 };

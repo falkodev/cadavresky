@@ -3,6 +3,55 @@
 $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
 @import "~bootstrap-sass/assets/stylesheets/bootstrap";
 
+body {
+    font-family: sans-serif;
+}
+
+.container {
+    margin-right: 0;
+    margin-left: 0;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.row {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#logo-default {
+    margin: 25px 25px 100px -15px;
+    width: 120px;
+}
+
+//#close-menu-icon {
+//    border: none;
+//    margin-right: -25px;
+//}
+
+#nav-logos {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+#logo-instagram {
+    width: 40px;
+    height: 40px;
+}
+
+#logo-facebook {
+    width: 26px;
+    height: 26px;
+    margin-top: 7px;
+}
+
+#palm {
+    width: 200px;
+    float: right;
+    margin-right: -16px;
+}
+
 .navbar-default {
     background-color: white;
     border-color: white;
@@ -39,62 +88,74 @@ $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
 
         .menu-whoswho {
             background-color: $red;
-            background-image: url('../images/menu_categories/unselected/B1.png');
+            background-image: url('../images/menu_categories/B1_unselected.png');
             background-size: cover;
 
             &.active {
-                background-image: url('../images/menu_categories/selected/B1.png');
+                background-image: url('../images/menu_categories/B1_selected.png');
             }
         }
           
         .menu-projectology {
             background-color: $purple;
-            background-image: url('../images/menu_categories/unselected/B2.png');
+            background-image: url('../images/menu_categories/B2_unselected.png');
             background-size: cover;
 
             &.active {
-                background-image: url('../images/menu_categories/selected/B2.png');
+                background-image: url('../images/menu_categories/B2_selected.png');
             }
         }
 
         .menu-zoo {
             background-color: $yellow;
-            background-image: url('../images/menu_categories/unselected/B3.png');
+            background-image: url('../images/menu_categories/B3_unselected.png');
             background-size: cover;
 
             &.active {
-                background-image: url('../images/menu_categories/selected/B3.png');
+                background-image: url('../images/menu_categories/B3_selected.png');
             }
         }
 
         .menu-shop {
             background-color: $green;
-            background-image: url('../images/menu_categories/unselected/B4.png');
+            background-image: url('../images/menu_categories/B4_unselected.png');
             background-size: cover;
 
             &.active {
-                background-image: url('../images/menu_categories/selected/B4.png');
+                background-image: url('../images/menu_categories/B4_selected.png');
             }
         }
 
         .menu-goodies {
             background-color: $orange;
-            background-image: url('../images/menu_categories/unselected/B5.png');
+            background-image: url('../images/menu_categories/B5_unselected.png');
             background-size: cover;
 
             &.active {
-                background-image: url('../images/menu_categories/selected/B5.png');
+                background-image: url('../images/menu_categories/B5_selected.png');
             }
         }
 
         .menu-contact {
             background-color: $pink;
-            background-image: url('../images/menu_categories/unselected/B6.png');
+            background-image: url('../images/menu_categories/B6_unselected.png');
             background-size: cover;
 
             &.active {
-                background-image: url('../images/menu_categories/selected/B6.png');
+                background-image: url('../images/menu_categories/B6_selected.png');
             }
+        }
+        
+        .menu-facebook {
+            background-color: $brown;
+            position: fixed;
+            bottom: 30px;
+        }
+        
+        .menu-instagram {
+            background-color: $beige;
+            position: fixed;
+            bottom: 0px;
         }
 
         >li {
@@ -124,11 +185,21 @@ $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
   }
 }
 
+.footer {
+    position: absolute;
+    bottom: 0;
+    height: 140px;
+}
+
 /* make sidebar nav vertical */
 @media (min-width: $screen-sm-min) {
     .content {
         margin-top: 50px;
         margin-right: 50px;
+    }
+    
+    .footer {
+        width: 98%;
     }
 
     .sidebar-nav .navbar .navbar-collapse {
@@ -140,7 +211,7 @@ $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
     }
     .sidebar-nav .navbar ul {
         float: none;
-        margin: 100px 0px 0px 25px;
+        margin: 30vh 0px 0px 25px;
     }
     .sidebar-nav .navbar ul:not {
         display: block;
@@ -151,6 +222,10 @@ $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
         width: 120px;
     }
     .navbar-header {
+        display: none;
+    }
+    
+    #nav-logos {
         display: none;
     }
 }
@@ -185,12 +260,17 @@ $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
     }
 
     .content {
-        margin-top: 0px;
-        margin-right: 0px;
+        position: fixed;
+        top: 100px;
+//        margin-right: 0px;
 
         &.transparent {
             opacity: 0.5;
         }
+    }
+    
+    .footer {
+        width: 96%;
     }
 
     .sidebar-nav .navbar .navbar-collapse {
@@ -236,6 +316,10 @@ $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
 
     .navbar-default .navbar-nav > li {
         margin-bottom: 15px;
+        
+        &.menu-desktop {
+            display: none;
+        }
 
         > a {
             font-size: 18px;
@@ -243,45 +327,3 @@ $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
     }
 }
 
-body {
-    font-family: sans-serif;
-}
-
-.container {
-    margin-right: 0;
-    margin-left: 0;
-    padding-left: 0;
-    padding-right: 0;
-}
-
-.row {
-    margin-left: 10px;
-    margin-right: 10px;
-}
-
-#logo-default {
-    margin: 25px 25px 100px -15px;
-    width: 120px;
-}
-
-#close-menu-icon {
-    border: none;
-    margin-right: -25px;
-}
-
-#nav-logos {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-}
-
-#logo-instagram {
-    width: 40px;
-    height: 40px;
-}
-
-#logo-facebook {
-    width: 26px;
-    height: 26px;
-    margin-top: 7px;
-}
