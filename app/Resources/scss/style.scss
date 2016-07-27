@@ -33,17 +33,18 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
+    margin-top: 20px;
 }
 
 #logo-instagram {
-    width: 40px;
-    height: 40px;
+    width: 80px;
+    height: 80px;
 }
 
 #logo-facebook {
-    width: 26px;
-    height: 26px;
-    margin-top: 7px;
+    width: 50px;
+    height: 50px;
+    margin-top: 10px;
 }
 
 #palm {
@@ -80,7 +81,6 @@ body {
                   top: 40%;
                   left: 2px;
                   right: 0;
-                  height: 4px; /* height = weight */
                   background: black; /* line color */
                 }
             }
@@ -89,7 +89,6 @@ body {
         .menu-whoswho {
             background-color: $red;
             background-image: url('../images/menu_categories/B1_unselected.png');
-            background-size: cover;
 
             &.active {
                 background-image: url('../images/menu_categories/B1_selected.png');
@@ -99,7 +98,6 @@ body {
         .menu-projectology {
             background-color: $purple;
             background-image: url('../images/menu_categories/B2_unselected.png');
-            background-size: cover;
 
             &.active {
                 background-image: url('../images/menu_categories/B2_selected.png');
@@ -109,7 +107,6 @@ body {
         .menu-zoo {
             background-color: $yellow;
             background-image: url('../images/menu_categories/B3_unselected.png');
-            background-size: cover;
 
             &.active {
                 background-image: url('../images/menu_categories/B3_selected.png');
@@ -119,7 +116,6 @@ body {
         .menu-shop {
             background-color: $green;
             background-image: url('../images/menu_categories/B4_unselected.png');
-            background-size: cover;
 
             &.active {
                 background-image: url('../images/menu_categories/B4_selected.png');
@@ -129,7 +125,6 @@ body {
         .menu-goodies {
             background-color: $orange;
             background-image: url('../images/menu_categories/B5_unselected.png');
-            background-size: cover;
 
             &.active {
                 background-image: url('../images/menu_categories/B5_selected.png');
@@ -139,7 +134,6 @@ body {
         .menu-contact {
             background-color: $pink;
             background-image: url('../images/menu_categories/B6_unselected.png');
-            background-size: cover;
 
             &.active {
                 background-image: url('../images/menu_categories/B6_selected.png');
@@ -162,7 +156,7 @@ body {
             margin-bottom: 10px;
 
             a {
-                padding: 0px 2px;
+                padding: 5px 2px;
                 background-color: transparent;
                 color: black;
                 &:hover, &:focus, &:active {
@@ -176,7 +170,6 @@ body {
                       top: 40%;
                       left: 2px;
                       right: 0;
-                      height: 4px; /* height = weight */
                       background: black; /* line color */
                     }
                 }
@@ -225,6 +218,26 @@ body {
         display: none;
     }
     
+    .navbar-default {
+        .navbar-nav {
+            .menu  {
+                background-size: contain;
+            }
+
+            .menu-desktop > a {
+                padding: 0px 2px;
+            }
+
+            .active > a:before {
+              height: 4px; /* height = weight */
+            }
+
+            li > a:before {
+              height: 4px; /* height = weight */
+            }
+        }
+    }
+
     #nav-logos {
         display: none;
     }
@@ -279,7 +292,7 @@ body {
         ul {
             left: -200px;
             width: 0%;
-            padding-top: 80px;
+            padding-top: 60px;
             transition: all .5s ease-in-out;
         }
 
@@ -291,13 +304,7 @@ body {
         }
     }
 
-    .navbar-nav {
-        margin: 80px 0px;
-    }
-
     .navbar-default {
-//        margin-top: 15px;
-
         .navbar-toggle {
             border: none;
             float: left;
@@ -312,17 +319,34 @@ body {
                 }
             }
         }
-    }
-
-    .navbar-default .navbar-nav > li {
-        margin-bottom: 15px;
         
-        &.menu-desktop {
-            display: none;
-        }
+        .navbar-nav {
+            margin: 80px 0px;
 
-        > a {
-            font-size: 18px;
+            .active > a:before {
+              height: 8px; /* height = weight */
+            }
+
+            > li {
+                margin-bottom: 15px;
+                height: 40px;
+
+                &.menu-desktop {
+                    display: none;
+                }
+
+                > a {
+                    font-size: 28px;
+                    padding: 10px 5px;
+
+                    &:before {
+                      height: 8px; /* height = weight */
+                    }
+                }
+            }
+            .menu  {
+                background-size: cover;
+            }
         }
     }
 }

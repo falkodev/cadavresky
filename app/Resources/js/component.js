@@ -1,6 +1,13 @@
 import React from 'react';
 import { Grid, Row, Col, Nav, Navbar, NavItem, NavDropdown, MenuItem, Button, Fade, Collapse, Panel } from 'react-bootstrap';
-import ImgPalm from '../images/player/palm2.png';
+
+//images
+import ImgLogo             from '../images/CADAVRESKY-logo-fullscreen.png';
+import ImgLogoMobileOpened from '../images/CADAVRESKY-logo-mobile-opened.png';
+import ImgLogoMobileClosed from '../images/CADAVRESKY-logo-mobile-closed.png';
+import ImgLogoInsta        from '../images/instagram-logo.png';
+import ImgLogoFb           from '../images/facebook-logo.png';
+import ImgPalm             from '../images/player/palm.png';
 
 const Component = React.createClass({
     getInitialState: function() {
@@ -20,7 +27,7 @@ const Component = React.createClass({
             <Grid fluid>
                 <Row>
                     <Col sm={2}>
-                        <img className="logo" id="logo-default" src="../images/CADAVRESKY-logo-fullscreen.png"/>
+                        <img className="logo" id="logo-default" src={ImgLogo}/>
                         <div className="sidebar-nav">
                             <Navbar>
                                 <Navbar.Header>
@@ -28,28 +35,28 @@ const Component = React.createClass({
                                     <Collapse dimension="height" in={this.state.open}>
                                         <Navbar.Toggle id="toggle-text-mobile" children={
                                             <div id="div-text-mobile">
-                                                <img id="text-mobile" src="../images/CADAVRESKY-logo-mobile-opened.png" width="120px"/> {/*<span id="close-menu-icon" className="pull-right"><img id="close-menu" src="../images/close-menu.png" width="10px"/></span>*/}
+                                                <img id="text-mobile" src={ImgLogoMobileOpened} width="120px"/> {/*<span id="close-menu-icon" className="pull-right"><img id="close-menu" src="../images/close-menu.png" width="10px"/></span>*/}
                                             </div> }
                                         onClick={ this.toggleMenu }/>
                                     </Collapse>
                                     <Fade timeout={1} in={!this.state.open}>
-                                        <Navbar.Toggle id="toggle-logo-mobile" children={ <img className="logo" id="logo-mobile" src="../images/CADAVRESKY-logo-mobile-closed.png" width="45px"/> } onClick={ this.toggleMenu }/>
+                                        <Navbar.Toggle id="toggle-logo-mobile" children={ <img className="logo" id="logo-mobile" src={ImgLogoMobileClosed} width="45px"/> } onClick={ this.toggleMenu }/>
                                     </Fade>
                                     </div>
                                 </Navbar.Header>
                                 <Navbar.Collapse>
                                     <Nav className="menu navbar-fixed-top">
-                                        <NavItem href="#" className="menu-whoswho active">Who's who</NavItem>
-                                        <NavItem href="#" className="menu-projectology">Projectology</NavItem>
-                                        <NavItem href="#" className="menu-zoo">The zoo</NavItem>
-                                        <NavItem href="#" className="menu-shop">Shop</NavItem>
-                                        <NavItem href="#" className="menu-goodies">Goodies</NavItem>
-                                        <NavItem href="#" className="menu-contact">Contact</NavItem>
-                                        <NavItem href="#" className="menu-facebook menu-desktop">Facebook</NavItem>
-                                        <NavItem href="#" className="menu-instagram menu-desktop">Instagram</NavItem>
+                                        <NavItem href="#" className="menu menu-whoswho active">Who's who</NavItem>
+                                        <NavItem href="#" className="menu menu-projectology">Projectology</NavItem>
+                                        <NavItem href="#" className="menu menu-zoo">The zoo</NavItem>
+                                        <NavItem href="#" className="menu menu-shop">Shop</NavItem>
+                                        <NavItem href="#" className="menu menu-goodies">Goodies</NavItem>
+                                        <NavItem href="#" className="menu menu-contact">Contact</NavItem>
+                                        <NavItem href="http://www.facebook.com" className="menu-facebook menu-desktop">Facebook</NavItem>
+                                        <NavItem href="http://www.instagram.com" className="menu-instagram menu-desktop">Instagram</NavItem>
                                         <li id="nav-logos">
-                                            <a href="http://www.instagram.com"><img id="logo-instagram" src="../images/instagram-logo.png"/></a>&nbsp;
-                                            <a href="http://www.facebook.com"><img id="logo-facebook" src="../images/facebook-logo.png"/></a>
+                                            <a href="http://www.instagram.com"><img id="logo-instagram" src={ImgLogoInsta}/></a>&nbsp;
+                                            <a href="http://www.facebook.com"><img id="logo-facebook" src={ImgLogoFb}/></a>
                                         </li>
                                     </Nav>
                                 </Navbar.Collapse>
@@ -66,7 +73,7 @@ const Component = React.createClass({
 
                             <p>CADAVRESKY fait un tout avec rien et surtout, plus que tout, recherche, retrouve, décompose, recompose, un savoir-faire artisanal par le travail de la pièce unique pour des êtres uniques.</p>
 
-                            <p>CADAVRESKY décale les codes, pour jouer de styles, en proposant une vision alternative de se penser avec classe et t’invite à trouver l’écho qui te correspond à travers chaque projet.</p>
+                            <p>CADAVRESKY décale les codes, pour jouer de styles, en proposant une vision alternative de se penser avec classe et t’invite à trouver l’écho qui te correspond à travers chaque projet</p>
                         </div>
                     </Col>
                 </Row>
@@ -81,21 +88,3 @@ const Component = React.createClass({
 });
 
 export default Component;
-
-//<Row>
-//    <Col sm={12}>
-//        <img id="palm" src={ImgPalm} />
-//    </Col>
-//</Row>
-
-//<div className="container">
-//                  <div className="row flex-row">
-//                    <div className="col-md-12">
-//                      <div className="panel panel-default flex-col">
-//                       <div className="panel-heading">Title flex-col</div>
-//                       <div className="panel-body flex-grow">Content here -- div with .flex-grow<br/>Yo<br/>Yeah</div>
-//                       <div className="panel-footer">Footer</div>
-//                       </div>
-//                    </div>	
-//                  </div>
-//                </div>
