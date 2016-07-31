@@ -8,12 +8,16 @@ import ImgLogoMobileClosed from '../images/CADAVRESKY-logo-mobile-closed.png';
 import ImgLogoInsta        from '../images/instagram-logo.png';
 import ImgLogoFb           from '../images/facebook-logo.png';
 import ImgPalm             from '../images/player/palm.png';
+import ImgCoverEthical     from '../images/player/lp-cover-ethical.png';
+import ImgLpEthical        from '../images/player/lp-ethical.png';
 
 const Component = React.createClass({
     getInitialState: function() {
         return {
             open: false,
-            transparentContent: false
+            transparentContent: false,
+            movingLp: false,
+            movedLp: false,
         };
     },
     toggleMenu: function() {
@@ -21,6 +25,21 @@ const Component = React.createClass({
             open: !this.state.open,
             transparentContent: !this.state.transparentContent,
         });
+    },
+    toggleMovingLp: function() {
+        const elem = document.getElementById("lp");
+        const stateMovedLp = this.state.movedLp;
+
+        this.setState({
+            movedLp: !this.state.movedLp,
+        });
+
+        setTimeout(function(){
+            if(!stateMovedLp) { elem.className = "lp moved"; }
+            else { elem.className = "lp"; }
+        },4000);
+
+
     },
     render: function() {
         return (
@@ -39,9 +58,9 @@ const Component = React.createClass({
                                             </div> }
                                         onClick={ this.toggleMenu }/>
                                     </Collapse>
-                                    <Fade timeout={1} in={!this.state.open}>
+                                    <div timeout={1} in={!this.state.open}>
                                         <Navbar.Toggle id="toggle-logo-mobile" children={ <img className="logo" id="logo-mobile" src={ImgLogoMobileClosed} width="45px"/> } onClick={ this.toggleMenu }/>
-                                    </Fade>
+                                    </div>
                                     </div>
                                 </Navbar.Header>
                                 <Navbar.Collapse>
@@ -80,6 +99,8 @@ const Component = React.createClass({
                 <Row>
                     <Col sm={12} className="footer">
                         <img id="palm" src={ImgPalm} />
+                        <img id="cover" src={ImgCoverEthical} style={{width: '120px', position: 'fixed', right: '54px', bottom: '-6px', zIndex: '2'}} onClick={ this.toggleMovingLp }/>
+                        <img id="lp" src={ImgLpEthical} className={ this.state.movedLp ? "lp moved moving" : "lp moving" }/>
                     </Col>
                 </Row>
             </Grid>

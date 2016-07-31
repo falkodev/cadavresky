@@ -182,6 +182,10 @@ body {
     position: absolute;
     bottom: 0;
     height: 140px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
 }
 
 /* make sidebar nav vertical */
@@ -254,20 +258,25 @@ body {
     }
 
     #toggle-logo-mobile {
-        height: 0;
+        left: 800px;
+        opacity: 0;
+        transition: all .8s ease-in-out;
 
-        &.in {
-            height: 75px;
+        &.collapsed {
+            left: 0px;
+            opacity: 1;
         }
     }
 
     #toggle-text-mobile {
-        left: -200px;
-        width: 0%;
+        left: -800px;
+        opacity: 0;
+        width: 0;
         transition: all .5s ease-in-out;
 
-        &.in {
+        &.collapse {
             left: 0;
+            opacity: 1;
             width: 100%;
         }
     }
@@ -290,7 +299,7 @@ body {
         border-color: transparent;
 
         ul {
-            left: -200px;
+            left: -300px;
             width: 0%;
             padding-top: 60px;
             transition: all .5s ease-in-out;
@@ -329,6 +338,7 @@ body {
 
             > li {
                 margin-bottom: 15px;
+                padding-left: 5px;
                 height: 40px;
 
                 &.menu-desktop {
@@ -351,3 +361,25 @@ body {
     }
 }
 
+.lp {
+    position: fixed;
+    bottom: 1px;
+    right: 60px;
+    width: 70px;
+    transition: 4s;
+    z-index: 1;
+}
+
+@keyframes spin {
+  100% {
+    transform:rotate(-720deg);
+  }
+}
+
+.moving {
+    animation: spin 4s linear infinite;
+}
+
+.moved {
+    right: 83%;
+}
