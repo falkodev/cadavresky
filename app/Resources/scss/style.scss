@@ -3,6 +3,11 @@
 $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
 @import "~bootstrap-sass/assets/stylesheets/bootstrap";
 
+@font-face {
+    font-family: "5by7";
+    src: url("../fonts/5by7.ttf");
+}
+
 body {
     font-family: sans-serif;
 }
@@ -51,6 +56,7 @@ body {
     width: 200px;
     float: right;
     margin-right: -16px;
+    z-index: 3;
 }
 
 .navbar-default {
@@ -188,6 +194,64 @@ body {
     justify-content: flex-end;
 }
 
+.lp {
+    position: fixed;
+    bottom: 1px;
+    right: 60px;
+    width: 70px;
+    transition: 4s;
+    z-index: 3;
+}
+
+@keyframes spin {
+  100% { transform:rotate(-720deg); }
+}
+
+.lp-moving {
+    animation: spin 4s linear infinite;
+}
+
+.lp-moved {
+    right: 88%;
+}
+
+.line {
+    position: fixed;
+    height: 29px;
+    width: 8%;
+    bottom: 21px;
+    right: 55px;
+    z-index: 1;
+    transition: width 4s;
+}
+
+.line-moving {
+    transition: width 4s;
+    width: 85%;
+}
+
+.text {
+    position: fixed;
+    height: 50px;
+    width: 8%;
+    bottom: 10px;
+    right: 55px;
+    z-index: 2;
+    transition: width 4s;
+}
+
+.text-moving {
+    transition: width 4s;
+    width: 82%;
+}
+
+.text span {
+    font-family: '5by7';
+    color: $khaki;
+    line-height: 50px;
+    text-align: center;
+}
+
 /* make sidebar nav vertical */
 @media (min-width: $screen-sm-min) {
     .content {
@@ -245,6 +309,26 @@ body {
     #nav-logos {
         display: none;
     }
+
+    .lp-moved {
+        right: 83%;
+    }
+
+    .line {
+        width: 5%;
+    }
+
+    .line-moving {
+        width: 82%;
+    }
+
+    .text {
+        width: 5%;
+    }
+
+    .text-moving {
+        width: 80%;
+    }
 }
 
 @media (max-width: $screen-xs-max) {
@@ -258,26 +342,28 @@ body {
     }
 
     #toggle-logo-mobile {
-        left: 800px;
+        left: -200px;
         opacity: 0;
-        transition: all .8s ease-in-out;
+        transition: all .4s ease-in-out;
 
         &.collapsed {
             left: 0px;
             opacity: 1;
+            transition: all .8s ease-in-out;
         }
     }
 
     #toggle-text-mobile {
-        left: -800px;
+        left: -100px;
         opacity: 0;
         width: 0;
-        transition: all .5s ease-in-out;
+        transition: all .3s ease-in-out;
 
         &.collapse {
             left: 0;
             opacity: 1;
             width: 100%;
+            transition: all .5s ease-in-out;
         }
     }
 
@@ -361,25 +447,3 @@ body {
     }
 }
 
-.lp {
-    position: fixed;
-    bottom: 1px;
-    right: 60px;
-    width: 70px;
-    transition: 4s;
-    z-index: 1;
-}
-
-@keyframes spin {
-  100% {
-    transform:rotate(-720deg);
-  }
-}
-
-.moving {
-    animation: spin 4s linear infinite;
-}
-
-.moved {
-    right: 83%;
-}

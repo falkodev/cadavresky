@@ -30,8 +30,12 @@ var config = {
                 loader: ExtractTextPlugin.extract('css!sass')
             },
             {
-                test: /\.jpe?g$|\.gif$|\.png$|\.svg$|\.woff$|\.woff2?$|\.ttf$|\.eot$|\.svg$/, 
+                test: /\.jpe?g$|\.gif$|\.png$|\.svg$/,
                 loader: "file?name=images/[name].[ext]"
+            },
+            {
+                test: /\.woff$|\.woff2?$|\.ttf$|\.eot$/,
+                loader: "file?name=fonts/[name].[ext]"
             }
         ]
     }

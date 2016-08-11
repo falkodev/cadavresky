@@ -10,14 +10,15 @@ import ImgLogoFb           from '../images/facebook-logo.png';
 import ImgPalm             from '../images/player/palm.png';
 import ImgCoverEthical     from '../images/player/lp-cover-ethical.png';
 import ImgLpEthical        from '../images/player/lp-ethical.png';
+import ImgScrollingLine    from '../images/player/scrolling-line.png';
 
 const Component = React.createClass({
     getInitialState: function() {
         return {
             open: false,
             transparentContent: false,
-            movingLp: false,
             movedLp: false,
+            onLoad: true,
         };
     },
     toggleMenu: function() {
@@ -32,14 +33,14 @@ const Component = React.createClass({
 
         this.setState({
             movedLp: !this.state.movedLp,
+            onLoad: false,
         });
 
+        const that = this;
         setTimeout(function(){
-            if(!stateMovedLp) { elem.className = "lp moved"; }
+            if(!stateMovedLp) { elem.className = "lp lp-moved lp-moving"; }
             else { elem.className = "lp"; }
         },4000);
-
-
     },
     render: function() {
         return (
@@ -98,9 +99,11 @@ const Component = React.createClass({
                 </Row>
                 <Row>
                     <Col sm={12} className="footer">
-                        <img id="palm" src={ImgPalm} />
-                        <img id="cover" src={ImgCoverEthical} style={{width: '120px', position: 'fixed', right: '54px', bottom: '-6px', zIndex: '2'}} onClick={ this.toggleMovingLp }/>
-                        <img id="lp" src={ImgLpEthical} className={ this.state.movedLp ? "lp moved moving" : "lp moving" }/>
+                        <img id="palm" src={ ImgPalm } />
+                        <img id="cover" src={ ImgCoverEthical } style={{width: '120px', position: 'fixed', right: '54px', bottom: '-6px', zIndex: '4'}} onClick={ this.toggleMovingLp }/>
+                        <img id="lp" src={ ImgLpEthical } className={ this.state.onLoad ? "lp" : this.state.movedLp ? "lp lp-moved lp-moving" : "lp lp-moving" }/>
+                        <img id="scrolling-line" src={ ImgScrollingLine } className={ this.state.movedLp ? "line line-moving" : "line" }/>
+                        <div className={ this.state.movedLp ? "text text-moving" : "text" }><marquee><span>Texte défilant en caractères fins pour l'instant</span></marquee></div>
                     </Col>
                 </Row>
             </Grid>
