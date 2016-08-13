@@ -24,6 +24,10 @@ body {
     margin-right: 10px;
 }
 
+.content {
+    overflow-y: auto;
+}
+
 #logo-default {
     margin: 25px 25px 100px -15px;
     width: 120px;
@@ -38,25 +42,35 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
-    margin-top: 20px;
+    margin-top: 50px;
 }
 
 #logo-instagram {
-    width: 80px;
-    height: 80px;
+    width: 70px;
+    height: 70px;
 }
 
 #logo-facebook {
-    width: 50px;
-    height: 50px;
-    margin-top: 10px;
+    width: 40px;
+    height: 40px;
+    margin-top: 15px;
 }
 
 #palm {
-    width: 200px;
-    float: right;
-    margin-right: -16px;
-    z-index: 3;
+    position: fixed;
+    width: 330px;
+    height: 245px;
+    right: 0;
+    bottom: 0;
+    z-index: 5;
+}
+
+#cover {
+    position: fixed;
+    width: 120px;
+    right: 90px;
+    bottom: -6px;
+    z-index: 4;
 }
 
 .navbar-default {
@@ -81,14 +95,14 @@ body {
                     color: black;
                 }
 
-                &:before {
-                  content: "";
-                  position: absolute;
-                  top: 40%;
-                  left: 2px;
-                  right: 0;
-                  background: black; /* line color */
-                }
+//                &:before {
+//                  content: "";
+//                  position: absolute;
+//                  top: 40%;
+//                  left: 2px;
+//                  right: 0;
+//                  background: black; /* line color */
+//                }
             }
         }
 
@@ -96,7 +110,7 @@ body {
             background-color: $red;
             background-image: url('../images/menu_categories/B1_unselected.png');
 
-            &.active {
+            &:hover {
                 background-image: url('../images/menu_categories/B1_selected.png');
             }
         }
@@ -105,7 +119,7 @@ body {
             background-color: $purple;
             background-image: url('../images/menu_categories/B2_unselected.png');
 
-            &.active {
+            &:hover {
                 background-image: url('../images/menu_categories/B2_selected.png');
             }
         }
@@ -114,7 +128,7 @@ body {
             background-color: $yellow;
             background-image: url('../images/menu_categories/B3_unselected.png');
 
-            &.active {
+            &:hover {
                 background-image: url('../images/menu_categories/B3_selected.png');
             }
         }
@@ -123,7 +137,7 @@ body {
             background-color: $green;
             background-image: url('../images/menu_categories/B4_unselected.png');
 
-            &.active {
+            &:hover {
                 background-image: url('../images/menu_categories/B4_selected.png');
             }
         }
@@ -132,7 +146,7 @@ body {
             background-color: $orange;
             background-image: url('../images/menu_categories/B5_unselected.png');
 
-            &.active {
+            &:hover {
                 background-image: url('../images/menu_categories/B5_selected.png');
             }
         }
@@ -141,7 +155,7 @@ body {
             background-color: $pink;
             background-image: url('../images/menu_categories/B6_unselected.png');
 
-            &.active {
+            &:hover {
                 background-image: url('../images/menu_categories/B6_selected.png');
             }
         }
@@ -197,7 +211,7 @@ body {
 .lp {
     position: fixed;
     bottom: 1px;
-    right: 60px;
+    right: 100px;
     width: 70px;
     transition: 4s;
     z-index: 3;
@@ -220,29 +234,29 @@ body {
     height: 29px;
     width: 8%;
     bottom: 21px;
-    right: 55px;
+    right: 100px;
     z-index: 1;
     transition: width 4s;
 }
 
 .line-moving {
     transition: width 4s;
-    width: 85%;
+    width: 77%;
 }
 
 .text {
     position: fixed;
     height: 50px;
-    width: 8%;
+    width: 0%;
     bottom: 10px;
-    right: 55px;
+    right: 100px;
     z-index: 2;
     transition: width 4s;
 }
 
 .text-moving {
     transition: width 4s;
-    width: 82%;
+    width: 77%;
 }
 
 .text span {
@@ -256,11 +270,12 @@ body {
 @media (min-width: $screen-sm-min) {
     .content {
         margin-top: 50px;
-        margin-right: 50px;
+        margin-right: 16.66667%;
+        height: 66vh;
     }
     
     .footer {
-        width: 98%;
+        width: 96%;
     }
 
     .sidebar-nav .navbar .navbar-collapse {
@@ -296,9 +311,9 @@ body {
                 padding: 0px 2px;
             }
 
-            .active > a:before {
-              height: 4px; /* height = weight */
-            }
+//            .active > a:before {
+//              height: 4px; /* height = weight */
+//            }
 
             li > a:before {
               height: 4px; /* height = weight */
@@ -319,15 +334,15 @@ body {
     }
 
     .line-moving {
-        width: 82%;
+        width: 77%;
     }
 
     .text {
-        width: 5%;
+        width: 0%;
     }
 
     .text-moving {
-        width: 80%;
+        width: 77%;
     }
 }
 
@@ -370,7 +385,7 @@ body {
     .content {
         position: fixed;
         top: 100px;
-//        margin-right: 0px;
+        height: 47vh;
 
         &.transparent {
             opacity: 0.5;
@@ -378,7 +393,11 @@ body {
     }
     
     .footer {
-        width: 96%;
+        width: 90%;
+
+        &.transparent {
+            opacity: 0.5;
+        }
     }
 
     .sidebar-nav .navbar .navbar-collapse {
@@ -418,9 +437,9 @@ body {
         .navbar-nav {
             margin: 80px 0px;
 
-            .active > a:before {
-              height: 8px; /* height = weight */
-            }
+//            .active > a:before {
+//              height: 8px; /* height = weight */
+//            }
 
             > li {
                 margin-bottom: 15px;
@@ -434,9 +453,20 @@ body {
                 > a {
                     font-size: 28px;
                     padding: 10px 5px;
+                    float: left;
 
                     &:before {
                       height: 8px; /* height = weight */
+                    }
+                }
+
+                &#nav-logos {
+                    > a {
+                        &:hover {
+                            &:before {
+                              background: transparent; /* line color */
+                            }
+                        }
                     }
                 }
             }

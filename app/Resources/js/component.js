@@ -98,9 +98,9 @@ const Component = React.createClass({
                     </Col>
                 </Row>
                 <Row>
-                    <Col sm={12} className="footer">
-                        <img id="palm" src={ ImgPalm } />
-                        <img id="cover" src={ ImgCoverEthical } style={{width: '120px', position: 'fixed', right: '54px', bottom: '-6px', zIndex: '4'}} onClick={ this.toggleMovingLp }/>
+                    <Col sm={12} className={ this.state.transparentContent ?  "footer transparent" : "footer" }>
+                        <img id="palm" src={ ImgPalm } onClick={ this.toggleMovingLp }/>
+                        <img id="cover" src={ ImgCoverEthical } onClick={ this.toggleMovingLp }/>
                         <img id="lp" src={ ImgLpEthical } className={ this.state.onLoad ? "lp" : this.state.movedLp ? "lp lp-moved lp-moving" : "lp lp-moving" }/>
                         <img id="scrolling-line" src={ ImgScrollingLine } className={ this.state.movedLp ? "line line-moving" : "line" }/>
                         <div className={ this.state.movedLp ? "text text-moving" : "text" }><marquee><span>Texte défilant en caractères fins pour l'instant</span></marquee></div>
