@@ -28,6 +28,11 @@ body {
     overflow-y: auto;
 }
 
+.editor {
+   border: 1px dashed $grey;
+   padding: 6px;
+}
+
 #logo-default {
     margin: 25px 25px 100px -15px;
     width: 120px;
@@ -114,7 +119,7 @@ body {
                 background-image: url('../images/menu_categories/B1_selected.png');
             }
         }
-          
+
         .menu-projectology {
             background-color: $purple;
             background-image: url('../images/menu_categories/B2_unselected.png');
@@ -159,13 +164,13 @@ body {
                 background-image: url('../images/menu_categories/B6_selected.png');
             }
         }
-        
+
         .menu-facebook {
             background-color: $brown;
             position: fixed;
             bottom: 30px;
         }
-        
+
         .menu-instagram {
             background-color: $beige;
             position: fixed;
@@ -194,7 +199,7 @@ body {
                     }
                 }
             }
-      } 
+      }
   }
 }
 
@@ -273,7 +278,7 @@ body {
         margin-right: 16.66667%;
         height: 66vh;
     }
-    
+
     .footer {
         width: 96%;
     }
@@ -300,7 +305,7 @@ body {
     .navbar-header {
         display: none;
     }
-    
+
     .navbar-default {
         .navbar-nav {
             .menu  {
@@ -391,7 +396,7 @@ body {
             opacity: 0.5;
         }
     }
-    
+
     .footer {
         width: 90%;
 
@@ -433,7 +438,7 @@ body {
                 }
             }
         }
-        
+
         .navbar-nav {
             margin: 80px 0px;
 
@@ -476,4 +481,3 @@ body {
         }
     }
 }
-
