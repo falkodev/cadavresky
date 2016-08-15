@@ -15,7 +15,8 @@
     "draft-js": "^0.8.0",
     "object-assign": "^4.1.0",
     "react": "15.1.0",
-    "react-dom": "15.1.0"
+    "react-dom": "15.1.0",
+    "react-router": "^2.6.1"
   },
   "devDependencies": {
     "react-bootstrap": "^0.29.5",

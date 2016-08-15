@@ -1,6 +1,5 @@
 import React from 'react';
 import { Grid, Row, Col, Nav, Navbar, NavItem, NavDropdown, MenuItem, Button, Fade, Collapse, Panel } from 'react-bootstrap';
-import {Editor, EditorState, ContentState, convertFromHTML} from 'draft-js';
 
 //images
 import ImgLogo             from '../images/CADAVRESKY-logo-fullscreen.png';
@@ -13,23 +12,14 @@ import ImgCoverEthical     from '../images/player/lp-cover-ethical.png';
 import ImgLpEthical        from '../images/player/lp-ethical.png';
 import ImgScrollingLine    from '../images/player/scrolling-line.png';
 
-const Component = React.createClass({
+const Layout = React.createClass({
     getInitialState: function() {
-        const initialContent = "<p>Il était une fois en 2015, une envie naquit au coin de la rue. L’idée un peu surréaliste de créer une jungle vestimentaire, en grattant les strates de nos restes populaires.</p><br><br><p>CADAVRESKY c’est le pied de nez au bras tendu des tendances actuelles. Sans concession, ni contre-façon.</p><br><br><p>CADAVRESKY propose à ton plumage un voyage au pays de la préhistoire contemporaine. A consommer sans modération en un cocktail bien frappé des cultures urbaines, street art et pop.</p><br><br><p>CADAVRESKY fait un tout avec rien et surtout, plus que tout, recherche, retrouve, décompose, recompose, un savoir-faire artisanal par le travail de la pièce unique pour des êtres uniques.</p><br><br><p>CADAVRESKY décale les codes, pour jouer de styles, en proposant une vision alternative de se penser avec classe et t’invite à trouver l’écho qui te correspond à travers chaque projet</p>";
-
         return {
             open: false,
             transparentContent: false,
             movedLp: false,
             onLoad: true,
-            editorState: EditorState.createWithContent(ContentState.createFromBlockArray(convertFromHTML(initialContent))),
-            editMode: false,
         };
-    },
-    onChange: function(editorState) {
-      if(this.state.editMode) {
-        this.setState({editorState});
-      }
     },
     toggleMenu: function() {
         this.setState({
@@ -94,13 +84,7 @@ const Component = React.createClass({
                     </Col>
                     <Col sm={10}>
                         <div className={ this.state.transparentContent ?  "content transparent" : "content" }>
-                          <button onClick={ () => this.setState({editMode:!this.state.editMode}) }>{ this.state.editMode ?  "Annuler" : "Editer" }</button>
-                          <div className={ this.state.editMode ?  "editor" : "" }>
-                            <Editor
-                              editorState={ this.state.editorState }
-                              onChange={ this.onChange }
-                            />
-                          </div>
+                          {this.props.children}
                         </div>
                     </Col>
                 </Row>
@@ -118,4 +102,4 @@ const Component = React.createClass({
     }
 });
 
-export default Component;
+export default Layout;

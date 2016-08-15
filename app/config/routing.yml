@@ -2,6 +2,18 @@
 #     resource: "@AppBundle/Controller/"
 #     type:     annotation
 
+# api:
+#     resource: "@AppBundle/Resources/config/routing.yml"
+#     prefix:   /api/
+
+api_routes:
+    resource: "@AppBundle/Controller"
+    type:     annotation
+
+# api_get:
+#     pattern:  /api/get/pages/{id}
+#     defaults: { _controller: AppBundle:Default:sejour }
+
 fallback:
     pattern: /{url}
     defaults: { _controller: AppBundle:Default:index, url: null }
