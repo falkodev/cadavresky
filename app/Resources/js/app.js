@@ -1,14 +1,14 @@
-import React from 'react';
+import React    from 'react';
 import ReactDom from 'react-dom';
 
-import history from './helpers/history';
-import Layout from './Layout';
-import WhosWho from './pages/WhosWho';
+import history      from './helpers/history';
+import Layout       from './Layout';
+import WhosWho      from './pages/WhosWho';
 import Projectology from './pages/Projectology';
-import Error404 from './pages/Error404';
+import Error404     from './pages/Error404';
 
 function render(location) {
-  const path = location.pathname.split("/").pop();
+  const path = location.pathname.split('/').pop();
   let component;
 
   switch (path) {
