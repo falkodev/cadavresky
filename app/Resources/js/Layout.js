@@ -1,5 +1,7 @@
 import React from 'react';
 import { Grid, Row, Col, Nav, Navbar, NavItem, NavDropdown, MenuItem, Button, Fade, Collapse, Panel } from 'react-bootstrap';
+import history from './helpers/history';
+import Link from './Link';
 
 //images
 import ImgLogo             from '../images/CADAVRESKY-logo-fullscreen.png';
@@ -41,6 +43,13 @@ const Layout = React.createClass({
             else { elem.className = "lp"; }
         },4000);
     },
+    transition: event => {
+      event.preventDefault();
+      history.push({
+        pathname: event.currentTarget.pathname,
+        search: event.currentTarget.search
+      });
+    },
     render: function() {
         return (
             <Grid fluid>
@@ -65,14 +74,14 @@ const Layout = React.createClass({
                                 </Navbar.Header>
                                 <Navbar.Collapse>
                                     <Nav className="menu navbar-fixed-top">
-                                        <NavItem href="#" className="menu menu-whoswho active">Who's who</NavItem>
-                                        <NavItem href="#" className="menu menu-projectology">Projectology</NavItem>
-                                        <NavItem href="#" className="menu menu-zoo">The zoo</NavItem>
-                                        <NavItem href="#" className="menu menu-shop">Shop</NavItem>
-                                        <NavItem href="#" className="menu menu-goodies">Goodies</NavItem>
-                                        <NavItem href="#" className="menu menu-contact">Contact</NavItem>
-                                        <NavItem href="http://www.facebook.com" className="menu-facebook menu-desktop">Facebook</NavItem>
-                                        <NavItem href="http://www.instagram.com" className="menu-instagram menu-desktop">Instagram</NavItem>
+                                        <Link to="whoswho" className="menu menu-whoswho active">Whos who</Link>
+                                        <Link to="projectology" className="menu menu-projectology">Projectology</Link>
+                                        <Link to="#" className="menu menu-zoo">The zoo</Link>
+                                        <Link to="#" className="menu menu-shop">Shop</Link>
+                                        <Link to="#" className="menu menu-goodies">Goodies</Link>
+                                        <Link to="#" className="menu menu-contact">Contact</Link>
+                                        <Link to="http://www.facebook.com" className="menu-facebook menu-desktop">Facebook</Link>
+                                        <Link to="http://www.instagram.com" className="menu-instagram menu-desktop">Instagram</Link>
                                         <li id="nav-logos">
                                             <a href="http://www.instagram.com"><img id="logo-instagram" src={ImgLogoInsta}/></a>&nbsp;
                                             <a href="http://www.facebook.com"><img id="logo-facebook" src={ImgLogoFb}/></a>

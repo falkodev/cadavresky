@@ -1,18 +1,31 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import { Router, Route, IndexRoute, browserHistory } from 'react-router'
+
+import history from './helpers/history';
 import Layout from './Layout';
 import WhosWho from './pages/WhosWho';
 import Projectology from './pages/Projectology';
 import Error404 from './pages/Error404';
 
-ReactDom.render((
-  <Router history = {browserHistory}>
-      <Route path = "/" component = {Layout}>
-          <IndexRoute component={WhosWho} />
-          <Route path = "whoswho" component = {WhosWho} />
-          <Route path = "projectology" component = {Projectology} />
-      </Route>
-      <Route path="*" component={Error404}/>
-   </Router>
-), document.getElementById('app'));
+function render(location) {
+  const path = location.pathname.split("/").pop();
+  let component;
+
+  switch (path) {
+    case 'whoswho':
+      component = <WhosWho />;
+      break;
+    case 'projectology':
+      component = <Projectology />;
+      break;
+    default:
+      component = <WhosWho />;
+  }
+
+  ReactDom.render((
+    <Layout>{component}</Layout>
+  ), document.getElementById('app'));
+}
+
+render(history.getCurrentLocation());
+history.listen(render);

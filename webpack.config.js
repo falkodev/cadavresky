@@ -22,8 +22,8 @@ var config = {
                 test: /\.jsx?$/,
                 include: path.join(__dirname, 'app/Resources/js'),
                 exclude: node_modules_dir,
-                loaders: ['react-hot', 'babel?presets[]=es2015&presets[]=react'],
-                presets: ['es2015', 'react']
+                loaders: ['react-hot', 'babel?presets[]=es2015&presets[]=react&presets[]=stage-2'],
+                presets: ['es2015', 'react', 'stage-2']
             },
             {
                 test: /\.scss$/,
