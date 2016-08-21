@@ -1,6 +1,5 @@
 import React from 'react';
 import { Grid, Row, Col, Nav, Navbar, NavItem, NavDropdown, MenuItem, Button, Fade, Collapse, Panel } from 'react-bootstrap';
-import history from './helpers/history';
 import Link from './Link';
 
 //images
@@ -85,7 +84,7 @@ const Layout = React.createClass({
                         </div>
                     </Col>
                     <Col sm={10}>
-                        <div id="test" className={ this.state.transparentContent ?  "content transparent" : "content" }>
+                        <div className={ this.state.transparentContent ?  "content transparent" : "content" }>
                           {this.props.children}
                         </div>
                     </Col>

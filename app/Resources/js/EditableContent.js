@@ -10,6 +10,12 @@ const EditableContent = React.createClass({
             editMode: false,
         };
     },
+    componentWillReceiveProps: function(nextProps) {
+      this.setState({
+        editorState: EditorState.createWithContent(ContentState.createFromBlockArray(convertFromHTML(nextProps.initialContent))),
+        editMode: false,
+      });
+    },
     onChange: function(editorState) {
       if(this.state.editMode) {
         this.setState({editorState});
