@@ -78,6 +78,17 @@ body {
     z-index: 4;
 }
 
+@keyframes loading {
+  100% { transform:rotate(360deg); }
+}
+
+#spinner {
+  fill: black;
+  height: 30px;
+  width: 30px;
+  animation: loading 1s linear infinite;
+}
+
 .navbar-default {
     background-color: white;
     border-color: white;

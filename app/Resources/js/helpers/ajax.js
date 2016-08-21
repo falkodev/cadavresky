@@ -1,7 +1,7 @@
 export function ajaxGet(file, callback) {
   var xObj = new XMLHttpRequest();
 
-  xObj.open('GET', file, false);
+  xObj.open('GET', file, true);
   xObj.onreadystatechange = function () {
     if (xObj.readyState == 4 && xObj.status == '200') {
       callback(xObj.responseText);

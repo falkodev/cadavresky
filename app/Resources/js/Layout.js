@@ -43,13 +43,6 @@ const Layout = React.createClass({
             else { elem.className = "lp"; }
         },4000);
     },
-    transition: event => {
-      event.preventDefault();
-      history.push({
-        pathname: event.currentTarget.pathname,
-        search: event.currentTarget.search
-      });
-    },
     render: function() {
         return (
             <Grid fluid>
@@ -92,7 +85,7 @@ const Layout = React.createClass({
                         </div>
                     </Col>
                     <Col sm={10}>
-                        <div className={ this.state.transparentContent ?  "content transparent" : "content" }>
+                        <div id="test" className={ this.state.transparentContent ?  "content transparent" : "content" }>
                           {this.props.children}
                         </div>
                     </Col>

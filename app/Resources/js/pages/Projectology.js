@@ -1,25 +1,21 @@
 import React from 'react';
-import ajaxGet from '../helpers/ajax';
 
 const Projectology = React.createClass({
-    componentDidMount: function() {
-        var _this = this;
-        this.serverRequest =
-          axios
-            .get("http://codepen.io/jobs.json")
-            .then(function(result) {
-              _this.setState({
-                jobs: result.data.jobs
-              });
-            })
-    },
-    render: function() {
-        return (
-          <div>
-
-          </div>
-        );
-    }
+  getInitialState: function() {
+    return {
+      content: null
+    };
+  },
+  componentDidMount: function() {
+    this.props.onAjax(this, 3);
+  },
+  render: function() {
+    return (
+      <div>
+        { this.state.content }
+      </div>
+    );
+  }
 });
 
 export default Projectology;
