@@ -1,5 +1,6 @@
 import React from 'react';
 import EditableContent from './EditableContent';
+import { loadHandler } from './helpers/ajax';
 
 const Page = React.createClass({
   getInitialState: function() {
@@ -8,11 +9,11 @@ const Page = React.createClass({
       content: null
     };
   },
-  componentDidMount: function() {
-    this.props.onLoad(this, this.props.page);
+  componentDidMount: function() { //1ere fois que la page est chargée avec un composant (sex: who's who = page 2)
+    loadData(this, this.props.page);
   },
-  componentWillReceiveProps: function(nextProps) {
-    this.props.onLoad(this, nextProps.page);
+  componentWillReceiveProps: function(nextProps) { //changement de page -> la page est chargée avec un nouveau composant (ex: projectology = page 3)
+    loadData(this, nextProps.page);
   },
   render: function() {
       return (

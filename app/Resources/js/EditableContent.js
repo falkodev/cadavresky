@@ -24,8 +24,16 @@ const EditableContent = React.createClass({
     render: function() {
         return (
           <div>
-            <button onClick={ () => this.setState({editMode:!this.state.editMode}) }>{ this.state.editMode ?  "Annuler" : "Editer" }</button>
-            <div className={ this.state.editMode ?  "editor" : "" }>
+            { this.state.editMode ?
+             <div>
+                {/* voir si methode dans draft.js pour garder l'état initial, sinon enregistrer l'état au moment du clic sur "Editer" */}
+                <button onClick={ () => this.setState({editMode:false}) } 
+                  className="btn btn-danger">Annuler</button>
+                <button className="btn btn-success">Enregistrer</button>
+              </div> :
+             <button onClick={ () => this.setState({editMode:true}) } className="btn">Editer</button> 
+            }
+            <div className={ this.state.editMode ?  "editor" : "" }> {/* affichage bordure en trait */}
               <Editor
                 editorState={ this.state.editorState }
                 onChange={ this.onChange }

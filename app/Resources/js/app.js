@@ -2,7 +2,6 @@ import React    from 'react';
 import ReactDom from 'react-dom';
 
 import history         from './helpers/history';
-import { loadHandler } from './helpers/ajax';
 import Layout          from './Layout';
 import Page            from './Page';
 
@@ -12,13 +11,13 @@ function render(location) {
 
   switch (path) {
     case 'whoswho':
-      component = <Page page={2} onLoad={loadHandler} />;
+      component = <Page page={2} />;
       break;
     case 'projectology':
-      component = <Page page={3} onLoad={loadHandler} />;
+      component = <Page page={3} />;
       break;
     default:
-      component = <Page page={2} onLoad={loadHandler} />;
+      component = <Page page={2} />;
   }
 
   ReactDom.render((

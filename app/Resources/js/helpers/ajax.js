@@ -23,7 +23,7 @@ function ajaxPost(file, data, callback) {
 }
 
 let cache = [];
-export function loadHandler(that, page) {
+export function loadData(that, page) {
   if(cache.hasOwnProperty()  && cache[page].id === page) {
     that.setState({
       isLoading: false,
@@ -38,10 +38,6 @@ export function loadHandler(that, page) {
           isLoading: false,
           content: data
         });
-        const newPageInCache = {
-          id: page,
-          content: data
-        };
         cache[page] = {};
         cache[page].id = page;
         cache[page].content = data;
