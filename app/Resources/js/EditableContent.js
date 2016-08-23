@@ -1,28 +1,24 @@
 import React from 'react';
-import { Editor, EditorState, ContentState, convertFromHTML, convertFromRaw } from 'draft-js';
+import RichTextEditor from 'react-rte';
 
 const EditableContent = React.createClass({
     getInitialState: function() {
         const initialContent = this.props.initialContent;
-        console.log('initialContent', initialContent);
+
         return {
-            editorState: EditorState.createWithContent(ContentState.createFromBlockArray(convertFromHTML(initialContent))),
+            value: RichTextEditor.createValueFromString(initialContent, 'html'),
             editMode: false,
         };
     },
     componentWillReceiveProps: function(nextProps) {
       this.setState({
-        editorState: EditorState.createWithContent(ContentState.createFromBlockArray(convertFromHTML(nextProps.initialContent))),
+        value: RichTextEditor.createValueFromString(nextProps.initialContent, 'html'),
         editMode: false,
       });
     },
-    onChange: function(editorState) {
-//      editorState.getCurrentContent().getBlockMap().map((item) => {
-//        console.log('item', item.text);
-//      } );
-//      console.log('content map: ', editorState.getCurrentContent().getBlockMap());
+    onChange: function(value) {
       if(this.state.editMode) {
-        this.setState({editorState});
+        this.setState({value});
       }
     },
     render: function() {
@@ -31,16 +27,16 @@ const EditableContent = React.createClass({
             { this.state.editMode ?
              <div>
                 {/* voir si methode dans draft.js pour garder l'état initial, sinon enregistrer l'état au moment du clic sur "Editer" */}
-                <button onClick={ () => this.setState({editMode:false}) } 
+                <button onClick={ () => this.setState({editMode:false}) }
                   className="btn btn-danger">Annuler</button>
-                <button className="btn btn-success">Enregistrer</button>
+                <button className="btn">Enregistrer</button>
               </div> :
-             <button onClick={ () => this.setState({editMode:true}) } className="btn">Editer</button> 
+             <button onClick={ () => this.setState({editMode:true}) } className="btn">Editer</button>
             }
             <div className={ this.state.editMode ?  "editor" : "" }> {/* affichage bordure en trait */}
-              <Editor
-                editorState={ this.state.editorState }
-                onChange={ this.onChange }
+              <RichTextEditor
+                value={this.state.value}
+                onChange={this.onChange}
               />
             </div>
           </div>

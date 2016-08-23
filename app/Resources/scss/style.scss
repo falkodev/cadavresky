@@ -28,9 +28,36 @@ body {
     overflow-y: auto;
 }
 
+[class^=EditorToolbar__root] {
+  display: none;
+}
+
+[class^=RichTextEditor__root] {
+    overflow: hidden !important;
+    font-family: sans-serif !important;
+    background: transparent !important;
+    border: none !important;
+    padding: 0px !important;
+}
+
+[class^=RichTextEditor__editor] {
+  border-top: none !important;
+  cursor: default !important;
+  font-size: 14px !important;
+  margin-top: 0px !important;
+}
+
 .editor {
    border: 1px dashed $grey;
    padding: 6px;
+
+   [class^=EditorToolbar__root] {
+     display: block;
+   }
+
+   [class^=RichTextEditor__editor] {
+     cursor: text;
+   }
 }
 
 #logo-default {
