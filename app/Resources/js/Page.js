@@ -1,6 +1,6 @@
 import React from 'react';
 import EditableContent from './EditableContent';
-import { loadHandler } from './helpers/ajax';
+import { loadData } from './helpers/ajax';
 
 const Page = React.createClass({
   getInitialState: function() {

@@ -1,10 +1,10 @@
 import React from 'react';
-import {Editor, EditorState, ContentState, convertFromHTML} from 'draft-js';
+import { Editor, EditorState, ContentState, convertFromHTML, convertFromRaw } from 'draft-js';
 
 const EditableContent = React.createClass({
     getInitialState: function() {
         const initialContent = this.props.initialContent;
-
+        console.log('initialContent', initialContent);
         return {
             editorState: EditorState.createWithContent(ContentState.createFromBlockArray(convertFromHTML(initialContent))),
             editMode: false,
@@ -17,6 +17,10 @@ const EditableContent = React.createClass({
       });
     },
     onChange: function(editorState) {
+//      editorState.getCurrentContent().getBlockMap().map((item) => {
+//        console.log('item', item.text);
+//      } );
+//      console.log('content map: ', editorState.getCurrentContent().getBlockMap());
       if(this.state.editMode) {
         this.setState({editorState});
       }
