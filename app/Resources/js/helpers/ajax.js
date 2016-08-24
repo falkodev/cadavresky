@@ -12,14 +12,15 @@ function ajaxGet(file, callback) {
 
 function ajaxPost(file, data, callback) {
   var xObj = new XMLHttpRequest();
-
   xObj.open('POST', file, true);
+  xObj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xObj.setRequestHeader("X-Requested-With","XMLHttpRequest");
   xObj.onreadystatechange = function () {
     if (xObj.readyState == 4 && xObj.status == '200') {
       callback(xObj.responseText);
     }
   };
-  xObj.send(data);
+  xObj.send('data='+data);
 }
 
 let cache = [];
@@ -33,14 +34,35 @@ export function loadData(that, page) {
     let data;
     ajaxGet('api/get/pages/'+page,
       function(response){
-        data = JSON.parse(response).data;
+        const jsonContent = JSON.parse(response).data;
         that.setState({
           isLoading: false,
-          content: data
+          content: jsonContent
         });
         cache[page] = {};
         cache[page].id = page;
-        cache[page].content = data;
+        cache[page].content = jsonContent;
       });
   }
+}
+
+export function sendData(that, page, data) {
+  that.setState({isLoading:true});
+
+  ajaxPost('api/post/pages/'+page,
+    data,
+    function(response){
+      const jsonResponse = JSON.parse(response);
+      if(jsonResponse.success) {
+        that.setState({
+          isLoading: false,
+          editMode: false,
+        });
+      } else {
+        that.setState({
+          isLoading: false,
+          hasError: true,
+        });
+      }
+    });
 }

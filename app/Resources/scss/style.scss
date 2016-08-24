@@ -42,7 +42,7 @@ body {
 
 [class^=RichTextEditor__editor] {
   border-top: none !important;
-  cursor: default !important;
+//  cursor: default !important;
   font-size: 14px !important;
   margin-top: 0px !important;
 }
@@ -109,13 +109,21 @@ body {
   100% { transform:rotate(360deg); }
 }
 
-#spinner {
+.spinner {
   fill: black;
   height: 30px;
   width: 30px;
   animation: loading 1s linear infinite;
 }
 
+#spinner-save {
+  margin-left: 10px;
+  position: absolute;
+}
+
+.alert {
+  margin-top: 10px;
+}
 .navbar-default {
     background-color: white;
     border-color: white;
@@ -309,12 +317,12 @@ body {
     text-align: center;
 }
 
-/* make sidebar nav vertical */
+/* desktop */
 @media (min-width: $screen-sm-min) {
     .content {
         margin-top: 50px;
         margin-right: 16.66667%;
-        height: 66vh;
+        height: 83vh;
     }
 
     .footer {
@@ -331,6 +339,7 @@ body {
     .sidebar-nav .navbar ul {
         float: none;
         margin: 30vh 0px 0px 25px;
+        width: 120px;
     }
     .sidebar-nav .navbar ul:not {
         display: block;
@@ -389,6 +398,7 @@ body {
     }
 }
 
+/* mobile */
 @media (max-width: $screen-xs-max) {
     #logo-default {
         display: none;
@@ -428,7 +438,7 @@ body {
     .content {
         position: fixed;
         top: 100px;
-        height: 47vh;
+        height: 67vh;
 
         &.transparent {
             opacity: 0.5;
@@ -465,7 +475,7 @@ body {
         .navbar-toggle {
             border: none;
             float: left;
-            z-index: 1000;
+            z-index: 6;
             margin: 0;
             padding: 0;
 
