@@ -6,7 +6,8 @@ const Page = React.createClass({
   getInitialState: function() {
     return {
       isLoading: true,
-      content: null
+      content: null,
+      isAdminLoggedIn: false,
     };
   },
   componentDidMount: function() { //1ere fois que la page est chargée avec un composant (sex: who's who = page 2)
@@ -23,7 +24,7 @@ const Page = React.createClass({
               <path opacity=".25" d="M16 0 A16 16 0 0 0 16 32 A16 16 0 0 0 16 0 M16 4 A12 12 0 0 1 16 28 A12 12 0 0 1 16 4"></path>
               <path d="M16 0 A16 16 0 0 1 32 16 L28 16 A12 12 0 0 0 16 4z" transform="rotate(297.427 16 16)"></path>
             </svg>:
-           <EditableContent initialContent={ this.state.content } page={ this.props.page } />}
+           <EditableContent initialContent={ this.state.content } page={ this.props.page } editable={this.state.isAdminLoggedIn} />}
         </div>
       );
   }

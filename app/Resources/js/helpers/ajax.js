@@ -20,7 +20,7 @@ function ajaxPost(file, data, callback) {
       callback(xObj.responseText);
     }
   };
-  xObj.send('data='+data);
+  xObj.send(data);
 }
 
 let cache = [];
@@ -50,13 +50,34 @@ export function sendData(that, page, data) {
   that.setState({isLoading:true});
 
   ajaxPost('api/post/pages/'+page,
-    data,
+    'data='+data,
     function(response){
       const jsonResponse = JSON.parse(response);
       if(jsonResponse.success) {
         that.setState({
           isLoading: false,
           editMode: false,
+        });
+      } else {
+        that.setState({
+          isLoading: false,
+          hasError: true,
+        });
+      }
+    });
+}
+
+export function login(that, data) {
+  that.setState({isLoading:true});
+
+  ajaxPost('user/login/1',
+    data,
+    function(response){
+      const jsonResponse = JSON.parse(response);
+      if(jsonResponse.success) {
+        that.setState({
+          isLoading: false,
+          isAdminLoggedIn: true,
         });
       } else {
         that.setState({
