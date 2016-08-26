@@ -1,3 +1,5 @@
+import render from '../app';
+
 function ajaxGet(file, callback) {
   var xObj = new XMLHttpRequest();
 
@@ -79,6 +81,7 @@ export function login(that, data) {
           isLoading: false,
           isAdminLoggedIn: true,
         });
+        that.props.callbackParent(true); // call connectionHandler in App.js
       } else {
         that.setState({
           isLoading: false,
@@ -86,4 +89,11 @@ export function login(that, data) {
         });
       }
     });
+}
+
+let isAdminLoggedIn;
+export function connectionHandler(log) {
+  isAdminLoggedIn = log;
+  window.history.pushState({}, null, "whoswho"); //change url
+  render({pathname: 'whoswho'}, isAdminLoggedIn); //render page in editable mode with isAdminLoggedIn = true
 }

@@ -22,7 +22,6 @@ const Login = React.createClass({
     const data =
       'username='+this.state.username+
       '&password='+this.state.password;
-    console.log('data', data);
     login(this, data);
   },
   render: function() {
@@ -61,6 +60,20 @@ const Login = React.createClass({
               className="btn btn-default text-center"
             >Connexion</button>
           </div>
+
+          {this.state.isLoading ?
+           <svg className="spinner spinner-alt" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+              <path opacity=".25" d="M16 0 A16 16 0 0 0 16 32 A16 16 0 0 0 16 0 M16 4 A12 12 0 0 1 16 28 A12 12 0 0 1 16 4"></path>
+              <path d="M16 0 A16 16 0 0 1 32 16 L28 16 A12 12 0 0 0 16 4z" transform="rotate(297.427 16 16)"></path>
+            </svg>:null}
+
+          {this.state.hasError ?
+            <div id="alert-login" className="alert alert-danger" role="alert">
+              <button type="button" onClick={ () => this.setState({hasError:false})} className="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <strong>Connexion impossible</strong>
+                <br />Identifiant / mot de passe incorrect
+                <br />ou problème de connexion avec la base de données
+            </div>:null}
 
         </form>
       );

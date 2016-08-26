@@ -116,14 +116,19 @@ body {
   animation: loading 1s linear infinite;
 }
 
-#spinner-save {
+.spinner-alt {
   margin-left: 10px;
   position: absolute;
 }
 
-.alert {
+#alert-edit {
   margin-top: 10px;
 }
+
+#alert-login {
+  margin-top: 60px;
+}
+
 .navbar-default {
     background-color: white;
     border-color: white;

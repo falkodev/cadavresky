@@ -1,24 +1,25 @@
 import React    from 'react';
 import ReactDom from 'react-dom';
 
-import history         from './helpers/history';
-import Layout          from './Layout';
-import Page            from './Page';
-import Login           from './Login';
+import history               from './helpers/history';
+import { connectionHandler } from './helpers/ajax';
+import Layout                from './Layout';
+import Page                  from './Page';
+import Login                 from './Login';
 
-function render(location) {
+export default function render(location, isAdminLoggedIn=false) {
   const path = location.pathname.split('/').pop();
   let component;
 
   switch (path) {
     case 'login':
-      component = <Login />;
+      component = <Login callbackParent={connectionHandler} />;
       break;
     case 'whoswho':
-      component = <Page page={2} />;
+      component = <Page page={2} isAdminLoggedIn={isAdminLoggedIn} />;
       break;
     case 'projectology':
-      component = <Page page={3} />;
+      component = <Page page={3} isAdminLoggedIn={isAdminLoggedIn} />;
       break;
     default:
       component = <Page page={2} />;

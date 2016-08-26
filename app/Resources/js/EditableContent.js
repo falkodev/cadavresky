@@ -1,6 +1,6 @@
 import React from 'react';
 import RichTextEditor from 'react-rte';
-import { sendData } from './helpers/ajax';
+import { sendData, connectionHandler } from './helpers/ajax';
 
 let initialContent;
 
@@ -51,13 +51,13 @@ const EditableContent = React.createClass({
                   <button onClick={ this.saveHandler } className="btn">Enregistrer</button>
 
                   {this.state.isLoading ?
-                   <svg className="spinner" id="spinner-save" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+                   <svg className="spinner spinner-alt" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
                       <path opacity=".25" d="M16 0 A16 16 0 0 0 16 32 A16 16 0 0 0 16 0 M16 4 A12 12 0 0 1 16 28 A12 12 0 0 1 16 4"></path>
                       <path d="M16 0 A16 16 0 0 1 32 16 L28 16 A12 12 0 0 0 16 4z" transform="rotate(297.427 16 16)"></path>
                     </svg>:null}
 
                   {this.state.hasError ?
-                    <div className="alert alert-danger" role="alert">
+                    <div id="alert-edit" className="alert alert-danger" role="alert">
                       <button type="button" onClick={ () => this.setState({hasError:false})} className="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                       <strong>Problème d'enregistrement</strong>
                         <br />Un problème s'est produit lors de l'enregistrement en base de données
@@ -65,7 +65,10 @@ const EditableContent = React.createClass({
                     </div>:null}
                 </div> :
 
-               <button onClick={ this.editModeHandler } className="btn">Editer</button>
+               <div>
+                <button onClick={ this.editModeHandler } className="btn">Editer</button>
+                <button onClick={ () => location.reload() } className="btn btn-primary pull-right">Déconnexion</button>
+               </div>
             : null }
 
             <div className={ this.state.editMode ?  "editor" : "" }> {/* affichage bordure en trait */}
