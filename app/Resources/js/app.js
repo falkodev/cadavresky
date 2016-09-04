@@ -21,6 +21,15 @@ export default function render(location, isAdminLoggedIn=false) {
     case 'projectology':
       component = <Page page={3} isAdminLoggedIn={isAdminLoggedIn} />;
       break;
+    case 'zoo':
+      component = <Page page={4} isAdminLoggedIn={isAdminLoggedIn} />;
+      break;
+    case 'shop':
+      component = <Page page={5} isAdminLoggedIn={isAdminLoggedIn} />;
+      break;
+    case 'goodies':
+      component = <Page page={6} isAdminLoggedIn={isAdminLoggedIn} />;
+      break;
     default:
       component = <Page page={2} />;
   }

@@ -68,9 +68,9 @@ const Layout = React.createClass({
                                     <Nav className="menu navbar-fixed-top">
                                         <Link to="whoswho" className="menu menu-whoswho active">Whos who</Link>
                                         <Link to="projectology" className="menu menu-projectology">Projectology</Link>
-                                        <Link to="#" className="menu menu-zoo">The zoo</Link>
-                                        <Link to="#" className="menu menu-shop">Shop</Link>
-                                        <Link to="#" className="menu menu-goodies">Goodies</Link>
+                                        <Link to="zoo" className="menu menu-zoo">The zoo</Link>
+                                        <Link to="shop" className="menu menu-shop">Shop</Link>
+                                        <Link to="goodies" className="menu menu-goodies">Goodies</Link>
                                         <Link to="#" className="menu menu-contact">Contact</Link>
                                         <Link to="http://www.facebook.com" className="menu-facebook menu-desktop">Facebook</Link>
                                         <Link to="http://www.instagram.com" className="menu-instagram menu-desktop">Instagram</Link>
