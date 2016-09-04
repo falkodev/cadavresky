@@ -42,6 +42,11 @@ const Layout = React.createClass({
             else { elem.className = "lp"; }
         },4000);
     },
+    toggleSubMenu: function(parent) {
+        document.querySelectorAll(".sub-menu.menu-" + parent).forEach(function(key, value) {
+            key.classList.toggle("clicked");
+        });
+    },
     render: function() {
         return (
             <Grid fluid>
@@ -67,7 +72,11 @@ const Layout = React.createClass({
                                 <Navbar.Collapse>
                                     <Nav className="menu navbar-fixed-top">
                                         <Link to="whoswho" className="menu menu-whoswho active">Whos who</Link>
-                                        <Link to="projectology" className="menu menu-projectology">Projectology</Link>
+                                        <li role="presentation" className="menu menu-projectology">
+                                            <span onClick={ this.toggleSubMenu.bind(null, "projectology") }>Projectology</span>
+                                          <Link to="wear" className="sub-menu menu-projectology">To wear</Link>
+                                          <Link to="adorn" className="sub-menu menu-projectology">To adorn</Link>
+                                        </li>
                                         <Link to="zoo" className="menu menu-zoo">The zoo</Link>
                                         <Link to="shop" className="menu menu-shop">Shop</Link>
                                         <Link to="goodies" className="menu menu-goodies">Goodies</Link>

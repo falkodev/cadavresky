@@ -30,6 +30,12 @@ export default function render(location, isAdminLoggedIn=false) {
     case 'goodies':
       component = <Page page={6} isAdminLoggedIn={isAdminLoggedIn} />;
       break;
+    case 'wear':
+      component = <Page page={7} isAdminLoggedIn={isAdminLoggedIn} />;
+      break;
+    case 'adorn':
+      component = <Page page={8} isAdminLoggedIn={isAdminLoggedIn} />;
+      break;
     default:
       component = <Page page={2} />;
   }

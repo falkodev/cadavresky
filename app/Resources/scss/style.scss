@@ -172,11 +172,19 @@ body {
         }
 
         .menu-projectology {
+            padding: 5px 2px;
             background-color: $purple;
             background-image: url('../images/menu_categories/B2_unselected.png');
 
             &:hover {
                 background-image: url('../images/menu_categories/B2_selected.png');
+            }
+
+            a {
+                display: none;
+                &.clicked {
+                    display: block;
+                }
             }
         }
 
