@@ -74,9 +74,9 @@ const Layout = React.createClass({
                                         <Link to="whoswho" className="menu menu-whoswho active">Whos who</Link>
                                         <li role="presentation" className="menu menu-projectology">
                                             <span onClick={ this.toggleSubMenu.bind(null, "projectology") }>Projectology</span>
-                                          <Link to="wear" className="sub-menu menu-projectology">To wear</Link>
-                                          <Link to="adorn" className="sub-menu menu-projectology">To adorn</Link>
                                         </li>
+                                        <Link to="wear" className="menu sub-menu menu-projectology">To wear</Link>
+                                        <Link to="adorn" className="menu sub-menu menu-projectology">To adorn</Link>
                                         <Link to="zoo" className="menu menu-zoo">The zoo</Link>
                                         <Link to="shop" className="menu menu-shop">Shop</Link>
                                         <Link to="goodies" className="menu menu-goodies">Goodies</Link>

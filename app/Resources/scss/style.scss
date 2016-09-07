@@ -42,7 +42,6 @@ body {
 
 [class^=RichTextEditor__editor] {
   border-top: none !important;
-//  cursor: default !important;
   font-size: 14px !important;
   margin-top: 0px !important;
 }
@@ -180,12 +179,12 @@ body {
                 background-image: url('../images/menu_categories/B2_selected.png');
             }
 
-            a {
-                display: none;
-                &.clicked {
-                    display: block;
-                }
-            }
+//            a {
+//                display: none;
+//                &.clicked {
+//                    display: block;
+//                }
+//            }
         }
 
         .menu-zoo {
@@ -234,6 +233,14 @@ body {
             background-color: $beige;
             position: fixed;
             bottom: 0px;
+        }
+
+        .sub-menu {
+            display: none;
+
+            &.clicked {
+                display: block;
+            }
         }
 
         >li {
@@ -383,6 +390,13 @@ body {
             li > a:before {
               height: 4px; /* height = weight */
             }
+
+            .sub-menu {
+                padding: 0;
+                margin-top: -10px;
+                width: 100px;
+                margin-left: 20px;
+            }
         }
     }
 
@@ -516,7 +530,7 @@ body {
                     display: none;
                 }
 
-                > a {
+                > a, span {
                     font-size: 28px;
                     padding: 10px 5px;
                     float: left;
@@ -524,6 +538,11 @@ body {
                     &:before {
                       height: 8px; /* height = weight */
                     }
+                }
+
+                > span {
+                    padding: 0px 0px 0px 10px;
+                    margin-top: -3px;
                 }
 
                 &#nav-logos {
@@ -538,6 +557,13 @@ body {
             }
             .menu  {
                 background-size: cover;
+            }
+
+            .sub-menu {
+                padding: 1px 5px;
+                margin-top: -15px;
+                margin-left: 15%;
+                width: 100%;
             }
         }
     }
