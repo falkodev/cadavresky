@@ -36,6 +36,12 @@ export default function render(location, isAdminLoggedIn=false) {
     case 'adorn':
       component = <Page page={8} isAdminLoggedIn={isAdminLoggedIn} />;
       break;
+    case 'collaboratory':
+      component = <Page page={9} isAdminLoggedIn={isAdminLoggedIn} />;
+      break;
+    case 'buddies':
+      component = <Page page={10} isAdminLoggedIn={isAdminLoggedIn} />;
+      break;
     default:
       component = <Page page={2} />;
   }

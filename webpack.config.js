@@ -77,7 +77,6 @@ function setPlugins() {
         plugins.push(new webpack.optimize.OccurenceOrderPlugin());
         plugins.push(new webpack.optimize.DedupePlugin());
         plugins.push(new webpack.optimize.UglifyJsPlugin());
-        plugins.push(new ExtractTextPlugin('style.css', { allChunks: true }));
     }
 
     return plugins;

@@ -61,7 +61,7 @@ body {
 
 #logo-default {
     margin: 25px 25px 100px -15px;
-    width: 120px;
+    width: 130px;
 }
 
 //#close-menu-icon {
@@ -178,16 +178,10 @@ body {
             &:hover {
                 background-image: url('../images/menu_categories/B2_selected.png');
             }
-
-//            a {
-//                display: none;
-//                &.clicked {
-//                    display: block;
-//                }
-//            }
         }
 
         .menu-zoo {
+            padding: 5px 2px;
             background-color: $yellow;
             background-image: url('../images/menu_categories/B3_unselected.png');
 
@@ -359,7 +353,7 @@ body {
     .sidebar-nav .navbar ul {
         float: none;
         margin: 30vh 0px 0px 25px;
-        width: 120px;
+        width: 130px;
     }
     .sidebar-nav .navbar ul:not {
         display: block;
@@ -367,7 +361,7 @@ body {
     .sidebar-nav .navbar li {
         float: none;
         display: block;
-        width: 120px;
+        width: 130px;
     }
     .navbar-header {
         display: none;
@@ -394,8 +388,7 @@ body {
             .sub-menu {
                 padding: 0;
                 margin-top: -10px;
-                width: 100px;
-                margin-left: 20px;
+                width: 130px;
             }
         }
     }
@@ -560,9 +553,8 @@ body {
             }
 
             .sub-menu {
-                padding: 1px 5px;
+                padding: 1px 8px;
                 margin-top: -15px;
-                margin-left: 15%;
                 width: 100%;
             }
         }
