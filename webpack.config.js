@@ -34,6 +34,7 @@ var config = {
 
 function setEntry() {
     var entry = [
+        'babel-polyfill',
         './app/Resources/js/app.js',
         './app/Resources/scss/style.scss'
     ];

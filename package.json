@@ -12,6 +12,7 @@
     "build": "NODE_ENV=production webpack -p"
   },
   "dependencies": {
+    "babel-polyfill": "^6.13.0",
     "draft-js": "^0.8.0",
     "history": "^3.0.0",
     "object-assign": "^4.1.0",

@@ -18,7 +18,6 @@ node_modules
 .tmp
 .sass-cache
 web/libs
-web/dist
 web/css
 app/dist
 /web/js
