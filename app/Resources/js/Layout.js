@@ -81,7 +81,7 @@ const Layout = React.createClass({
         },4000);
     },
     toggleSubMenu: function(parent) {
-        document.querySelectorAll(".sub-menu.menu-" + parent).forEach(function(key, value) {
+        Array.from(document.querySelectorAll(".sub-menu.menu-" + parent)).forEach(function(key, value) {
             key.classList.toggle("clicked");
         });
     },
