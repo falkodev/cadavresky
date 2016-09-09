@@ -31,7 +31,7 @@ export default function render(location, isAdminLoggedIn=false) {
       component = <Page page={6} isAdminLoggedIn={isAdminLoggedIn} />;
       break;
     case 'wear':
-      component = <Page page={7} isAdminLoggedIn={isAdminLoggedIn} />;
+      component = <Page page={7} isAdminLoggedIn={isAdminLoggedIn} project="projet1"/>;
       break;
     case 'adorn':
       component = <Page page={8} isAdminLoggedIn={isAdminLoggedIn} />;

@@ -2,6 +2,7 @@
 @import '_color.scss';
 $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
 @import "~bootstrap-sass/assets/stylesheets/bootstrap";
+@import "~react-image-gallery/src/image-gallery";
 
 @font-face {
     font-family: "5by7";
@@ -331,6 +332,10 @@ body {
     text-align: center;
 }
 
+.image-gallery-slide img {
+    height: auto;
+}
+
 /* desktop */
 @media (min-width: $screen-sm-min) {
     .content {
@@ -415,6 +420,10 @@ body {
 
     .text-moving {
         width: 77%;
+    }
+
+    .image-gallery-slide img {
+        max-width: 500px;
     }
 }
 
@@ -558,5 +567,9 @@ body {
                 width: 100%;
             }
         }
+    }
+
+    .image-gallery-slide img {
+        max-width: 200px;
     }
 }
