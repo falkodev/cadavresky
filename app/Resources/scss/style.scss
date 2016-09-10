@@ -29,6 +29,13 @@ body {
     overflow-y: auto;
 }
 
+.addable:hover {
+    background-color: white;
+    color: $info;
+    border-color: $info;
+    border-style: dashed;
+}
+
 [class^=EditorToolbar__root] {
   display: none;
 }

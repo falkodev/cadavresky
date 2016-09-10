@@ -7,8 +7,6 @@ const Layout = React.createClass({
     getInitialState: function() {
         return {
             transparentContent: false,
-            movedLp: false,
-            onLoad: true,
         };
     },
     handleToggleMenu: function(transparentContent) {

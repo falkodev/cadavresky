@@ -1,6 +1,7 @@
 ._*
 .DS_Store
 .vagrant
+phploy*
 
 # Symfony
 /web/bundles/
