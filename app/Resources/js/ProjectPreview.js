@@ -19,17 +19,16 @@ const ProjectPreview = React.createClass({
       const ImgCover1 = require("../images/" + this.props.project + "/cover1.png");
       return (
         <div>
-          <Button bsSize="large" className="btn-info addable">
+          <Dropzone className="dropzone text-center" onDrop={ this.onDrop }>
+              <Button bsSize="large" className="btn-info addable">
             <Glyphicon glyph="plus" />
           </Button>
-          <Dropzone onDrop={ this.onDrop }>
-              <div>Try dropping some files here, or click to select files to upload.</div>
             </Dropzone>
           {this.state.files ? <div>
             <h2>Uploading {this.state.files.length} files...</h2>
-            <div>{this.state.files.map((file) => <img src={file.preview} /> )}</div>
+            <div>{this.state.files.map((file) => <img src={file.preview} key={file.preview} /> )}</div>
             </div> : null}
-          <img src={ ImgCover1 } />
+          <img className="project-cover" src={ ImgCover1 } />
         </div>
       );
   }

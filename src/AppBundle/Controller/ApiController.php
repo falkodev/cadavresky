@@ -53,4 +53,78 @@ class ApiController extends Controller
 
     return new Response('Only AJAX');
   }
+
+  /**
+   * @Route("/post/projects/{page}/{folder}", name="api_post_project_new")
+   * @Method({"POST"})
+   */
+  public function postProjectNewAction(Request $request, $page, $folder)
+  {
+    if ($request->isXMLHttpRequest()) {
+      $response = new JsonResponse();
+
+      $folder = $this->slugify($folder);
+      $path = 'projects/'.$page.'/'.$folder;
+
+      if (!file_exists($path) && !is_dir($path)) {
+        mkdir($path);
+        $response->setData(array(
+          'success' => true
+        ));
+      } else {
+        $response->setData(array(
+          'success' => false
+        ));
+      }
+
+      return $response;
+    }
+
+    return new Response('Only AJAX');
+  }
+
+  /**
+   * @Route("/get/projects/{page}", name="api_get_projects_new")
+   * @Method({"GET"})
+   */
+  public function getProjects(Request $request, $page)
+  {
+    $response = new JsonResponse();
+
+    $path = 'projects/'.$page;
+    $folders = array_diff(scandir($path), array('..', '.', '.DS_Store'));
+
+    $response->setData(array(
+      'data' => $folders
+    ));
+
+    return $response;
+  }
+
+  static private function slugify($text)
+  {
+    // replace non letter or digits by -
+    $text = preg_replace('~[^\pL\d]+~u', '-', $text);
+
+    // transliterate
+    $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
+
+    // remove unwanted characters
+    $text = preg_replace('~[^-\w]+~', '', $text);
+
+    // trim
+    $text = trim($text, '-');
+
+    // remove duplicate -
+    $text = preg_replace('~-+~', '-', $text);
+
+    // lowercase
+    $text = strtolower($text);
+
+    if (empty($text)) {
+      return 'n-a';
+    }
+
+    return $text;
+  }
 }

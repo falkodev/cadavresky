@@ -68,7 +68,7 @@ const Login = React.createClass({
             </svg>:null}
 
           {this.state.hasError ?
-            <div id="alert-login" className="alert alert-danger" role="alert">
+            <div className="alert alert-danger alert-margin-60px" role="alert">
               <button type="button" onClick={ () => this.setState({hasError:false})} className="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
               <strong>Connexion impossible</strong>
                 <br />Identifiant / mot de passe incorrect

@@ -97,3 +97,36 @@ export function connectionHandler(log) {
   window.history.pushState({}, null, "whoswho"); //change url
   render({pathname: 'whoswho'}, isAdminLoggedIn); //render page in editable mode with isAdminLoggedIn = true
 }
+
+export function addFolder(that, page, folder) {
+  ajaxPost('api/post/projects/'+page+'/'+folder,
+    '', //no data
+    function(response){
+      const jsonResponse = JSON.parse(response);
+      if(jsonResponse.success) {
+        that.setState({
+          isRequesting: false,
+          showInput: false,
+          showFolderCreationSuccess: true,
+          newFolder: folder,
+        });
+        getFolders(that, page);
+      } else {
+        that.setState({
+          showErrorCreation: true,
+          isRequesting: false,
+        });
+      }
+    });
+}
+
+export function getFolders(that, page) {
+  ajaxGet('api/get/projects/'+page,
+    function(response){
+      const jsonContent = JSON.parse(response).data;
+      const folders = Object.keys(jsonContent).map(function(k) { return jsonContent[k] });
+      that.setState({
+        folders
+      });
+    });
+}

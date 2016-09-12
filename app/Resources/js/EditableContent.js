@@ -57,7 +57,7 @@ const EditableContent = React.createClass({
                     </svg>:null}
 
                   {this.state.hasError ?
-                    <div id="alert-edit" className="alert alert-danger" role="alert">
+                    <div className="alert alert-danger alert-margin-10px" role="alert">
                       <button type="button" onClick={ () => this.setState({hasError:false})} className="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                       <strong>Problème d'enregistrement</strong>
                         <br />Un problème s'est produit lors de l'enregistrement en base de données

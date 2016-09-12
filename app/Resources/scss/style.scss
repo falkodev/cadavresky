@@ -29,11 +29,22 @@ body {
     overflow-y: auto;
 }
 
-.addable:hover {
-    background-color: white;
-    color: $info;
-    border-color: $info;
-    border-style: dashed;
+.addable {
+    position: relative;
+    top: 35%;
+    left: 2%;
+}
+
+.dropzone {
+    height: 200px;
+    width: 100%;
+    border: 2px dashed rgb(102, 102, 102);
+    border-radius: 5px;
+}
+
+.project-cover {
+    width: 200px;
+    height: auto;
 }
 
 [class^=EditorToolbar__root] {
@@ -128,11 +139,11 @@ body {
   position: absolute;
 }
 
-#alert-edit {
+.alert-margin-10px {
   margin-top: 10px;
 }
 
-#alert-login {
+.alert-margin-60px {
   margin-top: 60px;
 }
 

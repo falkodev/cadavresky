@@ -1,22 +1,65 @@
 import React from 'react';
 import EditableContent from './EditableContent';
 import ProjectPreview from './ProjectPreview';
-import { loadData } from './helpers/ajax';
+import { Button, Glyphicon } from 'react-bootstrap';
+import { loadData, addFolder, getFolders } from './helpers/ajax';
 
 const Page = React.createClass({
   getInitialState: function() {
     const isAdminLoggedIn = this.props.isAdminLoggedIn;
+
+    if (this.props.project) {
+      this.listFolders(this.props.page);
+    }
+
     return {
       isLoading: true,
+      isRequesting: false,
       content: null,
-      isAdminLoggedIn: isAdminLoggedIn
+      isAdminLoggedIn: isAdminLoggedIn,
+      showInput: false, // afficher l'input pour le nom de projet à créer
+      showErrorEmpty: false,
+      showErrorCreation: false,
+      showFolderCreationSuccess: false,
+      newFolder: null,
+      folders: null,
     };
   },
   componentDidMount: function() { //1ere fois que la page est chargée avec un composant (ex: who's who = page 2)
     loadData(this, this.props.page);
   },
   componentWillReceiveProps: function(nextProps) { //changement de page -> la page est chargée avec un nouveau composant (ex: projectology = page 3)
+    if (nextProps.project) {
+      this.listFolders(nextProps.page);
+    }
+
+    this.setState({
+      isLoading: true,
+    });
     loadData(this, nextProps.page);
+  },
+  listFolders: function(page) {
+    getFolders(this, page);
+  },
+  handleClick: function() {
+    this.setState({
+      showInput: true,
+    });
+  },
+  handleSubmit: function(e) {
+    e.preventDefault();
+    const newFolder = new FormData(document.querySelector('form')).get('folder');
+
+    if(newFolder) {
+      this.setState({
+        showErrorEmpty: false,
+        showErrorCreation: false,
+        isRequesting: true,
+      });
+      addFolder(this, this.props.page, newFolder);
+    } else {
+      this.setState({ showErrorEmpty: true });
+    }
   },
   render: function() {
       return (
@@ -28,7 +71,51 @@ const Page = React.createClass({
             </svg>:
             <div>
               <EditableContent initialContent={ this.state.content } page={ this.props.page } editable={ this.state.isAdminLoggedIn } />
-              {this.props.project ? <ProjectPreview project={ this.props.project } editable={ this.state.isAdminLoggedIn } /> : null}
+
+              { this.props.project ? <Button onClick={ this.handleClick } style={{ marginTop:'15px', marginBottom:'15px' }}>Ajouter projet <Glyphicon glyph="plus" /></Button> : null }
+
+              { this.state.showInput ?
+                <form onSubmit={ this.handleSubmit }>
+                  <div className="form-group">
+                    <input name="folder" type="text" className="form-control" placeholder="Nom projet" />
+                  </div>
+                  <Button type="submit">Valider </Button>
+
+                  { this.state.isRequesting ?
+                   <svg className="spinner spinner-alt" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+                      <path opacity=".25" d="M16 0 A16 16 0 0 0 16 32 A16 16 0 0 0 16 0 M16 4 A12 12 0 0 1 16 28 A12 12 0 0 1 16 4"></path>
+                      <path d="M16 0 A16 16 0 0 1 32 16 L28 16 A12 12 0 0 0 16 4z" transform="rotate(297.427 16 16)"></path>
+                    </svg> : null }
+
+                </form> : null }
+
+              { this.state.showErrorEmpty ?
+                <div className="alert alert-danger alert-margin-10px" role="alert">
+                  <button type="button" onClick={ () => this.setState({showErrorEmpty:false})} className="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <strong>Nom invalide</strong>
+                    <br />Le nom de projet ne peut pas être vide
+                </div> : null }
+
+              { this.state.showErrorCreation ?
+                <div className="alert alert-danger alert-margin-10px" role="alert">
+                  <button type="button" onClick={ () => this.setState({showErrorCreation:false})} className="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <strong>Erreur de création</strong>
+                    <br />Ce nom de projet est déjà utilisé ou il y a un problème sur le serveur
+                </div> : null }
+
+              { this.state.showFolderCreationSuccess ?
+                <div className="alert alert-success alert-margin-10px" role="alert">
+                  <button type="button" onClick={ () => this.setState({showFolderCreationSuccess:false})} className="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <strong>Projet créé</strong>
+                    <br />Le projet {this.state.newFolder} a bien été créé
+                </div> : null }
+
+              { this.state.folders ?
+                <div>
+                { this.state.folders.map(function(folder) {
+                  return <Button key={folder}>{folder} <Glyphicon glyph="folder-open" /></Button>;
+                }) }
+                </div> : null }
             </div>
           }
         </div>
@@ -37,3 +124,5 @@ const Page = React.createClass({
 });
 
 export default Page;
+
+//              {this.props.project ? <ProjectPreview project={ this.props.project } editable={ this.state.isAdminLoggedIn } /> : null}
