@@ -13,6 +13,10 @@ body {
     font-family: sans-serif;
 }
 
+form {
+  margin-bottom: 15px;
+}
+
 .container {
     margin-right: 0;
     margin-left: 0;
@@ -30,18 +34,35 @@ body {
 }
 
 .addable {
-    position: relative;
-    top: 35%;
-    left: 2%;
+    position: absolute;
+    top: 39%;
+    left: 45%;
+}
+
+.addable-cover {
+    top: 77px;
+    left: 74px;
+}
+
+.added {
+  color: $info;
+  background: transparent;
 }
 
 .dropzone {
     height: 200px;
-    width: 100%;
     border: 2px dashed rgb(102, 102, 102);
     border-radius: 5px;
 }
 
+.dropzone-cover {
+    width: 200px;
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: -15px;
+    margin-right: -15px;
+    margin-bottom: 15px;
+}
 .project-cover {
     width: 200px;
     height: auto;
@@ -125,6 +146,10 @@ body {
 
 @keyframes loading {
   100% { transform:rotate(360deg); }
+}
+
+.custom-modal {
+  width: 90%;
 }
 
 .spinner {
@@ -522,7 +547,7 @@ body {
         .navbar-toggle {
             border: none;
             float: left;
-            z-index: 6;
+//            z-index: 6;
             margin: 0;
             padding: 0;
 

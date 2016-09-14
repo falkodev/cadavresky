@@ -1,6 +1,7 @@
 import React from 'react';
 import RichTextEditor from 'react-rte';
 import { sendData, connectionHandler } from './helpers/ajax';
+import Spinner from './Layout/Spinner';
 
 let initialContent;
 
@@ -50,19 +51,15 @@ const EditableContent = React.createClass({
                   <button onClick={ this.cancelHandler } className="btn btn-danger">Annuler</button>
                   <button onClick={ this.saveHandler } className="btn">Enregistrer</button>
 
-                  {this.state.isLoading ?
-                   <svg className="spinner spinner-alt" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-                      <path opacity=".25" d="M16 0 A16 16 0 0 0 16 32 A16 16 0 0 0 16 0 M16 4 A12 12 0 0 1 16 28 A12 12 0 0 1 16 4"></path>
-                      <path d="M16 0 A16 16 0 0 1 32 16 L28 16 A12 12 0 0 0 16 4z" transform="rotate(297.427 16 16)"></path>
-                    </svg>:null}
+                  { this.state.isLoading ? <Spinner alt="true" /> : null }
 
-                  {this.state.hasError ?
+                  { this.state.hasError ?
                     <div className="alert alert-danger alert-margin-10px" role="alert">
                       <button type="button" onClick={ () => this.setState({hasError:false})} className="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                       <strong>Problème d'enregistrement</strong>
                         <br />Un problème s'est produit lors de l'enregistrement en base de données
                         <br />C'est le moment de contacter ton informaticien préféré ;)
-                    </div>:null}
+                    </div> : null }
                 </div> :
 
                <div>

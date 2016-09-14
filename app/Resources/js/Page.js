@@ -1,6 +1,7 @@
 import React from 'react';
 import EditableContent from './EditableContent';
-import ProjectPreview from './ProjectPreview';
+import Spinner from './Layout/Spinner';
+import ProjectFolder from './ProjectFolder';
 import { Button, Glyphicon } from 'react-bootstrap';
 import { loadData, addFolder, getFolders } from './helpers/ajax';
 
@@ -65,10 +66,7 @@ const Page = React.createClass({
       return (
         <div>
           { this.state.isLoading ?
-           <svg className="spinner" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-              <path opacity=".25" d="M16 0 A16 16 0 0 0 16 32 A16 16 0 0 0 16 0 M16 4 A12 12 0 0 1 16 28 A12 12 0 0 1 16 4"></path>
-              <path d="M16 0 A16 16 0 0 1 32 16 L28 16 A12 12 0 0 0 16 4z" transform="rotate(297.427 16 16)"></path>
-            </svg>:
+            <Spinner />:
             <div>
               <EditableContent initialContent={ this.state.content } page={ this.props.page } editable={ this.state.isAdminLoggedIn } />
 
@@ -82,10 +80,7 @@ const Page = React.createClass({
                   <Button type="submit">Valider </Button>
 
                   { this.state.isRequesting ?
-                   <svg className="spinner spinner-alt" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-                      <path opacity=".25" d="M16 0 A16 16 0 0 0 16 32 A16 16 0 0 0 16 0 M16 4 A12 12 0 0 1 16 28 A12 12 0 0 1 16 4"></path>
-                      <path d="M16 0 A16 16 0 0 1 32 16 L28 16 A12 12 0 0 0 16 4z" transform="rotate(297.427 16 16)"></path>
-                    </svg> : null }
+                   <Spinner alt="true" /> : null }
 
                 </form> : null }
 
@@ -112,8 +107,8 @@ const Page = React.createClass({
 
               { this.state.folders ?
                 <div>
-                { this.state.folders.map(function(folder) {
-                  return <Button key={folder}>{folder} <Glyphicon glyph="folder-open" /></Button>;
+                { this.state.folders.map((folder) => {
+                  return <ProjectFolder key={folder} folder={folder} />
                 }) }
                 </div> : null }
             </div>
