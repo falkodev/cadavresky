@@ -1,7 +1,7 @@
 import React from 'react';
 import Dropzone from 'react-dropzone';
 import { Row, Col, Button, Glyphicon, Modal } from 'react-bootstrap';
-import { uploadFiles } from './helpers/ajax';
+import { uploadFiles, getMedias } from './helpers/ajax';
 
 const ProjectFolder = React.createClass({
   getInitialState: function() {
@@ -14,37 +14,34 @@ const ProjectFolder = React.createClass({
     this.setState({
       showModal: true,
     });
+    getMedias(this, this.props.page, this.props.folder);
   },
-  handleDropCover1: function (file) {
-    this.setState({
-      cover1: file,
-      cover1Progress: true
-    });
-
-    const data = new FormData();
-    data.append("file", file[0]);
-    uploadFiles(this, this.props.page, this.props.folder, data, "barCover1");
-  },
-  handleDropCover2: function (file) {
-    this.setState({
-      cover2: file
-    });
-  },
-  handleDropMedias: function (files) {
-    console.log(files);
-    this.setState({
-      medias: files
-    });
-  },
-  handleDrop: function (files) {
-    this.setState({
-      cover1: files,
-      cover1Progress: true
-    });
+  handleDrop: function (files, e) {
+    console.log('e', e.currentTarget.parentNode.id);
+    let progressBar;
+    if (e.currentTarget.parentNode.id === 'dropzone-cover1') {
+      this.setState({
+        cover1: files,
+        cover1Progress: true
+      });
+      progressBar = 'barCover1';
+    } else if (e.currentTarget.parentNode.id === 'dropzone-cover2') {
+      this.setState({
+        cover2: files,
+        cover2Progress: true
+      });
+      progressBar = 'barCover2';
+    } else {
+      this.setState({
+        medias: files,
+        mediasProgress: true
+      });
+      progressBar = 'barMedias';
+    }
 
     const data = new FormData();
     data.append("file", files[0]);
-    uploadFiles(this, this.props.page, this.props.folder, data, "barCover1");
+    uploadFiles(this, this.props.page, this.props.folder, data, progressBar);
   },
   render: function() {
     const close = () => this.setState({ showModal: false});
@@ -73,10 +70,13 @@ const ProjectFolder = React.createClass({
                   <Dropzone id="dropzone-cover1" className="dropzone dropzone-cover text-center" onDrop={ this.handleDrop }>
                     { this.state.cover1 ?
                       <div>{ plusCoverAdded }
-                        <div>{ this.state.cover1.map((file) => <img src={file.preview} id="imgCover1" key={file.preview} height="196" />) }</div>
+                        <div>{ this.state.cover1.map((file) => <img src={file.preview} key={file.preview} height="196" />) }</div>
                         { this.state.cover1Progress ? <div className="progress-bar-out"><div className="progress-bar-in" id="barCover1"></div></div> : null }
                       </div>
-                  : plusCover }
+                    : plusCover }
+                    { this.state.cover1OnServer ?
+                        <div><img src={this.state.cover1OnServer} height="196" /></div>
+                    : null }
                   </Dropzone>
                 </Col>
                 <Col sm={6}>
@@ -96,14 +96,30 @@ const ProjectFolder = React.createClass({
               </Col>
               <Col sm={6}>
                 <Col sm={6}>
-                  <Dropzone id="dropzone-cover2" className="dropzone dropzone-cover text-center" onDrop={ this.handleDropCover2 }>
+                  <Dropzone id="dropzone-cover2" className="dropzone dropzone-cover text-center" onDrop={ this.handleDrop }>
                     { this.state.cover2 ?
                       <div>{ plusCoverAdded }
                         <div>{ this.state.cover2.map((file) => <img src={file.preview} key={file.preview} height="196" />) }</div>
+                        { this.state.cover2Progress ? <div className="progress-bar-out"><div className="progress-bar-in" id="barCover2"></div></div> : null }
                       </div> : plusCover }
+                      { this.state.cover2OnServer ?
+                        <div><img src={this.state.cover2OnServer} height="196" /></div>
+                      : null }
                   </Dropzone>
                 </Col>
                 <Col sm={6}>
+                  { this.state.cover2UploadIssue ?
+                    <div className="alert alert-danger" role="alert">
+                      <button type="button" onClick={ () => this.setState({cover2UploadIssue:false})} className="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <strong>Problème de chargement du média</strong>
+                        <br />L'image de cover 2 n'a pas pu être chargée sur le serveur
+                    </div> : null }
+                  { this.state.cover2UploadSuccess ?
+                    <div className="alert alert-success" role="alert">
+                      <button type="button" onClick={ () => this.setState({cover2UploadSuccess:false})} className="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <strong>Média chargé</strong>
+                        <br />L'image de cover 2 a été chargée correctement sur le serveur
+                    </div> : null }
                 </Col>
               </Col>
             </Row>

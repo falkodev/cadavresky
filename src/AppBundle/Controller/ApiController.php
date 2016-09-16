@@ -101,14 +101,38 @@ class ApiController extends Controller
     return $response;
   }
 
-  /**
-   * @Route("/post/projects/{page}/{folder}/files", name="api_post_project_upload_files")
-   * @Method({"POST"})
+    /**
+   * @Route("/get/projects/{page}/{folder}", name="api_get_project_medias")
+   * @Method({"GET"})
    */
-  public function postProjectUploadFilesAction(Request $request, $page, $folder)
+  public function getProjectMedias(Request $request, $page, $folder)
+  {
+    $response = new JsonResponse();
+
+    $path = 'projects/'.$page.'/'.$folder;
+    $cover1 = array_diff(scandir($path.'/cover1'), array('..', '.', '.DS_Store'));
+    $cover2 = array_diff(scandir($path.'/cover2'), array('..', '.', '.DS_Store'));
+
+    $response->setData(array(
+      'cover1' => $cover1,
+      'cover2' => $cover2
+    ));
+
+    return $response;
+  }
+
+  /**
+   * @Route("/post/projects/{page}/{folder}/{type}", name="api_post_project_upload_files")
+   * @Method({"POST"})
+   *
+   * $page : page (to wear, to adorn...)
+   * $folder : project name
+   * $type : cover1, cover2, medias
+   */
+  public function postProjectUploadFilesAction(Request $request, $page, $folder, $type)
   {
     if ($request->isXMLHttpRequest()) {
-      $path = 'projects/'.$page.'/'.$folder;
+      $path = 'projects/'.$page.'/'.$folder.'/'.$type;
       $data = $request->files->get('file');
       $name = $data->getClientOriginalName();
       $data->move($path, $name);

@@ -139,18 +139,63 @@ export function getFolders(that, page) {
     });
 }
 
+export function getMedias(that, page, folder) {
+  ajaxGet('api/get/projects/'+page+'/'+folder,
+    function(response){
+      const jsonCover1 = JSON.parse(response).cover1;
+      const jsonCover2 = JSON.parse(response).cover2;
+      const path = '../projects/'+page+'/'+folder;
+      const cover1 = path+'/cover1/'+jsonCover1[Object.keys(jsonCover1)[0]];
+      const cover2 = path+'/cover2/'+jsonCover2[Object.keys(jsonCover2)[0]];
+
+      that.setState({
+        cover1OnServer: cover1,
+        cover2OnServer: cover2,
+      });
+    });
+}
+
 export function uploadFiles(that, page, folder, data, progressBar) {
-  ajaxPost('api/post/projects/'+page+'/'+folder+'/files',
+  let type;
+  if (progressBar === 'barCover1') {
+    type = 'cover1';
+  } else if (progressBar === 'barCover2') {
+    type = 'cover2';
+  } else {
+    type = 'medias';
+  }
+  ajaxPost('api/post/projects/'+page+'/'+folder+'/'+type,
     data,
     function(response){
       const jsonResponse = JSON.parse(response);
-      that.setState({
-        cover1Progress: false,
-      });
-      if (jsonResponse.success) {
-        that.setState({ cover1UploadSuccess: true, cover1UploadIssue: false });
+
+      if (progressBar === 'barCover1') {
+        that.setState({
+          cover1Progress: false,
+        });
+        if (jsonResponse.success) {
+          that.setState({ cover1UploadSuccess: true, cover1UploadIssue: false });
+        } else {
+          that.setState({ cover1UploadSuccess: false, cover1UploadIssue: true });
+        }
+      } else if (progressBar === 'barCover2') {
+        that.setState({
+          cover2Progress: false,
+        });
+        if (jsonResponse.success) {
+          that.setState({ cover2UploadSuccess: true, cover2UploadIssue: false });
+        } else {
+          that.setState({ cover2UploadSuccess: false, cover2UploadIssue: true });
+        }
       } else {
-        that.setState({ cover1UploadSuccess: false, cover1UploadIssue: true });
+        that.setState({
+          mediasProgress: false,
+        });
+        if (jsonResponse.success) {
+          that.setState({ mediasUploadSuccess: true, mediasUploadIssue: false });
+        } else {
+          that.setState({ mediasUploadSuccess: false, mediasUploadIssue: true });
+        }
       }
     },
     true, // no Content-Type to be able to upload file
