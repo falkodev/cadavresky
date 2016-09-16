@@ -68,6 +68,22 @@ form {
     height: auto;
 }
 
+.progress-bar-out {
+    position: relative;
+    width: 50%;
+    height: 15px;
+    margin-top: -30px;
+    margin-left: 25%;
+    background-color: $grey;
+}
+
+.progress-bar-in {
+    position: absolute;
+    width: 0%;
+    height: 100%;
+    background-color: $info;
+}
+
 [class^=EditorToolbar__root] {
   display: none;
 }

@@ -84,7 +84,7 @@ class ApiController extends Controller
   }
 
   /**
-   * @Route("/get/projects/{page}", name="api_get_projects_new")
+   * @Route("/get/projects/{page}", name="api_get_projects")
    * @Method({"GET"})
    */
   public function getProjects(Request $request, $page)
@@ -99,6 +99,38 @@ class ApiController extends Controller
     ));
 
     return $response;
+  }
+
+  /**
+   * @Route("/post/projects/{page}/{folder}/files", name="api_post_project_upload_files")
+   * @Method({"POST"})
+   */
+  public function postProjectUploadFilesAction(Request $request, $page, $folder)
+  {
+    if ($request->isXMLHttpRequest()) {
+      $path = 'projects/'.$page.'/'.$folder;
+      $data = $request->files->get('file');
+      $name = $data->getClientOriginalName();
+      $data->move($path, $name);
+
+      $response = new JsonResponse();
+
+      if ($data) {
+        $response->setData(array(
+          'success' => true,
+          'name' => $name
+        ));
+      } else {
+        $response->setData(array(
+          'success' => false,
+//          'data' => $data
+        ));
+      }
+
+      return $response;
+    }
+
+    return new Response('Only AJAX');
   }
 
   static private function slugify($text)

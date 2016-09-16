@@ -12,16 +12,24 @@ function ajaxGet(file, callback) {
   xObj.send(null);
 }
 
-function ajaxPost(file, data, callback) {
+function ajaxPost(file, data, callback, noContentType, progressBar) {
   var xObj = new XMLHttpRequest();
   xObj.open('POST', file, true);
-  xObj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  if(!noContentType) { xObj.setRequestHeader("Content-type", "application/x-www-form-urlencoded"); }
   xObj.setRequestHeader("X-Requested-With","XMLHttpRequest");
   xObj.onreadystatechange = function () {
     if (xObj.readyState == 4 && xObj.status == '200') {
       callback(xObj.responseText);
     }
   };
+  if (progressBar) {
+    xObj.upload.onprogress = function(e) {
+      if (e.lengthComputable) {
+        var percentComplete = ((e.loaded / e.total) * 100).toFixed(0);
+        document.getElementById(progressBar).style.width = percentComplete + '%';
+      }
+    };
+  }
   xObj.send(data);
 }
 
@@ -129,4 +137,22 @@ export function getFolders(that, page) {
         folders
       });
     });
+}
+
+export function uploadFiles(that, page, folder, data, progressBar) {
+  ajaxPost('api/post/projects/'+page+'/'+folder+'/files',
+    data,
+    function(response){
+      const jsonResponse = JSON.parse(response);
+      that.setState({
+        cover1Progress: false,
+      });
+      if (jsonResponse.success) {
+        that.setState({ cover1UploadSuccess: true, cover1UploadIssue: false });
+      } else {
+        that.setState({ cover1UploadSuccess: false, cover1UploadIssue: true });
+      }
+    },
+    true, // no Content-Type to be able to upload file
+    progressBar);
 }

@@ -108,7 +108,7 @@ const Page = React.createClass({
               { this.state.folders ?
                 <div>
                 { this.state.folders.map((folder) => {
-                  return <ProjectFolder key={folder} folder={folder} />
+                  return <ProjectFolder key={folder} folder={folder} page={this.props.page} />
                 }) }
                 </div> : null }
             </div>
