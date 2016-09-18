@@ -17,6 +17,19 @@ form {
   margin-bottom: 15px;
 }
 
+.inlineBlock {
+  display: inline-block;
+}
+
+.remove-media {
+    position: relative;
+    top: -40px;
+    left: -10px;
+    &:hover {
+      cursor: pointer;
+    }
+}
+
 .container {
     margin-right: 0;
     margin-left: 0;

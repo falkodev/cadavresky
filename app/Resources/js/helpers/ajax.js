@@ -33,6 +33,19 @@ function ajaxPost(file, data, callback, noContentType, progressBar) {
   xObj.send(data);
 }
 
+function ajaxDelete(file, callback) {
+  var xObj = new XMLHttpRequest();
+
+  xObj.open('DELETE', file, true);
+  xObj.setRequestHeader("X-Requested-With","XMLHttpRequest");
+  xObj.onreadystatechange = function () {
+    if (xObj.readyState == 4 && xObj.status == '200') {
+      callback(xObj.responseText);
+    }
+  };
+  xObj.send(null);
+}
+
 let cache = [];
 export function loadData(that, page) {
   if(cache.hasOwnProperty()  && cache[page].id === page) {
@@ -144,13 +157,17 @@ export function getMedias(that, page, folder) {
     function(response){
       const jsonCover1 = JSON.parse(response).cover1;
       const jsonCover2 = JSON.parse(response).cover2;
+      const jsonMedias = JSON.parse(response).medias;
+
       const path = '../projects/'+page+'/'+folder;
       const cover1 = path+'/cover1/'+jsonCover1[Object.keys(jsonCover1)[0]];
       const cover2 = path+'/cover2/'+jsonCover2[Object.keys(jsonCover2)[0]];
+      const medias = Object.keys(jsonMedias).map(key => path+'/medias/'+jsonMedias[key]);
 
       that.setState({
         cover1OnServer: cover1,
         cover2OnServer: cover2,
+        mediasOnServer: medias,
       });
     });
 }
@@ -164,6 +181,7 @@ export function uploadFiles(that, page, folder, data, progressBar) {
   } else {
     type = 'medias';
   }
+
   ajaxPost('api/post/projects/'+page+'/'+folder+'/'+type,
     data,
     function(response){
@@ -174,7 +192,7 @@ export function uploadFiles(that, page, folder, data, progressBar) {
           cover1Progress: false,
         });
         if (jsonResponse.success) {
-          that.setState({ cover1UploadSuccess: true, cover1UploadIssue: false });
+          that.setState({ cover1UploadSuccess: true, cover1UploadIssue: false, cover1OnServer: false });
         } else {
           that.setState({ cover1UploadSuccess: false, cover1UploadIssue: true });
         }
@@ -183,7 +201,7 @@ export function uploadFiles(that, page, folder, data, progressBar) {
           cover2Progress: false,
         });
         if (jsonResponse.success) {
-          that.setState({ cover2UploadSuccess: true, cover2UploadIssue: false });
+          that.setState({ cover2UploadSuccess: true, cover2UploadIssue: false, cover2OnServer: false });
         } else {
           that.setState({ cover2UploadSuccess: false, cover2UploadIssue: true });
         }
@@ -192,7 +210,8 @@ export function uploadFiles(that, page, folder, data, progressBar) {
           mediasProgress: false,
         });
         if (jsonResponse.success) {
-          that.setState({ mediasUploadSuccess: true, mediasUploadIssue: false });
+          getMedias(that, page, folder);
+          that.setState({ mediasUploadSuccess: true, mediasUploadIssue: false, medias: null });
         } else {
           that.setState({ mediasUploadSuccess: false, mediasUploadIssue: true });
         }
@@ -200,4 +219,15 @@ export function uploadFiles(that, page, folder, data, progressBar) {
     },
     true, // no Content-Type to be able to upload file
     progressBar);
+}
+
+export function deleteFile(that, file) {
+  const path = file.replace('../', '').split('/').join('-');
+  const page = path.split('-')[1];
+  const folder = path.split('-')[2];
+
+  ajaxDelete('api/delete/projects/'+path,
+    function(response){
+      getMedias(that, page, folder);
+    });
 }

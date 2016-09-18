@@ -1,7 +1,7 @@
 import React from 'react';
 import Dropzone from 'react-dropzone';
 import { Row, Col, Button, Glyphicon, Modal } from 'react-bootstrap';
-import { uploadFiles, getMedias } from './helpers/ajax';
+import { uploadFiles, getMedias, deleteFile } from './helpers/ajax';
 
 const ProjectFolder = React.createClass({
   getInitialState: function() {
@@ -17,8 +17,8 @@ const ProjectFolder = React.createClass({
     getMedias(this, this.props.page, this.props.folder);
   },
   handleDrop: function (files, e) {
-    console.log('e', e.currentTarget.parentNode.id);
     let progressBar;
+
     if (e.currentTarget.parentNode.id === 'dropzone-cover1') {
       this.setState({
         cover1: files,
@@ -40,8 +40,18 @@ const ProjectFolder = React.createClass({
     }
 
     const data = new FormData();
-    data.append("file", files[0]);
+    for(let i=0; i < files.length; i++) {
+      data.append('files[]', files[i]);
+    }
+
     uploadFiles(this, this.props.page, this.props.folder, data, progressBar);
+  },
+  handleMediaRemove: function(e) {
+    const nameFileToRemove = e.currentTarget.id.split('remove')[1];
+
+    if(window.confirm('Suppression de ' + nameFileToRemove + ' ?')) {
+      deleteFile(this, e.currentTarget.dataset.path);
+    }
   },
   render: function() {
     const close = () => this.setState({ showModal: false});
@@ -49,6 +59,7 @@ const ProjectFolder = React.createClass({
     const plusCover = <Button bsSize="large" className="btn-info addable addable-cover"><Glyphicon glyph="plus" /></Button>;
     const plusCoverAdded = <Button bsSize="large" className="btn-info addable addable-cover added"><Glyphicon glyph="plus" /></Button>;
     const plusAdded = <Button bsSize="large" className="btn-info addable added"><Glyphicon glyph="plus" /></Button>;
+
     return (
       <div>
         <Button onClick={ this.openModal }>{this.props.folder} <Glyphicon glyph="folder-open" /></Button>
@@ -126,12 +137,32 @@ const ProjectFolder = React.createClass({
             <Row>
               <Row><Col sm={12}>Médias</Col></Row>
               <Col sm={12}>
-                <Dropzone id="dropzone-medias" className="dropzone text-center" onDrop={ this.handleDropMedias }>
-
+                <Dropzone id="dropzone-medias" className="dropzone" onDrop={ this.handleDrop } disableClick={ true }>
                   { this.state.medias ?
                   <div>{ plusAdded }
-                    <div>{ this.state.medias.map((file) => <img src={file.preview} key={file.preview} width="100" style={{marginRight: "10px"}} />) }</div>
+                    <div className="inlineBlock">
+                      { this.state.medias.map((file) => {
+                        const uniqueId = "remove"+file.name;
+                        const path = 'projects/' + this.props.page + '/' + this.props.folder + '/medias/' + file.name;
+                        return (<div className="inlineBlock" key={ file.name }>
+                          <img src={file.preview} key={file.preview} height="98" style={{marginRight: "10px"}} />
+                          <span className="remove-media" onClick={ this.handleMediaRemove } id={ uniqueId } data-path={ path }>X</span>
+                        </div>);
+                      }) }
+                    </div>
+                    { this.state.mediasProgress ? <div className="progress-bar-out"><div className="progress-bar-in" id="barMedias"></div></div> : null }
                   </div> : plus }
+                  { this.state.mediasOnServer ?
+                    <div className="inlineBlock">
+                      { this.state.mediasOnServer.map((file) => {
+                        const uniqueId = "remove"+file.split('/').pop();
+                        return (<div className="inlineBlock" key={ file }>
+                          <img src={file} height="98" style={{marginRight: "10px"}} />
+                          <span className="remove-media" onClick={ this.handleMediaRemove } id={ uniqueId } data-path={ file }>X</span>
+                        </div>);
+                      }) }
+                    </div>
+                  : null }
                 </Dropzone>
               </Col>
             </Row>

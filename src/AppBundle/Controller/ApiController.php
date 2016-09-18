@@ -112,10 +112,12 @@ class ApiController extends Controller
     $path = 'projects/'.$page.'/'.$folder;
     $cover1 = array_diff(scandir($path.'/cover1'), array('..', '.', '.DS_Store'));
     $cover2 = array_diff(scandir($path.'/cover2'), array('..', '.', '.DS_Store'));
+    $medias = array_diff(scandir($path.'/medias'), array('..', '.', '.DS_Store'));
 
     $response->setData(array(
       'cover1' => $cover1,
-      'cover2' => $cover2
+      'cover2' => $cover2,
+      'medias' => $medias
     ));
 
     return $response;
@@ -133,21 +135,53 @@ class ApiController extends Controller
   {
     if ($request->isXMLHttpRequest()) {
       $path = 'projects/'.$page.'/'.$folder.'/'.$type;
-      $data = $request->files->get('file');
-      $name = $data->getClientOriginalName();
-      $data->move($path, $name);
+
+      //for covers, delete existing file before adding a new one
+      if($type === 'cover1' || $type === 'cover2') {
+        array_map('unlink', glob($path.'/*'));
+      }
+
+      $files = $request->files->get('files');
+      foreach ($files as $file){
+        $name = $file->getClientOriginalName();
+        $file->move($path, $name);
+      }
 
       $response = new JsonResponse();
-
-      if ($data) {
+      if ($files) {
         $response->setData(array(
           'success' => true,
-          'name' => $name
         ));
       } else {
         $response->setData(array(
           'success' => false,
-//          'data' => $data
+        ));
+      }
+
+      return $response;
+    }
+
+    return new Response('Only AJAX');
+  }
+
+  /**
+   * @Route("/delete/projects/{file}", name="api_delete_file")
+   * @Method({"DELETE"})
+   */
+  public function deleteFileAction(Request $request, $file)
+  {
+    if ($request->isXMLHttpRequest()) {
+      $path = str_replace('-', '/', $file); // $file contains the whole path, but "/" were converted to "-" to fit in url
+      unlink($path);
+
+      $response = new JsonResponse();
+      if ($path) {
+        $response->setData(array(
+          'success' => true,
+        ));
+      } else {
+        $response->setData(array(
+          'success' => false,
         ));
       }
 
