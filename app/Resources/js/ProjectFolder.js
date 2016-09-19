@@ -19,13 +19,13 @@ const ProjectFolder = React.createClass({
   handleDrop: function (files, e) {
     let progressBar;
 
-    if (e.currentTarget.parentNode.id === 'dropzone-cover1') {
+    if (e.currentTarget.id === 'dropzone-cover1') {
       this.setState({
         cover1: files,
         cover1Progress: true
       });
       progressBar = 'barCover1';
-    } else if (e.currentTarget.parentNode.id === 'dropzone-cover2') {
+    } else if (e.currentTarget.id === 'dropzone-cover2') {
       this.setState({
         cover2: files,
         cover2Progress: true

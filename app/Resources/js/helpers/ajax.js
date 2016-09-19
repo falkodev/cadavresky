@@ -164,8 +164,8 @@ export function getMedias(that, page, folder) {
       if(env < 0) { path = 'projects/'+page+'/'+folder; } // if not found => env = prod
       else { path = '../projects/'+page+'/'+folder; } // else env = dev
 
-      const cover1 = path+'/cover1/'+jsonCover1[Object.keys(jsonCover1)[0]];
-      const cover2 = path+'/cover2/'+jsonCover2[Object.keys(jsonCover2)[0]];
+      const cover1 = typeof jsonCover1[Object.keys(jsonCover1)[0]] == 'undefined' ? false : path+'/cover1/'+jsonCover1[Object.keys(jsonCover1)[0]];
+      const cover2 = typeof jsonCover2[Object.keys(jsonCover2)[0]] == 'undefined' ? false : path+'/cover2/'+jsonCover2[Object.keys(jsonCover2)[0]];
       const medias = Object.keys(jsonMedias).map(key => path+'/medias/'+jsonMedias[key]);
 
       that.setState({
@@ -226,9 +226,9 @@ export function uploadFiles(that, page, folder, data, progressBar) {
 }
 
 export function deleteFile(that, file) {
-  const path = file.replace('../', '').split('/').join('#');
-  const page = path.split('#')[1];
-  const folder = path.split('#')[2];
+  const path = file.replace('../', '').split('/').join('_');
+  const page = path.split('_')[1];
+  const folder = path.split('_')[2];
 
   ajaxDelete('api/delete/projects/'+path,
     function(response){

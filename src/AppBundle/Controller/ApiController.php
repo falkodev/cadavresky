@@ -68,6 +68,9 @@ class ApiController extends Controller
 
       if (!file_exists($path) && !is_dir($path)) {
         mkdir($path);
+        mkdir($path.'/cover1');
+        mkdir($path.'/cover2');
+        mkdir($path.'/medias');
         $response->setData(array(
           'success' => true
         ));
@@ -171,7 +174,7 @@ class ApiController extends Controller
   public function deleteFileAction(Request $request, $file)
   {
     if ($request->isXMLHttpRequest()) {
-      $path = str_replace('#', '/', $file); // $file contains the whole path, but "/" were converted to "#" to fit in url
+      $path = str_replace('_', '/', $file); // $file contains the whole path, but "/" were converted to "_" to fit in url
       unlink($path);
 
       $response = new JsonResponse();
