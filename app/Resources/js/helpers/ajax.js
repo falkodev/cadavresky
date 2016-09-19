@@ -226,9 +226,9 @@ export function uploadFiles(that, page, folder, data, progressBar) {
 }
 
 export function deleteFile(that, file) {
-  const path = file.replace('../', '').split('/').join('-');
-  const page = path.split('-')[1];
-  const folder = path.split('-')[2];
+  const path = file.replace('../', '').split('/').join('#');
+  const page = path.split('#')[1];
+  const folder = path.split('#')[2];
 
   ajaxDelete('api/delete/projects/'+path,
     function(response){
