@@ -13,6 +13,8 @@ function ajaxGet(file, callback) {
 }
 
 function ajaxPost(file, data, callback, noContentType, progressBar) {
+  console.log('entree ajaxPost');
+  console.log('file', file, 'data', data);
   var xObj = new XMLHttpRequest();
   xObj.open('POST', file, true);
   if(!noContentType) { xObj.setRequestHeader("Content-type", "application/x-www-form-urlencoded"); }
@@ -120,6 +122,7 @@ export function connectionHandler(log) {
 }
 
 export function addFolder(that, page, folder) {
+  console.log('entree addFolder');
   ajaxPost('api/post/projects/'+page+'/'+folder,
     '', //no data
     function(response){
@@ -159,7 +162,11 @@ export function getMedias(that, page, folder) {
       const jsonCover2 = JSON.parse(response).cover2;
       const jsonMedias = JSON.parse(response).medias;
 
-      const path = '../projects/'+page+'/'+folder;
+      const env = location.pathname.indexOf('app_dev.php'); // search in url 'app.dev.php'
+      let path;
+      if(env < 0) { path = 'projects/'+page+'/'+folder; } // if not found => env = prod
+      else { path = '../projects/'+page+'/'+folder; } // else env = dev
+
       const cover1 = path+'/cover1/'+jsonCover1[Object.keys(jsonCover1)[0]];
       const cover2 = path+'/cover2/'+jsonCover2[Object.keys(jsonCover2)[0]];
       const medias = Object.keys(jsonMedias).map(key => path+'/medias/'+jsonMedias[key]);

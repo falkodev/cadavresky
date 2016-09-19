@@ -1,6 +1,6 @@
 @import '_custom-variables.scss';
 @import '_color.scss';
-$icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
+$icon-font-path: "../fonts/";
 @import "~bootstrap-sass/assets/stylesheets/bootstrap";
 @import "~react-image-gallery/src/image-gallery";
 
@@ -25,6 +25,8 @@ form {
     position: relative;
     top: -40px;
     left: -10px;
+    color: $info;
+
     &:hover {
       cursor: pointer;
     }

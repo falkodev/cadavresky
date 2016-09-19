@@ -146,7 +146,7 @@ const ProjectFolder = React.createClass({
                         const path = 'projects/' + this.props.page + '/' + this.props.folder + '/medias/' + file.name;
                         return (<div className="inlineBlock" key={ file.name }>
                           <img src={file.preview} key={file.preview} height="98" style={{marginRight: "10px"}} />
-                          <span className="remove-media" onClick={ this.handleMediaRemove } id={ uniqueId } data-path={ path }>X</span>
+                          <span className="remove-media" onClick={ this.handleMediaRemove } id={ uniqueId } data-path={ path }><Glyphicon glyph="remove-circle" /></span>
                         </div>);
                       }) }
                     </div>
@@ -158,7 +158,7 @@ const ProjectFolder = React.createClass({
                         const uniqueId = "remove"+file.split('/').pop();
                         return (<div className="inlineBlock" key={ file }>
                           <img src={file} height="98" style={{marginRight: "10px"}} />
-                          <span className="remove-media" onClick={ this.handleMediaRemove } id={ uniqueId } data-path={ file }>X</span>
+                          <span className="remove-media" onClick={ this.handleMediaRemove } id={ uniqueId } data-path={ file }><Glyphicon glyph="remove" /></span>
                         </div>);
                       }) }
                     </div>

@@ -49,9 +49,11 @@ const Page = React.createClass({
   },
   handleSubmit: function(e) {
     e.preventDefault();
+    console.log('entree handleSubmit');
     const newFolder = new FormData(document.querySelector('form')).get('folder');
 
     if(newFolder) {
+      console.log('passage newFolder');
       this.setState({
         showErrorEmpty: false,
         showErrorCreation: false,
@@ -59,6 +61,7 @@ const Page = React.createClass({
       });
       addFolder(this, this.props.page, newFolder);
     } else {
+      console.log('passage pas de newFolder');
       this.setState({ showErrorEmpty: true });
     }
   },

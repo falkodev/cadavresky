@@ -60,11 +60,14 @@ class ApiController extends Controller
    */
   public function postProjectNewAction(Request $request, $page, $folder)
   {
+    echo "entree postProjectNewAction\r\n";
+
     if ($request->isXMLHttpRequest()) {
       $response = new JsonResponse();
 
       $folder = $this->slugify($folder);
       $path = 'projects/'.$page.'/'.$folder;
+      echo "path:$path";
 
       if (!file_exists($path) && !is_dir($path)) {
         mkdir($path);

@@ -55,6 +55,8 @@ function setOutput() {
     };
     if (process.env.NODE_ENV !== 'production') {
         output.publicPath = 'http://127.0.0.1:3000/static/';
+    } else if (process.env.localhost) {
+        output.publicPath = 'http://localhost/symfony-react/web/dist/';
     }
 
     return output;
