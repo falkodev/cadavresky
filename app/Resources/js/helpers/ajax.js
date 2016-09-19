@@ -13,8 +13,6 @@ function ajaxGet(file, callback) {
 }
 
 function ajaxPost(file, data, callback, noContentType, progressBar) {
-  console.log('entree ajaxPost');
-  console.log('file', file, 'data', data);
   var xObj = new XMLHttpRequest();
   xObj.open('POST', file, true);
   if(!noContentType) { xObj.setRequestHeader("Content-type", "application/x-www-form-urlencoded"); }
@@ -122,7 +120,6 @@ export function connectionHandler(log) {
 }
 
 export function addFolder(that, page, folder) {
-  console.log('entree addFolder');
   ajaxPost('api/post/projects/'+page+'/'+folder,
     '', //no data
     function(response){

@@ -146,7 +146,7 @@ const ProjectFolder = React.createClass({
                         const path = 'projects/' + this.props.page + '/' + this.props.folder + '/medias/' + file.name;
                         return (<div className="inlineBlock" key={ file.name }>
                           <img src={file.preview} key={file.preview} height="98" style={{marginRight: "10px"}} />
-                          <span className="remove-media" onClick={ this.handleMediaRemove } id={ uniqueId } data-path={ path }><Glyphicon glyph="remove-circle" /></span>
+                          <span className="remove-media" onClick={ this.handleMediaRemove } id={ uniqueId } data-path={ path }><Glyphicon glyph="remove" /></span>
                         </div>);
                       }) }
                     </div>
