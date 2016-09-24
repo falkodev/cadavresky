@@ -219,7 +219,7 @@ class ApiController extends Controller
       $headers .= 'From: cadavresky<noreply@cadavresky.com>\r\n';
       $headers .= 'Reply-To: <'.$email.'>\r\n';
 
-      $sent = mail('anthony.tarlao@gmail.com', 'Cadavresky - Nouveau message depuis le formulaire de contact', $body, $headers);
+      $sent = mail('charlotteabale@gmail.com', 'Cadavresky - Nouveau message depuis le formulaire de contact', $body, $headers);
 
       $response = new JsonResponse();
       $response->setData(array(
