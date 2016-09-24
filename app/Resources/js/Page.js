@@ -32,6 +32,10 @@ const Page = React.createClass({
   componentWillReceiveProps: function(nextProps) { //changement de page -> la page est chargée avec un nouveau composant (ex: projectology = page 3)
     if (nextProps.project) {
       this.listFolders(nextProps.page);
+    } else {
+      this.setState({
+        folders: null,
+      });
     }
 
     this.setState({

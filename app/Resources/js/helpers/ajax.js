@@ -235,3 +235,11 @@ export function deleteFile(that, file) {
       getMedias(that, page, folder);
     });
 }
+
+export function sendEmail(that, data) {
+  ajaxPost('api/post/email',
+    data,
+    function(response){
+      console.log('yo');
+    });
+}

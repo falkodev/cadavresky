@@ -1,6 +1,6 @@
 import React from 'react';
 import RichTextEditor from 'react-rte';
-import { sendData, connectionHandler } from './helpers/ajax';
+import { sendData } from './helpers/ajax';
 import Spinner from './Layout/Spinner';
 
 let initialContent;

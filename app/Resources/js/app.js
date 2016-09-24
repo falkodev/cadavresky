@@ -6,6 +6,7 @@ import { connectionHandler } from './helpers/ajax';
 import Layout                from './Layout';
 import Page                  from './Page';
 import Login                 from './Login';
+import Contact               from './Contact';
 
 export default function render(location, isAdminLoggedIn=false) {
   const path = location.pathname.split('/').pop();
@@ -31,16 +32,19 @@ export default function render(location, isAdminLoggedIn=false) {
       component = <Page page={6} isAdminLoggedIn={isAdminLoggedIn} />;
       break;
     case 'wear':
-      component = <Page page={7} isAdminLoggedIn={isAdminLoggedIn} project="projet1"/>;
+      component = <Page page={7} isAdminLoggedIn={isAdminLoggedIn} project="true" />;
       break;
     case 'adorn':
-      component = <Page page={8} isAdminLoggedIn={isAdminLoggedIn} />;
+      component = <Page page={8} isAdminLoggedIn={isAdminLoggedIn} project="true" />;
       break;
     case 'collaboratory':
       component = <Page page={9} isAdminLoggedIn={isAdminLoggedIn} />;
       break;
     case 'buddies':
       component = <Page page={10} isAdminLoggedIn={isAdminLoggedIn} />;
+      break;
+    case 'contact':
+      component = <Contact />;
       break;
     default:
       component = <Page page={2} />;

@@ -67,6 +67,9 @@ class ApiController extends Controller
       $path = 'projects/'.$page.'/'.$folder;
 
       if (!file_exists($path) && !is_dir($path)) {
+        if (!file_exists('projects/'.$page)) {
+          mkdir('projects/'.$page);
+        }
         mkdir($path);
         mkdir($path.'/cover1');
         mkdir($path.'/cover2');
@@ -171,7 +174,7 @@ class ApiController extends Controller
    * @Route("/delete/projects/{file}", name="api_delete_file")
    * @Method({"DELETE"})
    */
-  public function deleteFileAction(Request $request, $file)
+  public function deleteFileAction(Request $request)
   {
     if ($request->isXMLHttpRequest()) {
       $path = str_replace('_', '/', $file); // $file contains the whole path, but "/" were converted to "_" to fit in url
@@ -187,6 +190,41 @@ class ApiController extends Controller
           'success' => false,
         ));
       }
+
+      return $response;
+    }
+
+    return new Response('Only AJAX');
+  }
+
+  /**
+   * @Route("/post/email", name="api_send_email")
+   * @Method({"POST"})
+   */
+  public function sendEmailAction(Request $request)
+  {
+    if ($request->isXMLHttpRequest()) {
+      $email = $request->request->get('email');
+      $message = $request->request->get('message');
+
+      $message_body = mb_convert_encoding($message, 'HTML-ENTITIES', 'UTF-8');
+      $body = '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+          <META HTTP-EQUIV="Content-Type" CONTENT="text/html;charset=iso-8859-1">
+          <html><body style="color:#434343;">';
+      $body .= '<p style="color:#434343;">Message de '.$email.'</p>';
+      $body .= '<p style="color:#434343;">';
+      $body .= nl2br($message_body);
+      $body .= '</body></html>';
+      $headers = 'Content-Type: text/html; charset=iso-8859-1\r\n';
+      $headers .= 'From: cadavresky<noreply@cadavresky.com>\r\n';
+      $headers .= 'Reply-To: <'.$email.'>\r\n';
+
+      $sent = mail('anthony.tarlao@gmail.com', 'Cadavresky - Nouveau message depuis le formulaire de contact', $body, $headers);
+
+      $response = new JsonResponse();
+      $response->setData(array(
+        'success' => $sent,
+      ));
 
       return $response;
     }

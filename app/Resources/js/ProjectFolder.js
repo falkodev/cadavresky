@@ -83,8 +83,7 @@ const ProjectFolder = React.createClass({
                       <div>{ plusCoverAdded }
                         <div>{ this.state.cover1.map((file) => <img src={file.preview} key={file.preview} height="196" />) }</div>
                         { this.state.cover1Progress ? <div className="progress-bar-out"><div className="progress-bar-in" id="barCover1"></div></div> : null }
-                      </div>
-                    : plusCover }
+                      </div> : plusCover }
                     { this.state.cover1OnServer ?
                         <div><img src={this.state.cover1OnServer} height="196" /></div>
                     : null }

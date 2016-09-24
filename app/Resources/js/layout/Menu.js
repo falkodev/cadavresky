@@ -129,7 +129,7 @@ const Menu = React.createClass({
 
                 <Link to="goodies" className="menu menu-goodies" onClick={ this.changeColor } style={{ backgroundImage : 'url(' + this.state.menu5 + ')' }} onMouseEnter={this.onEnterHover.bind(null, 'menu5', this.state.menu5)} onMouseLeave={this.onLeaveHover}>Goodies</Link>
 
-                <Link to="#" className="menu menu-contact" onClick={ this.changeColor } style={{ backgroundImage : 'url(' + this.state.menu6 + ')' }} onMouseEnter={this.onEnterHover.bind(null, 'menu6', this.state.menu6)} onMouseLeave={this.onLeaveHover}>Contact</Link>
+                <Link to="contact" className="menu menu-contact" onClick={ this.changeColor } style={{ backgroundImage : 'url(' + this.state.menu6 + ')' }} onMouseEnter={this.onEnterHover.bind(null, 'menu6', this.state.menu6)} onMouseLeave={this.onLeaveHover}>Contact</Link>
 
                 <Link to="http://www.facebook.com" className="menu-facebook menu-desktop">Facebook</Link>
                 <Link to="http://www.instagram.com" className="menu-instagram menu-desktop">Instagram</Link>
