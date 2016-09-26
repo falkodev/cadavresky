@@ -240,6 +240,12 @@ export function sendEmail(that, data) {
   ajaxPost('api/post/email',
     data,
     function(response){
-      console.log('yo');
+      const jsonContent = JSON.parse(response).success;
+      that.setState({ isLoading: false });
+      if(jsonContent) {
+        that.setState({ hasError: false, sentSuccess: true, email: '', message: '' });
+      } else {
+        that.setState({ hasError: true, sentSuccess: false });
+      }
     });
 }

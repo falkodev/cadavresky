@@ -7,6 +7,7 @@ const Contact = React.createClass({
     return {
       isLoading: false,
       hasError: false,
+      sentSuccess: false,
       email: '',
       message: '',
     };
@@ -19,6 +20,7 @@ const Contact = React.createClass({
   },
   submitHandler: function(e) {
     e.preventDefault();
+    this.setState({isLoading: true});
     const data =
       'email='+this.state.email+
       '&message='+this.state.message;
@@ -70,6 +72,13 @@ const Contact = React.createClass({
               <button type="button" onClick={ () => this.setState({hasError:false})} className="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
               <strong>Envoi impossible</strong>
                 <br />Problème d'envoi de l'email. Veuillez réessayer plus tard.
+            </div> : null }
+
+          { this.state.sentSuccess ?
+            <div className="alert alert-success alert-margin-60px" role="alert">
+              <button type="button" onClick={ () => this.setState({sentSuccess:false})} className="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <strong>Message bien envoyé</strong>
+                <br />Vous recevrez une réponse sous peu.
             </div> : null }
 
         </form>

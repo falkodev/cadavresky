@@ -30,7 +30,7 @@ const Footer = React.createClass({
     render: function() {
         return (
         <div>
-            <img id="palm" src={ ImgPalm } onClick={ this.toggleMovingLp }/>
+            <img id="palm" src={ ImgPalm } />
             <img id="cover" src={ ImgCoverEthical } onClick={ this.toggleMovingLp }/>
             <img id="lp" src={ ImgLpEthical } className={ this.state.onLoad ? "lp" : this.state.movedLp ? "lp lp-moved lp-moving" : "lp lp-moving" }/>
             <img id="scrolling-line" src={ ImgScrollingLine } className={ this.state.movedLp ? "line line-moving" : "line" }/>
