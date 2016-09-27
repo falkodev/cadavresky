@@ -132,7 +132,7 @@ form {
 
 #logo-default {
     margin: 25px 25px 100px -15px;
-    width: 130px;
+    width: 145px;
 }
 
 //#close-menu-icon {
@@ -184,7 +184,7 @@ form {
 }
 
 .spinner {
-  fill: black;
+  fill: $dark-grey;
   height: 30px;
   width: 30px;
   animation: loading 1s linear infinite;
@@ -216,13 +216,13 @@ form {
         .active {
             a {
                 background-color: transparent;
-                color: black;
+                color: $dark-grey;
                 display: inline-block;
                 position: relative;
 
                 &:hover, &:focus, &:active {
                     background-color: transparent;
-                    color: black;
+                    color: $dark-grey;
                 }
 
 //                &:before {
@@ -231,7 +231,7 @@ form {
 //                  top: 40%;
 //                  left: 2px;
 //                  right: 0;
-//                  background: black; /* line color */
+//                  background: $dark-grey; /* line color */
 //                }
             }
         }
@@ -318,9 +318,9 @@ form {
             a {
                 padding: 5px 2px;
                 background-color: transparent;
-                color: black;
+                color: $dark-grey;
                 &:hover, &:focus, &:active {
-                    color: black;
+                    color: $dark-grey;
                     display: inline-block;
                     position: relative;
 
@@ -330,7 +330,7 @@ form {
 //                      top: 40%;
 //                      left: 2px;
 //                      right: 0;
-//                      background: black; /* line color */
+//                      background: $dark-grey; /* line color */
 //                    }
                 }
             }
@@ -432,7 +432,7 @@ form {
     .sidebar-nav .navbar ul {
         float: none;
         margin: 30vh 0px 0px 25px;
-        width: 130px;
+        width: 145px;
     }
     .sidebar-nav .navbar ul:not {
         display: block;
@@ -440,7 +440,7 @@ form {
     .sidebar-nav .navbar li {
         float: none;
         display: block;
-        width: 130px;
+        width: 145px;
     }
     .navbar-header {
         display: none;
@@ -467,7 +467,7 @@ form {
             .sub-menu {
                 padding: 0;
                 margin-top: -10px;
-                width: 130px;
+                width: 145px;
             }
         }
     }

@@ -49,6 +49,12 @@ const Menu = React.createClass({
         };
     },
     toggleSubMenu: function(parent) {
+        //close other sub-menus
+        Array.from(document.querySelectorAll(".menu")).forEach(function(key, value) {
+            key.classList.remove("clicked");
+        });
+
+        //toggle current submenu
         Array.from(document.querySelectorAll(".sub-menu.menu-" + parent)).forEach(function(key, value) {
             key.classList.toggle("clicked");
         });
@@ -116,14 +122,14 @@ const Menu = React.createClass({
                 <li role="presentation" className="menu menu-projectology" style={{ backgroundImage : 'url(' + this.state.menu2 + ')' }} onMouseEnter={this.onEnterHover.bind(null, 'menu2', this.state.menu2)} onMouseLeave={this.onLeaveHover}>
                     <span onClick={ this.toggleSubMenu.bind(null, "projectology") }>Projectology</span>
                 </li>
-                <Link to="wear" className="menu sub-menu menu-projectology" onClick={ this.changeColor } style={{ backgroundImage : 'url(' + this.state.menu2 + ')' }} onMouseEnter={this.onEnterHover.bind(null, 'menu2', this.state.menu2)} onMouseLeave={this.onLeaveHover}>To wear</Link>
-                <Link to="adorn" className="menu sub-menu menu-projectology" onClick={ this.changeColor } style={{ backgroundImage : 'url(' + this.state.menu2 + ')' }} onMouseEnter={this.onEnterHover.bind(null, 'menu2', this.state.menu2)} onMouseLeave={this.onLeaveHover}>To adorn</Link>
+                <Link to="wear" className="menu sub-menu menu-projectology" onClick={ this.changeColor } style={{ backgroundImage : 'url(' + this.state.menu2 + ')' }} onMouseEnter={this.onEnterHover.bind(null, 'menu2', this.state.menu2)} onMouseLeave={this.onLeaveHover}>&nbsp;&nbsp;&nbsp;&nbsp;To wear</Link>
+                <Link to="adorn" className="menu sub-menu menu-projectology" onClick={ this.changeColor } style={{ backgroundImage : 'url(' + this.state.menu2 + ')' }} onMouseEnter={this.onEnterHover.bind(null, 'menu2', this.state.menu2)} onMouseLeave={this.onLeaveHover}>&nbsp;&nbsp;&nbsp;&nbsp;To adorn</Link>
 
                 <li role="presentation" className="menu menu-zoo" style={{ backgroundImage : 'url(' + this.state.menu3 + ')' }} onMouseEnter={this.onEnterHover.bind(null, 'menu3', this.state.menu3)} onMouseLeave={this.onLeaveHover}>
                     <span onClick={ this.toggleSubMenu.bind(null, "zoo") }>The zoo</span>
                 </li>
-                <Link to="collaboratory" className="menu sub-menu menu-zoo" onClick={ this.changeColor } style={{ backgroundImage : 'url(' + this.state.menu3 + ')' }} onMouseEnter={this.onEnterHover.bind(null, 'menu3', this.state.menu3)} onMouseLeave={this.onLeaveHover}>Collaboratory</Link>
-                <Link to="buddies" className="menu sub-menu menu-zoo" onClick={ this.changeColor } style={{ backgroundImage : 'url(' + this.state.menu3 + ')' }} onMouseEnter={this.onEnterHover.bind(null, 'menu3', this.state.menu3)} onMouseLeave={this.onLeaveHover}>Buddies</Link>
+                <Link to="collaboratory" className="menu sub-menu menu-zoo" onClick={ this.changeColor } style={{ backgroundImage : 'url(' + this.state.menu3 + ')' }} onMouseEnter={this.onEnterHover.bind(null, 'menu3', this.state.menu3)} onMouseLeave={this.onLeaveHover}>&nbsp;&nbsp;&nbsp;&nbsp;Collaboratory</Link>
+                <Link to="buddies" className="menu sub-menu menu-zoo" onClick={ this.changeColor } style={{ backgroundImage : 'url(' + this.state.menu3 + ')' }} onMouseEnter={this.onEnterHover.bind(null, 'menu3', this.state.menu3)} onMouseLeave={this.onLeaveHover}>&nbsp;&nbsp;&nbsp;&nbsp;Buddies</Link>
 
                 <Link to="shop" className="menu menu-shop" onClick={ this.changeColor } style={{ backgroundImage : 'url(' + this.state.menu4 + ')' }} onMouseEnter={this.onEnterHover.bind(null, 'menu4', this.state.menu4)} onMouseLeave={this.onLeaveHover}>Shop</Link>
 
