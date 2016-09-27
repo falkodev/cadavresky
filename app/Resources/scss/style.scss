@@ -324,14 +324,14 @@ form {
                     display: inline-block;
                     position: relative;
 
-                    &:before {
-                      content: "";
-                      position: absolute;
-                      top: 40%;
-                      left: 2px;
-                      right: 0;
-                      background: black; /* line color */
-                    }
+//                    &:before {
+//                      content: "";
+//                      position: absolute;
+//                      top: 40%;
+//                      left: 2px;
+//                      right: 0;
+//                      background: black; /* line color */
+//                    }
                 }
             }
       }

@@ -131,11 +131,11 @@ const Menu = React.createClass({
 
                 <Link to="contact" className="menu menu-contact" onClick={ this.changeColor } style={{ backgroundImage : 'url(' + this.state.menu6 + ')' }} onMouseEnter={this.onEnterHover.bind(null, 'menu6', this.state.menu6)} onMouseLeave={this.onLeaveHover}>Contact</Link>
 
-                <Link to="http://www.facebook.com" className="menu-facebook menu-desktop">Facebook</Link>
-                <Link to="http://www.instagram.com" className="menu-instagram menu-desktop">Instagram</Link>
+                <li role="presentation" className="menu-facebook menu-desktop"><a href="http://www.facebook.com/cadavresky">Facebook</a></li>
+                <li role="presentation" className="menu-instagram menu-desktop"><a href="http://www.instagram.com/cadavresky">Instagram</a></li>
                 <li id="nav-logos">
-                    <a href="http://www.instagram.com"><img id="logo-instagram" src={ImgLogoInsta}/></a>&nbsp;
-                    <a href="http://www.facebook.com"><img id="logo-facebook" src={ImgLogoFb}/></a>
+                    <a href="http://www.instagram.com/cadavresky"><img id="logo-instagram" src={ImgLogoInsta}/></a>&nbsp;
+                    <a href="http://www.facebook.com/cadavresky"><img id="logo-facebook" src={ImgLogoFb}/></a>
                 </li>
             </Nav>
         </Navbar.Collapse>
