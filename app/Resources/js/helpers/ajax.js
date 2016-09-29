@@ -70,10 +70,10 @@ export function loadData(that, page, language) {
   }
 }
 
-export function sendData(that, page, data) {
+export function sendData(that, page, data, language) {
   that.setState({isLoading:true});
 
-  ajaxPost('api/post/pages/'+page,
+  ajaxPost('api/post/pages/'+page+'/'+language,
     'data='+data,
     function(response){
       const jsonResponse = JSON.parse(response);

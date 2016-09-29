@@ -37,14 +37,18 @@ class ApiController extends Controller
   }
 
   /**
-   * @Route("/post/pages/{id}", name="api_post_page")
+   * @Route("/post/pages/{id}/{language}", name="api_post_page")
    * @Method({"POST"})
    */
-  public function postPageAction(Request $request, Page $page)
+  public function postPageAction(Request $request, Page $page, $language = 'fr')
   {
     if ($request->isXMLHttpRequest()) {
       $content = $request->request->get('data');
-      $page->setContent($content);
+      if($language === 'fr') {
+        $page->setContent($content);
+      } else {
+        $page->setContentEn($content);
+      }
 
       $em = $this->getDoctrine()->getManager();
       $em->flush();
