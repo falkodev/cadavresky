@@ -4,9 +4,18 @@ import Spinner from './Layout/Spinner';
 import ProjectFolder from './ProjectFolder';
 import { Button, Glyphicon } from 'react-bootstrap';
 import { loadData, addFolder, getFolders } from './helpers/ajax';
+import { subscribe } from './helpers/pubsub';
 
 const Page = React.createClass({
   getInitialState: function() {
+    subscribe("languageChanged", (language) => {
+      this.setState({
+        isLoading: true,
+        language: language,
+      });
+      loadData(this, this.props.page, language);
+    });
+
     const isAdminLoggedIn = this.props.isAdminLoggedIn;
 
     if (this.props.project) {
@@ -24,12 +33,13 @@ const Page = React.createClass({
       showFolderCreationSuccess: false,
       newFolder: null,
       folders: null,
+      language: (window.navigator.userLanguage||window.navigator.language).substr(0,2),
     };
   },
   componentDidMount: function() { //1ere fois que la page est chargée avec un composant (ex: who's who = page 2)
-    loadData(this, this.props.page);
+    loadData(this, this.props.page, this.state.language);
   },
-  componentWillReceiveProps: function(nextProps) { //changement de page -> la page est chargée avec un nouveau composant (ex: projectology = page 3)
+  componentWillReceiveProps: function(nextProps, nextContext) { //changement de page -> la page est chargée avec un nouveau composant (ex: projectology = page 3)
     if (nextProps.project) {
       this.listFolders(nextProps.page);
     } else {
@@ -41,7 +51,7 @@ const Page = React.createClass({
     this.setState({
       isLoading: true,
     });
-    loadData(this, nextProps.page);
+    loadData(this, nextProps.page, this.state.language);
   },
   listFolders: function(page) {
     getFolders(this, page);
@@ -66,6 +76,9 @@ const Page = React.createClass({
       this.setState({ showErrorEmpty: true });
     }
   },
+  contextTypes: {
+    language: React.PropTypes.string
+  },
   render: function() {
       return (
         <div>
@@ -81,7 +94,7 @@ const Page = React.createClass({
                   <div className="form-group">
                     <input name="folder" type="text" className="form-control" placeholder="Nom projet" />
                   </div>
-                  <Button type="submit">Valider </Button>
+                  <Button type="submit">Valider</Button>
 
                   { this.state.isRequesting ?
                    <Spinner alt="true" /> : null }

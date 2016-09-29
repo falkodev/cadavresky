@@ -31,9 +31,16 @@ class Page
     /**
      * @var string
      *
-     * @ORM\Column(name="content", type="text")
+     * @ORM\Column(name="content", type="text", nullable=true)
      */
     private $content;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="content_en", type="text", nullable=true)
+     */
+    private $contentEn;
 
 
     /**
@@ -90,5 +97,28 @@ class Page
     public function getContent()
     {
         return $this->content;
+    }
+
+    /**
+     * Set content english
+     *
+     * @param string $content
+     * @return Page
+     */
+    public function setContentEn($contentEn)
+    {
+        $this->contentEn = $contentEn;
+
+        return $this;
+    }
+
+    /**
+     * Get content english
+     *
+     * @return string
+     */
+    public function getContentEn()
+    {
+        return $this->contentEn;
     }
 }

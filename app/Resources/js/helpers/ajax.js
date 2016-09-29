@@ -47,15 +47,15 @@ function ajaxDelete(file, callback) {
 }
 
 let cache = [];
-export function loadData(that, page) {
-  if(cache.hasOwnProperty()  && cache[page].id === page) {
+export function loadData(that, page, language) {
+  if(cache.hasOwnProperty(page) && cache[page].id === page && cache[page].language === language) {
     that.setState({
       isLoading: false,
       content: cache[page].content
     });
   } else {
     let data;
-    ajaxGet('api/get/pages/'+page,
+    ajaxGet('api/get/pages/'+page+'/'+language,
       function(response){
         const jsonContent = JSON.parse(response).data;
         that.setState({
@@ -65,6 +65,7 @@ export function loadData(that, page) {
         cache[page] = {};
         cache[page].id = page;
         cache[page].content = jsonContent;
+        cache[page].language = language;
       });
   }
 }

@@ -17,14 +17,20 @@ use AppBundle\Entity\Page;
 class ApiController extends Controller
 {
   /**
-   * @Route("/get/pages/{id}", name="api_get_page")
+   * @Route("/get/pages/{id}/{language}", name="api_get_page")
    * @Method({"GET"})
    */
-  public function getPageAction(Page $page)
+  public function getPageAction(Page $page, $language = 'fr')
   {
     $response = new JsonResponse();
+
+    if($language === 'fr') {
+      $content = $page->getContent();
+    } else {
+      $content = $page->getContentEn();
+    }
     $response->setData(array(
-      'data' => $page->getContent()
+      'data' => $content
     ));
 
     return $response;

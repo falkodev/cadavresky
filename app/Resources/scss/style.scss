@@ -3,6 +3,7 @@
 $icon-font-path: "../fonts/";
 @import "~bootstrap-sass/assets/stylesheets/bootstrap";
 @import "~react-image-gallery/src/image-gallery";
+@import "flag-css";
 
 @font-face {
     font-family: "5by7";
@@ -132,7 +133,7 @@ form {
 
 #logo-default {
     margin: 25px 25px 100px -15px;
-    width: 145px;
+    width: 180px;
 }
 
 //#close-menu-icon {
@@ -144,18 +145,18 @@ form {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
-    margin-top: 50px;
+    margin-top: 15px;
 }
 
 #logo-instagram {
-    width: 70px;
-    height: 70px;
+    width: 35px;
+    height: 35px;
 }
 
 #logo-facebook {
-    width: 40px;
-    height: 40px;
-    margin-top: 15px;
+    width: 20px;
+    height: 20px;
+    margin-top: 10px;
 }
 
 #palm {
@@ -210,6 +211,9 @@ form {
     .menu {
         text-transform: uppercase;
         font-weight: bold;
+        &:hover {
+            cursor: pointer;
+        }
     }
     .navbar-nav {
 
@@ -432,7 +436,7 @@ form {
     .sidebar-nav .navbar ul {
         float: none;
         margin: 30vh 0px 0px 25px;
-        width: 145px;
+        width: 180px;
     }
     .sidebar-nav .navbar ul:not {
         display: block;
@@ -440,7 +444,7 @@ form {
     .sidebar-nav .navbar li {
         float: none;
         display: block;
-        width: 145px;
+        width: 180px;
     }
     .navbar-header {
         display: none;
@@ -450,6 +454,7 @@ form {
         .navbar-nav {
             .menu  {
                 background-size: contain;
+                font-size: 17px;
             }
 
             .menu-desktop > a {
@@ -467,7 +472,7 @@ form {
             .sub-menu {
                 padding: 0;
                 margin-top: -10px;
-                width: 145px;
+                width: 180px;
             }
         }
     }

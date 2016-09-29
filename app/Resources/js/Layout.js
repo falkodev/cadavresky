@@ -5,14 +5,10 @@ import Footer from './layout/Footer';
 
 const Layout = React.createClass({
     getInitialState: function() {
-        return {
-            transparentContent: false,
-        };
+        return { transparentContent: false };
     },
     handleToggleMenu: function(transparentContent) {
-        this.setState({
-            transparentContent: transparentContent,
-        });
+        this.setState({ transparentContent: transparentContent });
     },
     render: function() {
         return (

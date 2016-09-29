@@ -1,6 +1,7 @@
 import React from 'react';
 import { Nav, Navbar, Collapse } from 'react-bootstrap';
 import Link from '../Link';
+import { dispatch } from '../helpers/pubsub';
 
 import ImgLogoInsta        from '../../images/instagram-logo.png';
 import ImgLogoFb           from '../../images/facebook-logo.png';
@@ -20,16 +21,16 @@ import ImgMenuB5Selected from '../../images/menu_categories/B5_selected.png';
 import ImgMenuB6Selected from '../../images/menu_categories/B6_selected.png';
 
 Array.prototype.shuffle = function() {
-    var input = this;
+    const input = this;
 
-    for (var i = input.length-1; i >=0; i--) {
-
-        var randomIndex = Math.floor(Math.random()*(i+1));
-        var itemAtIndex = input[randomIndex];
+    for (let i = input.length-1; i >=0; i--) {
+        const randomIndex = Math.floor(Math.random()*(i+1));
+        const itemAtIndex = input[randomIndex];
 
         input[randomIndex] = input[i];
         input[i] = itemAtIndex;
     }
+
     return input;
 }
 
@@ -45,12 +46,13 @@ const Menu = React.createClass({
             menu4: menus[3],
             menu5: menus[4],
             menu6: menus[5],
-            hover: false
+            hover: false,
+            language: (window.navigator.userLanguage||window.navigator.language).substr(0,2),
         };
     },
     toggleSubMenu: function(parent) {
         //close other sub-menus
-        Array.from(document.querySelectorAll(".menu")).forEach(function(key, value) {
+        Array.from(document.querySelectorAll(".sub-menu:not(.menu-" + parent + ")")).forEach(function(key, value) {
             key.classList.remove("clicked");
         });
 
@@ -113,6 +115,9 @@ const Menu = React.createClass({
             menu6: menus[5],
         });
     },
+    handleLanguage: function(language) {
+      dispatch("languageChanged", language);
+    },
     render: function() {
         return (
         <Navbar.Collapse>
@@ -137,8 +142,13 @@ const Menu = React.createClass({
 
                 <Link to="contact" className="menu menu-contact" onClick={ this.changeColor } style={{ backgroundImage : 'url(' + this.state.menu6 + ')' }} onMouseEnter={this.onEnterHover.bind(null, 'menu6', this.state.menu6)} onMouseLeave={this.onLeaveHover}>Contact</Link>
 
-                <li role="presentation" className="menu-facebook menu-desktop"><a href="http://www.facebook.com/cadavresky">Facebook</a></li>
-                <li role="presentation" className="menu-instagram menu-desktop"><a href="http://www.instagram.com/cadavresky">Instagram</a></li>
+                <li>
+                  <span className="flag flag-fr flag-2x" onClick={ this.handleLanguage.bind(null, 'fr') }></span>&nbsp;&nbsp;
+                  <span className="flag flag-gb flag-2x" onClick={ this.handleLanguage.bind(null, 'en') }></span>
+                </li>
+
+                <li role="presentation" className="menu-facebook menu-desktop text-center"><a href="http://www.facebook.com/cadavresky">Facebook</a></li>
+                <li role="presentation" className="menu-instagram menu-desktop text-center"><a href="http://www.instagram.com/cadavresky">Instagram</a></li>
                 <li id="nav-logos">
                     <a href="http://www.instagram.com/cadavresky"><img id="logo-instagram" src={ImgLogoInsta}/></a>&nbsp;
                     <a href="http://www.facebook.com/cadavresky"><img id="logo-facebook" src={ImgLogoFb}/></a>
