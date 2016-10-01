@@ -7,47 +7,69 @@ import Layout                from './Layout';
 import Page                  from './Page';
 import Login                 from './Login';
 import Contact               from './Contact';
+import SlideMedia            from './SlideMedia';
 
 export default function render(location, isAdminLoggedIn=false) {
-  const path = location.pathname.split('/').pop();
+  let transformedPathname = process.env.host.split('/').join('\\/');
+  transformedPathname = '/\\/' + transformedPathname + '(.*)/';
+  const path = location.pathname.match(eval(transformedPathname));
   let component;
+  let urlMatch;
 
-  switch (path) {
-    case 'login':
+  if(path) { //from url
+    urlMatch = path[1];
+  } else { //from Link
+    urlMatch = '/'+location.pathname;
+  }
+
+  switch (true) {
+    case (/^$/).test(urlMatch): // regex: urlMatch empty -> homepage
+      component = <Page page={2} />;
+      break;
+    case (/^\/$/).test(urlMatch): // regex: urlMatch = '/' -> homepage
+      component = <Page page={2} />;
+      break;
+    case (/\/login/).test(urlMatch):
       component = <Login callbackParent={connectionHandler} />;
       break;
-    case 'whoswho':
+    case (/\/whoswho\/\w/).test(urlMatch): // regex:\w -> any alphanumeric character (in order to test /whoswho/xxx for example)
+      component = <Page page={2} isAdminLoggedIn={isAdminLoggedIn} project="true" />;
+      break;
+    case (/\/whoswho/).test(urlMatch): // regex -> allow '/whoswho' and '/whoswho/'
       component = <Page page={2} isAdminLoggedIn={isAdminLoggedIn} />;
       break;
-    case 'projectology':
+    case (/\/projectology/).test(urlMatch):
       component = <Page page={3} isAdminLoggedIn={isAdminLoggedIn} />;
       break;
-    case 'zoo':
+    case (/\/zoo/).test(urlMatch):
       component = <Page page={4} isAdminLoggedIn={isAdminLoggedIn} />;
       break;
-    case 'shop':
+    case (/\/shop/).test(urlMatch):
       component = <Page page={5} isAdminLoggedIn={isAdminLoggedIn} />;
       break;
-    case 'goodies':
+    case (/\/goodies/).test(urlMatch):
       component = <Page page={6} isAdminLoggedIn={isAdminLoggedIn} />;
       break;
-    case 'wear':
+    case (/\/wear/).test(urlMatch):
       component = <Page page={7} isAdminLoggedIn={isAdminLoggedIn} project="true" />;
       break;
-    case 'adorn':
+    case (/\/adorn/).test(urlMatch):
       component = <Page page={8} isAdminLoggedIn={isAdminLoggedIn} project="true" />;
       break;
-    case 'collaboratory':
+    case (/\/collaboratory/).test(urlMatch):
       component = <Page page={9} isAdminLoggedIn={isAdminLoggedIn} />;
       break;
-    case 'buddies':
+    case (/\/buddies/).test(urlMatch):
       component = <Page page={10} isAdminLoggedIn={isAdminLoggedIn} />;
       break;
-    case 'contact':
+    case (/\/contact/).test(urlMatch):
       component = <Contact />;
       break;
-    default:
-      component = <Page page={2} />;
+    case (/\/slide/).test(urlMatch):
+      component = <SlideMedia />;
+      break;
+    default: // error 404
+      component = <Page page={1} />;
   }
 
   ReactDom.render((

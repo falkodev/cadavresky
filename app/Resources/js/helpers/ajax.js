@@ -1,5 +1,7 @@
 import render from '../app';
 
+const pathname = location.protocol + '//' + location.host + '/' + process.env.host;
+
 function ajaxGet(file, callback) {
   var xObj = new XMLHttpRequest();
 
@@ -55,7 +57,7 @@ export function loadData(that, page, language) {
     });
   } else {
     let data;
-    ajaxGet('api/get/pages/'+page+'/'+language,
+    ajaxGet(pathname+'/api/get/pages/'+page+'/'+language,
       function(response){
         const jsonContent = JSON.parse(response).data;
         that.setState({
@@ -73,7 +75,7 @@ export function loadData(that, page, language) {
 export function sendData(that, page, data, language) {
   that.setState({isLoading:true});
 
-  ajaxPost('api/post/pages/'+page+'/'+language,
+  ajaxPost(pathname+'/api/post/pages/'+page+'/'+language,
     'data='+data,
     function(response){
       const jsonResponse = JSON.parse(response);
@@ -94,7 +96,7 @@ export function sendData(that, page, data, language) {
 export function login(that, data) {
   that.setState({isLoading:true});
 
-  ajaxPost('user/login/1',
+  ajaxPost(pathname+'/user/login/1',
     data,
     function(response){
       const jsonResponse = JSON.parse(response);
@@ -121,7 +123,7 @@ export function connectionHandler(log) {
 }
 
 export function addFolder(that, page, folder) {
-  ajaxPost('api/post/projects/'+page+'/'+folder,
+  ajaxPost(pathname+'/api/post/projects/'+page+'/'+folder,
     '', //no data
     function(response){
       const jsonResponse = JSON.parse(response);
@@ -143,7 +145,7 @@ export function addFolder(that, page, folder) {
 }
 
 export function getFolders(that, page) {
-  ajaxGet('api/get/projects/'+page,
+  ajaxGet(pathname+'/api/get/projects/'+page,
     function(response){
       const jsonContent = JSON.parse(response).data;
       const folders = Object.keys(jsonContent).map(function(k) { return jsonContent[k] });
@@ -187,7 +189,7 @@ export function uploadFiles(that, page, folder, data, progressBar) {
     type = 'medias';
   }
 
-  ajaxPost('api/post/projects/'+page+'/'+folder+'/'+type,
+  ajaxPost(pathname+'/api/post/projects/'+page+'/'+folder+'/'+type,
     data,
     function(response){
       const jsonResponse = JSON.parse(response);
@@ -231,14 +233,14 @@ export function deleteFile(that, file) {
   const page = path.split('_')[1];
   const folder = path.split('_')[2];
 
-  ajaxDelete('api/delete/projects/'+path,
+  ajaxDelete(pathname+'/api/delete/projects/'+path,
     function(response){
       getMedias(that, page, folder);
     });
 }
 
 export function sendEmail(that, data) {
-  ajaxPost('api/post/email',
+  ajaxPost(pathname+'/api/post/email',
     data,
     function(response){
       const jsonContent = JSON.parse(response).success;

@@ -17,7 +17,7 @@ var config = {
                 presets: ['es2015', 'react', 'stage-2']
             },
             {
-                test: /\.scss$/,
+                test: /\.s?css$/,
                 loader: ExtractTextPlugin.extract('css!sass')
             },
             {
@@ -71,10 +71,16 @@ function setPlugins() {
 
     if (process.env.NODE_ENV !== 'production') {
         plugins.push(new webpack.HotModuleReplacementPlugin());
+        plugins.push(new webpack.DefinePlugin({
+          'process.env': {
+            host: JSON.stringify(process.env.host),
+          }
+        }));
     } else {
         plugins.push(new webpack.DefinePlugin({
           'process.env': {
             NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+            host: JSON.stringify(process.env.host),
           }
         }));
         plugins.push(new webpack.optimize.OccurenceOrderPlugin());

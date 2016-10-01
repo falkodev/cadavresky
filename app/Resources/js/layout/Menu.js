@@ -37,6 +37,8 @@ Array.prototype.shuffle = function() {
 const menus = [ImgMenuGreenYellow, ImgMenuRedOrange, ImgMenuLightGreenPurple, ImgMenuLightPinkOrange, ImgMenuGreenLightBlue, ImgMenuRedYellow];
 menus.shuffle();
 
+const pathname = location.protocol + '//' + location.host + '/' + process.env.host;
+
 const Menu = React.createClass({
     getInitialState: function() {
         return {
@@ -122,25 +124,25 @@ const Menu = React.createClass({
         return (
         <Navbar.Collapse>
             <Nav className="menu navbar-fixed-top">
-                <Link to="whoswho" className="menu menu-whoswho active" onClick={ this.changeColor } style={{ backgroundImage : 'url(' + this.state.menu1 + ')' }} onMouseEnter={this.onEnterHover.bind(null, 'menu1', this.state.menu1)} onMouseLeave={this.onLeaveHover}>Whos who</Link>
+                <Link to={ pathname+"/whoswho" } className="menu menu-whoswho active" onClick={ this.changeColor } style={{ backgroundImage : 'url(' + this.state.menu1 + ')' }} onMouseEnter={this.onEnterHover.bind(null, 'menu1', this.state.menu1)} onMouseLeave={this.onLeaveHover}>Who's who</Link>
 
                 <li role="presentation" className="menu menu-projectology" style={{ backgroundImage : 'url(' + this.state.menu2 + ')' }} onMouseEnter={this.onEnterHover.bind(null, 'menu2', this.state.menu2)} onMouseLeave={this.onLeaveHover}>
                     <span onClick={ this.toggleSubMenu.bind(null, "projectology") }>Projectology</span>
                 </li>
-                <Link to="wear" className="menu sub-menu menu-projectology" onClick={ this.changeColor } style={{ backgroundImage : 'url(' + this.state.menu2 + ')' }} onMouseEnter={this.onEnterHover.bind(null, 'menu2', this.state.menu2)} onMouseLeave={this.onLeaveHover}>&nbsp;&nbsp;&nbsp;&nbsp;To wear</Link>
-                <Link to="adorn" className="menu sub-menu menu-projectology" onClick={ this.changeColor } style={{ backgroundImage : 'url(' + this.state.menu2 + ')' }} onMouseEnter={this.onEnterHover.bind(null, 'menu2', this.state.menu2)} onMouseLeave={this.onLeaveHover}>&nbsp;&nbsp;&nbsp;&nbsp;To adorn</Link>
+                <Link to={ pathname+"/wear" } className="menu sub-menu menu-projectology" onClick={ this.changeColor } style={{ backgroundImage : 'url(' + this.state.menu2 + ')' }} onMouseEnter={this.onEnterHover.bind(null, 'menu2', this.state.menu2)} onMouseLeave={this.onLeaveHover}>&nbsp;&nbsp;&nbsp;&nbsp;To wear</Link>
+                <Link to={ pathname+"/adorn" } className="menu sub-menu menu-projectology" onClick={ this.changeColor } style={{ backgroundImage : 'url(' + this.state.menu2 + ')' }} onMouseEnter={this.onEnterHover.bind(null, 'menu2', this.state.menu2)} onMouseLeave={this.onLeaveHover}>&nbsp;&nbsp;&nbsp;&nbsp;To adorn</Link>
 
                 <li role="presentation" className="menu menu-zoo" style={{ backgroundImage : 'url(' + this.state.menu3 + ')' }} onMouseEnter={this.onEnterHover.bind(null, 'menu3', this.state.menu3)} onMouseLeave={this.onLeaveHover}>
                     <span onClick={ this.toggleSubMenu.bind(null, "zoo") }>The zoo</span>
                 </li>
-                <Link to="collaboratory" className="menu sub-menu menu-zoo" onClick={ this.changeColor } style={{ backgroundImage : 'url(' + this.state.menu3 + ')' }} onMouseEnter={this.onEnterHover.bind(null, 'menu3', this.state.menu3)} onMouseLeave={this.onLeaveHover}>&nbsp;&nbsp;&nbsp;&nbsp;Collaboratory</Link>
+                <Link to={ pathname+"/collaboratory" } className="menu sub-menu menu-zoo" onClick={ this.changeColor } style={{ backgroundImage : 'url(' + this.state.menu3 + ')' }} onMouseEnter={this.onEnterHover.bind(null, 'menu3', this.state.menu3)} onMouseLeave={this.onLeaveHover}>&nbsp;&nbsp;&nbsp;&nbsp;Collaboratory</Link>
                 <Link to="buddies" className="menu sub-menu menu-zoo" onClick={ this.changeColor } style={{ backgroundImage : 'url(' + this.state.menu3 + ')' }} onMouseEnter={this.onEnterHover.bind(null, 'menu3', this.state.menu3)} onMouseLeave={this.onLeaveHover}>&nbsp;&nbsp;&nbsp;&nbsp;Buddies</Link>
 
-                <Link to="shop" className="menu menu-shop" onClick={ this.changeColor } style={{ backgroundImage : 'url(' + this.state.menu4 + ')' }} onMouseEnter={this.onEnterHover.bind(null, 'menu4', this.state.menu4)} onMouseLeave={this.onLeaveHover}>Shop</Link>
+                <Link to={ pathname+"/shop" } className="menu menu-shop" onClick={ this.changeColor } style={{ backgroundImage : 'url(' + this.state.menu4 + ')' }} onMouseEnter={this.onEnterHover.bind(null, 'menu4', this.state.menu4)} onMouseLeave={this.onLeaveHover}>Shop</Link>
 
-                <Link to="goodies" className="menu menu-goodies" onClick={ this.changeColor } style={{ backgroundImage : 'url(' + this.state.menu5 + ')' }} onMouseEnter={this.onEnterHover.bind(null, 'menu5', this.state.menu5)} onMouseLeave={this.onLeaveHover}>Goodies</Link>
+                <Link to={ pathname+"/goodies" } className="menu menu-goodies" onClick={ this.changeColor } style={{ backgroundImage : 'url(' + this.state.menu5 + ')' }} onMouseEnter={this.onEnterHover.bind(null, 'menu5', this.state.menu5)} onMouseLeave={this.onLeaveHover}>Goodies</Link>
 
-                <Link to="contact" className="menu menu-contact" onClick={ this.changeColor } style={{ backgroundImage : 'url(' + this.state.menu6 + ')' }} onMouseEnter={this.onEnterHover.bind(null, 'menu6', this.state.menu6)} onMouseLeave={this.onLeaveHover}>Contact</Link>
+                <Link to={ pathname+"/contact" } className="menu menu-contact" onClick={ this.changeColor } style={{ backgroundImage : 'url(' + this.state.menu6 + ')' }} onMouseEnter={this.onEnterHover.bind(null, 'menu6', this.state.menu6)} onMouseLeave={this.onLeaveHover}>Contact</Link>
 
                 <li>
                   <span className="flag flag-fr flag-2x" onClick={ this.handleLanguage.bind(null, 'fr') }></span>&nbsp;&nbsp;

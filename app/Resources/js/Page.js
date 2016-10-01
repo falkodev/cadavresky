@@ -85,7 +85,7 @@ const Page = React.createClass({
           { this.state.isLoading ?
             <Spinner />:
             <div>
-              <EditableContent initialContent={ this.state.content } page={ this.props.page } editable={ this.state.isAdminLoggedIn } />
+              <EditableContent initialContent={ this.state.content } page={ this.props.page } editable={ this.state.isAdminLoggedIn } language={ this.state.language } />
 
               { this.props.project ? <Button onClick={ this.handleClick } style={{ marginTop:'15px', marginBottom:'15px' }}>Ajouter projet <Glyphicon glyph="plus" /></Button> : null }
 

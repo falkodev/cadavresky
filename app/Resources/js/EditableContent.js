@@ -5,14 +5,9 @@ import { sendData } from './helpers/ajax';
 import { subscribe } from './helpers/pubsub';
 
 let initialContent;
-let language;
 
 const EditableContent = React.createClass({
     getInitialState: function() {
-        subscribe("languageChanged", (lang) => {
-          language = lang;
-        });
-
         initialContent = this.props.initialContent;
         const editable = this.props.editable;
         return {
@@ -40,7 +35,7 @@ const EditableContent = React.createClass({
     },
     saveHandler: function() {
       const data = this.state.value.toString('html');
-      sendData(this, this.props.page, data, language);
+      sendData(this, this.props.page, data, this.props.language);
       initialContent = data; //initialContent takes current RTE content, so if a cancel action occurs, this saved content will be displayed and not the real initialContent (that no longer exists in DB)
     },
     changeHandler: function(value) {
