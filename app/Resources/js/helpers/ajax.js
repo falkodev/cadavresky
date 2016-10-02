@@ -164,7 +164,8 @@ export function getMedias(that, page, folder) {
       const jsonCover1 = JSON.parse(response).cover1;
       const jsonCover2 = JSON.parse(response).cover2;
       const jsonMedias = JSON.parse(response).medias;
-      const path = pathname+'/projects/'+page+'/'+folder;
+//      const path = pathname+'/../projects/'+page+'/'+folder; // localhost (dev et prod)
+      const path = pathname+'/projects/'+page+'/'+folder; // serveur ovh
 
       const cover1 = typeof jsonCover1[Object.keys(jsonCover1)[0]] == 'undefined' ? false : path+'/cover1/'+jsonCover1[Object.keys(jsonCover1)[0]];
       const cover2 = typeof jsonCover2[Object.keys(jsonCover2)[0]] == 'undefined' ? false : path+'/cover2/'+jsonCover2[Object.keys(jsonCover2)[0]];
