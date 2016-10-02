@@ -147,7 +147,7 @@ const ProjectFolder = React.createClass({
                         return (
                           file.name.split(".").pop() === 'avi' || file.name.split(".").pop() === 'mp4' ?
                           <div className="inlineBlock" key={ file.name }>
-                            <video src={file.preview} key={file.preview} height="98" style={{marginRight: "5px", marginTop: "5px"}} />
+                            <video src={file.preview} key={file.preview} height="98" style={{marginRight: "5px", marginTop: "5px", position: "relative", top: "45px"}} />
                             <span className="remove-media remove-video" onClick={ this.handleMediaRemove } id={ uniqueId } data-path={ file }><Glyphicon glyph="remove" /></span>
                           </div>:
                           <div className="inlineBlock" key={ file.name }>
@@ -167,7 +167,7 @@ const ProjectFolder = React.createClass({
                         return (
                           file.split(".").pop() === 'avi' || file.split(".").pop() === 'mp4' ?
                           <div className="inlineBlock" key={ file }>
-                            <video src={file} key={file} height="98" style={{marginRight: "5px", marginTop: "5px"}} />
+                            <video src={file} key={file} height="98" style={{marginRight: "5px", marginTop: "5px", position: "relative", top: "45px"}} />
                             <span className="remove-media remove-video" onClick={ this.handleMediaRemove } id={ uniqueId } data-path={ file }><Glyphicon glyph="remove" /></span>
                           </div>:
                           <div className="inlineBlock" key={ file }>
@@ -187,7 +187,7 @@ const ProjectFolder = React.createClass({
             </Row>
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={ close }>Close</Button>
+            <Button onClick={ close }>Fermer</Button>
           </Modal.Footer>
         </Modal>
       </div>

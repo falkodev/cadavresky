@@ -7,7 +7,6 @@ import Layout                from './Layout';
 import Page                  from './Page';
 import Login                 from './Login';
 import Contact               from './Contact';
-import SlideMedia            from './SlideMedia';
 import DisplayProject        from './DisplayProject';
 
 export default function render(location, isAdminLoggedIn=false) {
@@ -33,9 +32,6 @@ export default function render(location, isAdminLoggedIn=false) {
     case (/\/login/).test(urlMatch):
       component = <Login callbackParent={connectionHandler} />;
       break;
-    case (/\/whoswho\/\w/).test(urlMatch): // regex:\w -> any alphanumeric character (in order to test /whoswho/xxx for example)
-      component = <Page page={2} isAdminLoggedIn={isAdminLoggedIn} project="true" />;
-      break;
     case (/\/whoswho/).test(urlMatch): // regex -> allow '/whoswho' and '/whoswho/'
       component = <Page page={2} isAdminLoggedIn={isAdminLoggedIn} />;
       break;
@@ -57,20 +53,26 @@ export default function render(location, isAdminLoggedIn=false) {
     case (/\/wear/).test(urlMatch):
       component = <Page page={7} isAdminLoggedIn={isAdminLoggedIn} project="true" />;
       break;
+    case (/\/adorn\/\w/).test(urlMatch): // regex:\w -> any alphanumeric character (in order to test /adorn/xxx for example)
+      component = <DisplayProject page={8} />;
+      break;
     case (/\/adorn/).test(urlMatch):
       component = <Page page={8} isAdminLoggedIn={isAdminLoggedIn} project="true" />;
       break;
+    case (/\/collaboratory\/\w/).test(urlMatch): // regex:\w -> any alphanumeric character (in order to test /collaboratory/xxx for example)
+      component = <DisplayProject page={8} />;
+      break;
     case (/\/collaboratory/).test(urlMatch):
-      component = <Page page={9} isAdminLoggedIn={isAdminLoggedIn} />;
+      component = <Page page={9} isAdminLoggedIn={isAdminLoggedIn} project="true" />;
+      break;
+    case (/\/buddies\/\w/).test(urlMatch): // regex:\w -> any alphanumeric character (in order to test /buddies/xxx for example)
+      component = <DisplayProject page={8} />;
       break;
     case (/\/buddies/).test(urlMatch):
-      component = <Page page={10} isAdminLoggedIn={isAdminLoggedIn} />;
+      component = <Page page={10} isAdminLoggedIn={isAdminLoggedIn} project="true" />;
       break;
     case (/\/contact/).test(urlMatch):
       component = <Contact />;
-      break;
-    case (/\/slide/).test(urlMatch):
-      component = <SlideMedia />;
       break;
     default: // error 404
       component = <Page page={1} />;
