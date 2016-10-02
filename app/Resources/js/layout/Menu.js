@@ -136,7 +136,7 @@ const Menu = React.createClass({
                     <span onClick={ this.toggleSubMenu.bind(null, "zoo") }>The zoo</span>
                 </li>
                 <Link to={ pathname+"/collaboratory" } className="menu sub-menu menu-zoo" onClick={ this.changeColor } style={{ backgroundImage : 'url(' + this.state.menu3 + ')' }} onMouseEnter={this.onEnterHover.bind(null, 'menu3', this.state.menu3)} onMouseLeave={this.onLeaveHover}>&nbsp;&nbsp;&nbsp;&nbsp;Collaboratory</Link>
-                <Link to="buddies" className="menu sub-menu menu-zoo" onClick={ this.changeColor } style={{ backgroundImage : 'url(' + this.state.menu3 + ')' }} onMouseEnter={this.onEnterHover.bind(null, 'menu3', this.state.menu3)} onMouseLeave={this.onLeaveHover}>&nbsp;&nbsp;&nbsp;&nbsp;Buddies</Link>
+                <Link to={ pathname+"/buddies" } className="menu sub-menu menu-zoo" onClick={ this.changeColor } style={{ backgroundImage : 'url(' + this.state.menu3 + ')' }} onMouseEnter={this.onEnterHover.bind(null, 'menu3', this.state.menu3)} onMouseLeave={this.onLeaveHover}>&nbsp;&nbsp;&nbsp;&nbsp;Buddies</Link>
 
                 <Link to={ pathname+"/shop" } className="menu menu-shop" onClick={ this.changeColor } style={{ backgroundImage : 'url(' + this.state.menu4 + ')' }} onMouseEnter={this.onEnterHover.bind(null, 'menu4', this.state.menu4)} onMouseLeave={this.onLeaveHover}>Shop</Link>
 
