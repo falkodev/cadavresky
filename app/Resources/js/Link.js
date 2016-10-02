@@ -23,14 +23,10 @@ const Link = React.createClass({
 
     event.preventDefault();
 
-    if (this.props.to) {
-      history.push(this.props.to);
-    } else {
-      history.push({
-        pathname: event.currentTarget.pathname,
-        search: event.currentTarget.search,
-      });
-    }
+    history.push({
+      pathname: event.currentTarget.pathname,
+      search: event.currentTarget.search,
+    });
   },
 
   render: function() {

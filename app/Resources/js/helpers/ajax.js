@@ -1,6 +1,9 @@
 import render from '../app';
 
-const pathname = location.protocol + '//' + location.host + '/' + process.env.host;
+let pathname = location.protocol + '//' + location.host + '/' + process.env.host;
+if (process.env.NODE_ENV === 'production') {
+  pathname += '/web';
+}
 
 function ajaxGet(file, callback) {
   var xObj = new XMLHttpRequest();
