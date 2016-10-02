@@ -17,7 +17,7 @@ const ProjectPreview = React.createClass({
     return (
       <span style={{width: "98px"}}>
         { this.state.hover ?
-          <Link to={ location.pathname+'/'+this.props.project } onMouseLeave={ () => this.setState({hover: false}) }><img src={this.state.cover2OnServer} key={this.state.cover2OnServer} height="98" style={{marginRight: "5px", marginTop: "5px"}} onMouseLeave={ () => this.setState({hover: false}) } /></Link>
+          <Link to={ location.pathname+this.props.project } onMouseLeave={ () => this.setState({hover: false}) }><img src={this.state.cover2OnServer} key={this.state.cover2OnServer} height="98" style={{marginRight: "5px", marginTop: "5px"}} onMouseLeave={ () => this.setState({hover: false}) } /></Link>
            :
           <img src={this.state.cover1OnServer} key={this.state.cover1OnServer} height="98" style={{marginRight: "5px", marginTop: "5px"}} onMouseEnter={ () => this.setState({hover: true}) } />
         }
