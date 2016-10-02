@@ -184,10 +184,10 @@ class ApiController extends Controller
    * @Route("/delete/projects/{file}", name="api_delete_file")
    * @Method({"DELETE"})
    */
-  public function deleteFileAction(Request $request)
+  public function deleteFileAction(Request $request, $file)
   {
     if ($request->isXMLHttpRequest()) {
-      $path = str_replace('_', '/', $file); // $file contains the whole path, but "/" were converted to "_" to fit in url
+      $path = str_replace('@@', '/', $file); // $file contains the whole path, but "/" were converted to "@@" to fit in url
       unlink($path);
 
       $response = new JsonResponse();

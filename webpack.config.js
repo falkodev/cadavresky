@@ -67,22 +67,18 @@ function setPlugins() {
         new webpack.NoErrorsPlugin(),
         new webpack.IgnorePlugin(/^(jquery)$/), //exclude jquery (included with Twitter Bootstrap by default)
         new ExtractTextPlugin('style.css', { allChunks: true }),
+        new webpack.DefinePlugin({
+          'process.env': {
+            NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+            host: JSON.stringify(process.env.host),
+            localhost:  JSON.stringify(process.env.localhost),
+          }
+        }),
     ];
 
     if (process.env.NODE_ENV !== 'production') {
         plugins.push(new webpack.HotModuleReplacementPlugin());
-        plugins.push(new webpack.DefinePlugin({
-          'process.env': {
-            host: JSON.stringify(process.env.host),
-          }
-        }));
     } else {
-        plugins.push(new webpack.DefinePlugin({
-          'process.env': {
-            NODE_ENV: JSON.stringify(process.env.NODE_ENV),
-            host: JSON.stringify(process.env.host),
-          }
-        }));
         plugins.push(new webpack.optimize.OccurenceOrderPlugin());
         plugins.push(new webpack.optimize.DedupePlugin());
         plugins.push(new webpack.optimize.UglifyJsPlugin());

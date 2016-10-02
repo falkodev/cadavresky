@@ -8,6 +8,7 @@ import Page                  from './Page';
 import Login                 from './Login';
 import Contact               from './Contact';
 import SlideMedia            from './SlideMedia';
+import DisplayProject        from './DisplayProject';
 
 export default function render(location, isAdminLoggedIn=false) {
   let transformedPathname = process.env.host.split('/').join('\\/');
@@ -49,6 +50,9 @@ export default function render(location, isAdminLoggedIn=false) {
       break;
     case (/\/goodies/).test(urlMatch):
       component = <Page page={6} isAdminLoggedIn={isAdminLoggedIn} />;
+      break;
+    case (/\/wear\/\w/).test(urlMatch): // regex:\w -> any alphanumeric character (in order to test /wear/xxx for example)
+      component = <DisplayProject page={7} />;
       break;
     case (/\/wear/).test(urlMatch):
       component = <Page page={7} isAdminLoggedIn={isAdminLoggedIn} project="true" />;

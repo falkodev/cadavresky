@@ -143,10 +143,18 @@ const ProjectFolder = React.createClass({
                       { this.state.medias.map((file) => {
                         const uniqueId = "remove"+file.name;
                         const path = 'projects/' + this.props.page + '/' + this.props.folder + '/medias/' + file.name;
-                        return (<div className="inlineBlock" key={ file.name }>
-                          <img src={file.preview} key={file.preview} height="98" style={{marginRight: "10px"}} />
-                          <span className="remove-media" onClick={ this.handleMediaRemove } id={ uniqueId } data-path={ path }><Glyphicon glyph="remove" /></span>
-                        </div>);
+
+                        return (
+                          file.name.split(".").pop() === 'avi' || file.name.split(".").pop() === 'mp4' ?
+                          <div className="inlineBlock" key={ file.name }>
+                            <video src={file.preview} key={file.preview} height="98" style={{marginRight: "5px", marginTop: "5px"}} />
+                            <span className="remove-media remove-video" onClick={ this.handleMediaRemove } id={ uniqueId } data-path={ file }><Glyphicon glyph="remove" /></span>
+                          </div>:
+                          <div className="inlineBlock" key={ file.name }>
+                            <img src={file.preview} key={file.preview} height="98" style={{marginRight: "5px", marginTop: "5px"}} />
+                            <span className="remove-media" onClick={ this.handleMediaRemove } id={ uniqueId } data-path={ file }><Glyphicon glyph="remove" /></span>
+                          </div>
+                       );
                       }) }
                     </div>
                     { this.state.mediasProgress ? <div className="progress-bar-out"><div className="progress-bar-in" id="barMedias"></div></div> : null }
@@ -155,10 +163,18 @@ const ProjectFolder = React.createClass({
                     <div className="inlineBlock">
                       { this.state.mediasOnServer.map((file) => {
                         const uniqueId = "remove"+file.split('/').pop();
-                        return (<div className="inlineBlock" key={ file }>
-                          <img src={file} height="98" style={{marginRight: "10px"}} />
-                          <span className="remove-media" onClick={ this.handleMediaRemove } id={ uniqueId } data-path={ file }><Glyphicon glyph="remove" /></span>
-                        </div>);
+
+                        return (
+                          file.split(".").pop() === 'avi' || file.split(".").pop() === 'mp4' ?
+                          <div className="inlineBlock" key={ file }>
+                            <video src={file} key={file} height="98" style={{marginRight: "5px", marginTop: "5px"}} />
+                            <span className="remove-media remove-video" onClick={ this.handleMediaRemove } id={ uniqueId } data-path={ file }><Glyphicon glyph="remove" /></span>
+                          </div>:
+                          <div className="inlineBlock" key={ file }>
+                            <img src={file} key={file} height="98" style={{marginRight: "5px", marginTop: "5px"}} />
+                            <span className="remove-media" onClick={ this.handleMediaRemove } id={ uniqueId } data-path={ file }><Glyphicon glyph="remove" /></span>
+                          </div>
+                        );
                       }) }
                     </div>
                   : null }

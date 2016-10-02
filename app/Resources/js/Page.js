@@ -2,6 +2,7 @@ import React from 'react';
 import EditableContent from './EditableContent';
 import Spinner from './Layout/Spinner';
 import ProjectFolder from './ProjectFolder';
+import ProjectPreview from './ProjectPreview';
 import { Button, Glyphicon } from 'react-bootstrap';
 import { loadData, addFolder, getFolders } from './helpers/ajax';
 import { subscribe } from './helpers/pubsub';
@@ -39,7 +40,7 @@ const Page = React.createClass({
   componentDidMount: function() { //1ere fois que la page est chargée avec un composant (ex: who's who = page 2)
     loadData(this, this.props.page, this.state.language);
   },
-  componentWillReceiveProps: function(nextProps, nextContext) { //changement de page -> la page est chargée avec un nouveau composant (ex: projectology = page 3)
+  componentWillReceiveProps: function(nextProps) { //changement de page -> la page est chargée avec un nouveau composant (ex: projectology = page 3)
     if (nextProps.project) {
       this.listFolders(nextProps.page);
     } else {
@@ -87,7 +88,7 @@ const Page = React.createClass({
             <div>
               <EditableContent initialContent={ this.state.content } page={ this.props.page } editable={ this.state.isAdminLoggedIn } language={ this.state.language } />
 
-              { this.props.project ? <Button onClick={ this.handleClick } style={{ marginTop:'15px', marginBottom:'15px' }}>Ajouter projet <Glyphicon glyph="plus" /></Button> : null }
+              { this.props.project && this.state.isAdminLoggedIn ? <Button onClick={ this.handleClick } style={{ marginTop:'15px', marginBottom:'15px' }}>Ajouter projet <Glyphicon glyph="plus" /></Button> : null }
 
               { this.state.showInput ?
                 <form onSubmit={ this.handleSubmit }>
@@ -124,9 +125,14 @@ const Page = React.createClass({
 
               { this.state.folders ?
                 <div>
-                { this.state.folders.map((folder) => {
-                  return <ProjectFolder key={folder} folder={folder} page={this.props.page} />
-                }) }
+                { this.state.isAdminLoggedIn ?
+                  this.state.folders.map((folder) => {
+                    return <ProjectFolder key={folder} folder={folder} page={this.props.page} />
+                  }) :
+                  this.state.folders.map((folder) => {
+                    return <ProjectPreview key={folder} project={folder} page={this.props.page} />
+                  })
+                }
                 </div> : null }
             </div>
           }

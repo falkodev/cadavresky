@@ -22,6 +22,26 @@ form {
   display: inline-block;
 }
 
+.flex-center {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.media {
+  margin-right: 5px;
+  margin-top: 5px;
+  height: 98px;
+  width: auto;
+  cursor: pointer;
+}
+
+.video {
+  position: relative;
+  top: 45px;
+}
+
 .remove-media {
     position: relative;
     top: -40px;
@@ -31,6 +51,10 @@ form {
     &:hover {
       cursor: pointer;
     }
+}
+
+.remove-video {
+    top: -80px;
 }
 
 .container {

@@ -1,7 +1,7 @@
 import render from '../app';
 
 let pathname = location.protocol + '//' + location.host + '/' + process.env.host;
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'production' && process.env.localhost) {
   pathname += '/web';
 }
 
@@ -159,16 +159,12 @@ export function getFolders(that, page) {
 }
 
 export function getMedias(that, page, folder) {
-  ajaxGet('api/get/projects/'+page+'/'+folder,
+  ajaxGet(pathname+'/api/get/projects/'+page+'/'+folder,
     function(response){
       const jsonCover1 = JSON.parse(response).cover1;
       const jsonCover2 = JSON.parse(response).cover2;
       const jsonMedias = JSON.parse(response).medias;
-
-      const env = location.pathname.indexOf('app_dev.php'); // search in url 'app.dev.php'
-      let path;
-      if(env < 0) { path = 'projects/'+page+'/'+folder; } // if not found => env = prod
-      else { path = '../projects/'+page+'/'+folder; } // else env = dev
+      const path = pathname+'/../projects/'+page+'/'+folder;
 
       const cover1 = typeof jsonCover1[Object.keys(jsonCover1)[0]] == 'undefined' ? false : path+'/cover1/'+jsonCover1[Object.keys(jsonCover1)[0]];
       const cover2 = typeof jsonCover2[Object.keys(jsonCover2)[0]] == 'undefined' ? false : path+'/cover2/'+jsonCover2[Object.keys(jsonCover2)[0]];
@@ -232,9 +228,10 @@ export function uploadFiles(that, page, folder, data, progressBar) {
 }
 
 export function deleteFile(that, file) {
-  const path = file.replace('../', '').split('/').join('_');
-  const page = path.split('_')[1];
-  const folder = path.split('_')[2];
+  console.log('file to delete', file);
+  const path = file.replace('../../', '').split('/').join('@@');
+  const page = path.split('@@')[1];
+  const folder = path.split('@@')[2];
 
   ajaxDelete(pathname+'/api/delete/projects/'+path,
     function(response){

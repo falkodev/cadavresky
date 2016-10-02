@@ -18,7 +18,7 @@ const Layout = React.createClass({
                         <Header transparentContent={ this.state.transparentContent } onToggle={this.handleToggleMenu} />
                     </Col>
                     <Col sm={10}>
-                        <div className={ this.state.transparentContent ?  "content transparent" : "content" }>
+                        <div id="main" className={ this.state.transparentContent ?  "content transparent" : "content" }>
                           { this.props.children }
                         </div>
                     </Col>
