@@ -60,13 +60,13 @@ export default function render(location, isAdminLoggedIn=false) {
       component = <Page page={8} isAdminLoggedIn={isAdminLoggedIn} project="true" />;
       break;
     case (/\/collaboratory\/\w/).test(urlMatch): // regex:\w -> any alphanumeric character (in order to test /collaboratory/xxx for example)
-      component = <DisplayProject page={8} />;
+      component = <DisplayProject page={9} />;
       break;
     case (/\/collaboratory/).test(urlMatch):
       component = <Page page={9} isAdminLoggedIn={isAdminLoggedIn} project="true" />;
       break;
     case (/\/buddies\/\w/).test(urlMatch): // regex:\w -> any alphanumeric character (in order to test /buddies/xxx for example)
-      component = <DisplayProject page={8} />;
+      component = <DisplayProject page={10} />;
       break;
     case (/\/buddies/).test(urlMatch):
       component = <Page page={10} isAdminLoggedIn={isAdminLoggedIn} project="true" />;
