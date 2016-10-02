@@ -1,6 +1,7 @@
 ._*
 .DS_Store
 .vagrant
+.htaccess
 phploy*
 
 # Symfony
