@@ -18,30 +18,30 @@ const EditableContent = React.createClass({
             editable: editable,
         };
     },
-    blurText: function() {
-      const paragraphs = document.getElementById('main').querySelectorAll('[class*=RichTextEditor__paragraph___]');
-      if(paragraphs.length > 0) {
-        if(!this.state.editMode) {
-          paragraphs[0].classList.add('blur');
-          paragraphs[paragraphs.length - 1].classList.add('blur');
-        } else {
-          paragraphs[0].classList.remove('blur');
-          paragraphs[paragraphs.length - 1].classList.remove('blur');
-        }
-      }
-
-    },
-    componentDidMount: function() {
-      this.blurText();
-    },
+//    blurText: function() {
+//      const paragraphs = document.getElementById('main').querySelectorAll('[class*=RichTextEditor__paragraph___]');
+//      if(paragraphs.length > 0) {
+//        if(!this.state.editMode) {
+//          paragraphs[0].classList.add('blur');
+//          paragraphs[paragraphs.length - 1].classList.add('blur');
+//        } else {
+//          paragraphs[0].classList.remove('blur');
+//          paragraphs[paragraphs.length - 1].classList.remove('blur');
+//        }
+//      }
+//
+//    },
+//    componentDidMount: function() {
+//      this.blurText();
+//    },
+//    componentDidUpdate: function(prevProps, prevState) {
+//      this.blurText();
+//    },
     componentWillReceiveProps: function(nextProps) {
       this.setState({
         value: RichTextEditor.createValueFromString(nextProps.initialContent, 'html'),
         editMode: false,
       });
-    },
-    componentDidUpdate: function(prevProps, prevState) {
-      this.blurText();
     },
     editModeHandler: function() {
       this.setState({editMode:true});

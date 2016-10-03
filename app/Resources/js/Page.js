@@ -51,6 +51,9 @@ const Page = React.createClass({
 
     this.setState({
       isLoading: true,
+      showFolderCreationSuccess: false,
+      showErrorCreation: false,
+      showErrorEmpty: false,
     });
     loadData(this, nextProps.page, this.state.language);
   },
@@ -124,7 +127,7 @@ const Page = React.createClass({
                 </div> : null }
 
               { this.state.folders ?
-                <div>
+                <div style={{ position: this.state.isAdminLoggedIn ?  "static" : "fixed", top: "50%" }}> {/* test if isAdminLoggedIn in this div because when logged, this div needs to be static to display correctly modal dialog, but otherwise it needs to be fixed to display projects preview on the middle of the page */}
                 { this.state.isAdminLoggedIn ?
                   this.state.folders.map((folder) => {
                     return <ProjectFolder key={folder} folder={folder} page={this.props.page} />

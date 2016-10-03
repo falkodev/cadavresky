@@ -1,7 +1,7 @@
 import React from 'react';
 import Dropzone from 'react-dropzone';
 import { Row, Col, Button, Glyphicon, Modal } from 'react-bootstrap';
-import { uploadFiles, getMedias, deleteFile } from './helpers/ajax';
+import { uploadFiles, getMedias, deleteFile, deleteProject } from './helpers/ajax';
 
 const ProjectFolder = React.createClass({
   getInitialState: function() {
@@ -46,6 +46,14 @@ const ProjectFolder = React.createClass({
 
     uploadFiles(this, this.props.page, this.props.folder, data, progressBar);
   },
+  handleFolderRemove: function() {
+    if(window.confirm('Suppression de ' + this.props.folder + ' ?')) {
+      this.setState({
+        isLoading: true,
+      });
+      deleteProject(this, this.props.page, this.props.folder);
+    }
+  },
   handleMediaRemove: function(e) {
     const nameFileToRemove = e.currentTarget.id.split('remove')[1];
 
@@ -59,137 +67,148 @@ const ProjectFolder = React.createClass({
     const plusCover = <Button bsSize="large" className="btn-info addable addable-cover"><Glyphicon glyph="plus" /></Button>;
     const plusCoverAdded = <Button bsSize="large" className="btn-info addable addable-cover added"><Glyphicon glyph="plus" /></Button>;
     const plusAdded = <Button bsSize="large" className="btn-info addable added"><Glyphicon glyph="plus" /></Button>;
-
+    const idRemoveFolder = "remove"+this.props.folder;
     return (
       <div>
-        <Button onClick={ this.openModal }>{this.props.folder} <Glyphicon glyph="folder-open" /></Button>
-        <Modal
-          show={ this.state.showModal }
-          onHide={ close }
-          container={ this }
-          aria-labelledby="modal-medias"
-          dialogClassName="custom-modal"
-        >
-          <Modal.Header closeButton>
-            <Modal.Title id="modal-medias">Médias de {this.props.folder}</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <Row><Col sm={6}>Cover 1</Col><Col sm={6}>Cover 2</Col></Row>
-            <Row>
-              <Col sm={6}>
-                <Col sm={6}>
-                  <Dropzone id="dropzone-cover1" className="dropzone dropzone-cover text-center" onDrop={ this.handleDrop }>
-                    { this.state.cover1 ?
-                      <div>{ plusCoverAdded }
-                        <div>{ this.state.cover1.map((file) => <img src={file.preview} key={file.preview} height="196" />) }</div>
-                        { this.state.cover1Progress ? <div className="progress-bar-out"><div className="progress-bar-in" id="barCover1"></div></div> : null }
-                      </div> : plusCover }
-                    { this.state.cover1OnServer ?
-                        <div><img src={this.state.cover1OnServer} height="196" /></div>
-                    : null }
-                  </Dropzone>
-                </Col>
-                <Col sm={6}>
-                  { this.state.cover1UploadIssue ?
-                    <div className="alert alert-danger" role="alert">
-                      <button type="button" onClick={ () => this.setState({cover1UploadIssue:false})} className="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                      <strong>Problème de chargement du média</strong>
-                        <br />L'image de cover 1 n'a pas pu être chargée sur le serveur
-                    </div> : null }
-                  { this.state.cover1UploadSuccess ?
-                    <div className="alert alert-success" role="alert">
-                      <button type="button" onClick={ () => this.setState({cover1UploadSuccess:false})} className="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                      <strong>Média chargé</strong>
-                        <br />L'image de cover 1 a été chargée correctement sur le serveur
-                    </div> : null }
-                </Col>
-              </Col>
-              <Col sm={6}>
-                <Col sm={6}>
-                  <Dropzone id="dropzone-cover2" className="dropzone dropzone-cover text-center" onDrop={ this.handleDrop }>
-                    { this.state.cover2 ?
-                      <div>{ plusCoverAdded }
-                        <div>{ this.state.cover2.map((file) => <img src={file.preview} key={file.preview} height="196" />) }</div>
-                        { this.state.cover2Progress ? <div className="progress-bar-out"><div className="progress-bar-in" id="barCover2"></div></div> : null }
-                      </div> : plusCover }
-                      { this.state.cover2OnServer ?
-                        <div><img src={this.state.cover2OnServer} height="196" /></div>
+        { this.state.projectDeleted ? null
+          :
+          <div>
+            <Button onClick={ this.openModal }>{this.props.folder} <Glyphicon glyph="folder-open" /></Button>&nbsp;
+            <Glyphicon glyph="remove" onClick={ this.handleFolderRemove } style={{ cursor: "pointer" }} />
+            { this.state.deletionAlertError ? <div className="alert alert-danger" role="alert">
+                <button type="button" onClick={ () => this.setState({ deletionAlertError: false })} className="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong>Projet non supprimé</strong>
+                  <br />Le projet {this.props.folder} n'a pas pu être supprimé à cause d'une erreur sur le serveur
+              </div> : null }
+            <Modal
+              show={ this.state.showModal }
+              onHide={ close }
+              container={ this }
+              aria-labelledby="modal-medias"
+              dialogClassName="custom-modal"
+            >
+              <Modal.Header closeButton>
+                <Modal.Title id="modal-medias">Médias de {this.props.folder}</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <Row><Col sm={6}>Cover 1</Col><Col sm={6}>Cover 2</Col></Row>
+                <Row>
+                  <Col sm={6}>
+                    <Col sm={6}>
+                      <Dropzone id="dropzone-cover1" className="dropzone dropzone-cover text-center" onDrop={ this.handleDrop }>
+                        { this.state.cover1 ?
+                          <div>{ plusCoverAdded }
+                            <div>{ this.state.cover1.map((file) => <img src={file.preview} key={file.preview} height="196" />) }</div>
+                            { this.state.cover1Progress ? <div className="progress-bar-out"><div className="progress-bar-in" id="barCover1"></div></div> : null }
+                          </div> : plusCover }
+                        { this.state.cover1OnServer ?
+                            <div><img src={this.state.cover1OnServer} height="196" /></div>
+                        : null }
+                      </Dropzone>
+                    </Col>
+                    <Col sm={6}>
+                      { this.state.cover1UploadIssue ?
+                        <div className="alert alert-danger" role="alert">
+                          <button type="button" onClick={ () => this.setState({cover1UploadIssue:false})} className="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          <strong>Problème de chargement du média</strong>
+                            <br />L'image de cover 1 n'a pas pu être chargée sur le serveur
+                        </div> : null }
+                      { this.state.cover1UploadSuccess ?
+                        <div className="alert alert-success" role="alert">
+                          <button type="button" onClick={ () => this.setState({cover1UploadSuccess:false})} className="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          <strong>Média chargé</strong>
+                            <br />L'image de cover 1 a été chargée correctement sur le serveur
+                        </div> : null }
+                    </Col>
+                  </Col>
+                  <Col sm={6}>
+                    <Col sm={6}>
+                      <Dropzone id="dropzone-cover2" className="dropzone dropzone-cover text-center" onDrop={ this.handleDrop }>
+                        { this.state.cover2 ?
+                          <div>{ plusCoverAdded }
+                            <div>{ this.state.cover2.map((file) => <img src={file.preview} key={file.preview} height="196" />) }</div>
+                            { this.state.cover2Progress ? <div className="progress-bar-out"><div className="progress-bar-in" id="barCover2"></div></div> : null }
+                          </div> : plusCover }
+                          { this.state.cover2OnServer ?
+                            <div><img src={this.state.cover2OnServer} height="196" /></div>
+                          : null }
+                      </Dropzone>
+                    </Col>
+                    <Col sm={6}>
+                      { this.state.cover2UploadIssue ?
+                        <div className="alert alert-danger" role="alert">
+                          <button type="button" onClick={ () => this.setState({cover2UploadIssue:false})} className="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          <strong>Problème de chargement du média</strong>
+                            <br />L'image de cover 2 n'a pas pu être chargée sur le serveur
+                        </div> : null }
+                      { this.state.cover2UploadSuccess ?
+                        <div className="alert alert-success" role="alert">
+                          <button type="button" onClick={ () => this.setState({cover2UploadSuccess:false})} className="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          <strong>Média chargé</strong>
+                            <br />L'image de cover 2 a été chargée correctement sur le serveur
+                        </div> : null }
+                    </Col>
+                  </Col>
+                </Row>
+                <Row>
+                  <Row><Col sm={12}>Médias</Col></Row>
+                  <Col sm={12}>
+                    <Dropzone id="dropzone-medias" className="dropzone" onDrop={ this.handleDrop } disableClick={ true }>
+                      { this.state.medias ?
+                      <div>{ plusAdded }
+                        <div className="inlineBlock">
+                          { this.state.medias.map((file) => {
+                            const uniqueId = "remove"+file.name;
+                            const path = 'projects/' + this.props.page + '/' + this.props.folder + '/medias/' + file.name;
+
+                            return (
+                              file.name.split(".").pop() === 'avi' || file.name.split(".").pop() === 'mp4' ?
+                              <div className="inlineBlock" key={ file.name }>
+                                <video src={file.preview} key={file.preview} height="98" style={{marginRight: "5px", marginTop: "5px", position: "relative", top: "45px"}} />
+                                <span className="remove-media remove-video" onClick={ this.handleMediaRemove } id={ uniqueId } data-path={ file }><Glyphicon glyph="remove" /></span>
+                              </div>:
+                              <div className="inlineBlock" key={ file.name }>
+                                <img src={file.preview} key={file.preview} height="98" style={{marginRight: "5px", marginTop: "5px"}} />
+                                <span className="remove-media" onClick={ this.handleMediaRemove } id={ uniqueId } data-path={ file }><Glyphicon glyph="remove" /></span>
+                              </div>
+                           );
+                          }) }
+                        </div>
+                        { this.state.mediasProgress ? <div className="progress-bar-out"><div className="progress-bar-in" id="barMedias"></div></div> : null }
+                      </div> : plus }
+                      { this.state.mediasOnServer ?
+                        <div className="inlineBlock">
+                          { this.state.mediasOnServer.map((file) => {
+                            const uniqueId = "remove"+file.split('/').pop();
+
+                            return (
+                              file.split(".").pop() === 'avi' || file.split(".").pop() === 'mp4' ?
+                              <div className="inlineBlock" key={ file }>
+                                <video src={file} key={file} height="98" style={{marginRight: "5px", marginTop: "5px", position: "relative", top: "45px"}} />
+                                <span className="remove-media remove-video" onClick={ this.handleMediaRemove } id={ uniqueId } data-path={ file }><Glyphicon glyph="remove" /></span>
+                              </div>:
+                              <div className="inlineBlock" key={ file }>
+                                <img src={file} key={file} height="98" style={{marginRight: "5px", marginTop: "5px"}} />
+                                <span className="remove-media" onClick={ this.handleMediaRemove } id={ uniqueId } data-path={ file }><Glyphicon glyph="remove" /></span>
+                              </div>
+                            );
+                          }) }
+                        </div>
                       : null }
-                  </Dropzone>
-                </Col>
-                <Col sm={6}>
-                  { this.state.cover2UploadIssue ?
-                    <div className="alert alert-danger" role="alert">
-                      <button type="button" onClick={ () => this.setState({cover2UploadIssue:false})} className="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                      <strong>Problème de chargement du média</strong>
-                        <br />L'image de cover 2 n'a pas pu être chargée sur le serveur
-                    </div> : null }
-                  { this.state.cover2UploadSuccess ?
-                    <div className="alert alert-success" role="alert">
-                      <button type="button" onClick={ () => this.setState({cover2UploadSuccess:false})} className="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                      <strong>Média chargé</strong>
-                        <br />L'image de cover 2 a été chargée correctement sur le serveur
-                    </div> : null }
-                </Col>
-              </Col>
-            </Row>
-            <Row>
-              <Row><Col sm={12}>Médias</Col></Row>
-              <Col sm={12}>
-                <Dropzone id="dropzone-medias" className="dropzone" onDrop={ this.handleDrop } disableClick={ true }>
-                  { this.state.medias ?
-                  <div>{ plusAdded }
-                    <div className="inlineBlock">
-                      { this.state.medias.map((file) => {
-                        const uniqueId = "remove"+file.name;
-                        const path = 'projects/' + this.props.page + '/' + this.props.folder + '/medias/' + file.name;
-
-                        return (
-                          file.name.split(".").pop() === 'avi' || file.name.split(".").pop() === 'mp4' ?
-                          <div className="inlineBlock" key={ file.name }>
-                            <video src={file.preview} key={file.preview} height="98" style={{marginRight: "5px", marginTop: "5px", position: "relative", top: "45px"}} />
-                            <span className="remove-media remove-video" onClick={ this.handleMediaRemove } id={ uniqueId } data-path={ file }><Glyphicon glyph="remove" /></span>
-                          </div>:
-                          <div className="inlineBlock" key={ file.name }>
-                            <img src={file.preview} key={file.preview} height="98" style={{marginRight: "5px", marginTop: "5px"}} />
-                            <span className="remove-media" onClick={ this.handleMediaRemove } id={ uniqueId } data-path={ file }><Glyphicon glyph="remove" /></span>
-                          </div>
-                       );
-                      }) }
-                    </div>
-                    { this.state.mediasProgress ? <div className="progress-bar-out"><div className="progress-bar-in" id="barMedias"></div></div> : null }
-                  </div> : plus }
-                  { this.state.mediasOnServer ?
-                    <div className="inlineBlock">
-                      { this.state.mediasOnServer.map((file) => {
-                        const uniqueId = "remove"+file.split('/').pop();
-
-                        return (
-                          file.split(".").pop() === 'avi' || file.split(".").pop() === 'mp4' ?
-                          <div className="inlineBlock" key={ file }>
-                            <video src={file} key={file} height="98" style={{marginRight: "5px", marginTop: "5px", position: "relative", top: "45px"}} />
-                            <span className="remove-media remove-video" onClick={ this.handleMediaRemove } id={ uniqueId } data-path={ file }><Glyphicon glyph="remove" /></span>
-                          </div>:
-                          <div className="inlineBlock" key={ file }>
-                            <img src={file} key={file} height="98" style={{marginRight: "5px", marginTop: "5px"}} />
-                            <span className="remove-media" onClick={ this.handleMediaRemove } id={ uniqueId } data-path={ file }><Glyphicon glyph="remove" /></span>
-                          </div>
-                        );
-                      }) }
-                    </div>
-                  : null }
-                </Dropzone>
-              </Col>
-            </Row>
-            <Row>
-              <Col sm={12}>
-              </Col>
-            </Row>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button onClick={ close }>Fermer</Button>
-          </Modal.Footer>
-        </Modal>
+                    </Dropzone>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col sm={12}>
+                  </Col>
+                </Row>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button onClick={ close }>Fermer</Button>
+              </Modal.Footer>
+            </Modal>
+          </div>
+        } {/* fin operateur ternaire si projet supprimé */}
       </div>
     );
   }

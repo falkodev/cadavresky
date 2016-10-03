@@ -181,7 +181,41 @@ class ApiController extends Controller
   }
 
   /**
-   * @Route("/delete/projects/{file}", name="api_delete_file")
+   * @Route("/delete/projects/project/{page}/{folder}", name="api_delete_project")
+   * @Method({"DELETE"})
+   */
+  public function deleteFolderAction(Request $request, $page, $folder)
+  {
+    if ($request->isXMLHttpRequest()) {
+      $path     = 'projects/'.$page.'/'.$folder;
+      $iterator = new \RecursiveDirectoryIterator($path, \RecursiveDirectoryIterator::SKIP_DOTS);
+      $files    = new \RecursiveIteratorIterator($iterator, \RecursiveIteratorIterator::CHILD_FIRST);
+
+      foreach($files as $file) {
+        if ($file->isDir()){ rmdir($file->getRealPath()); }
+        else { unlink($file->getRealPath()); }
+      }
+      rmdir($path);
+
+      $response = new JsonResponse();
+      if ($path) {
+        $response->setData(array(
+          'success' => true,
+        ));
+      } else {
+        $response->setData(array(
+          'success' => false,
+        ));
+      }
+
+      return $response;
+    }
+
+    return new Response('Only AJAX');
+  }
+
+  /**
+   * @Route("/delete/projects/media/{file}", name="api_delete_media")
    * @Method({"DELETE"})
    */
   public function deleteFileAction(Request $request, $file)

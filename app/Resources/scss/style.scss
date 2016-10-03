@@ -240,6 +240,7 @@ form {
     .menu {
         text-transform: uppercase;
         font-weight: bold;
+        z-index: 1;
         &:hover {
             cursor: pointer;
         }

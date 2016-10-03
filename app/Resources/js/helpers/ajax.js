@@ -148,6 +148,9 @@ export function addFolder(that, page, folder) {
 }
 
 export function getFolders(that, page) {
+  that.setState({
+      folders: null,
+    });
   ajaxGet(pathname+'/api/get/projects/'+page,
     function(response){
       const jsonContent = JSON.parse(response).data;
@@ -228,13 +231,24 @@ export function uploadFiles(that, page, folder, data, progressBar) {
     progressBar);
 }
 
+export function deleteProject(that, page, project) {
+  ajaxDelete(pathname+'/api/delete/projects/project/'+page+'/'+project,
+    function(response){
+      const jsonResponse = JSON.parse(response);
+      if (jsonResponse.success) {
+        that.setState({ projectDeleted: true, deletionAlertError: false });
+      } else {
+        that.setState({ projectDeleted: false, deletionAlertError: true });
+      }
+    });
+}
+
 export function deleteFile(that, file) {
-  console.log('file to delete', file);
   const path = file.replace('../../', '').split('/').join('@@');
   const page = path.split('@@')[1];
   const folder = path.split('@@')[2];
 
-  ajaxDelete(pathname+'/api/delete/projects/'+path,
+  ajaxDelete(pathname+'/api/delete/projects/media/'+path,
     function(response){
       getMedias(that, page, folder);
     });
