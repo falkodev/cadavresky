@@ -1,4 +1,5 @@
 import React from 'react';
+import Marquee from 'react-marquee';
 
 //images
 import ImgPalm             from '../../images/player/palm.png';
@@ -38,7 +39,7 @@ Array.prototype.randomize = function() {
         case 'economic':
             ImgCover = ImgCoverEconomic;
             ImgLp    = ImgLpEconomic;
-            TextCategory = "CADAVRESKY c'est le tractopelle des tendances; un joyeux radeaux de la méduse version fashion, qui fragmente un système cyclique, par des projets sporadiques et aléatoires. CADAVRESKY développe un concept vestimentaire ainsi qu'une volonté farouche à ouvrir son c?ur, son temps et sa création à tout collaborateur passionné, dont les valeurs sont partagées. CADAVRESKY explore l'entraide et le faire ensemble ; tâter la mamelle économique afin que jaillisse l'osmose permettant de coexister sur un marché actuel de vaches maigres.";
+            TextCategory = "CADAVRESKY c'est le tractopelle des tendances; un joyeux radeaux de la méduse version fashion, qui fragmente un système cyclique, par des projets sporadiques et aléatoires. CADAVRESKY développe un concept vestimentaire ainsi qu'une volonté farouche à ouvrir son coeur, son temps et sa création à tout collaborateur passionné, dont les valeurs sont partagées. CADAVRESKY explore l'entraide et le faire ensemble ; tâter la mamelle économique afin que jaillisse l'osmose permettant de coexister sur un marché actuel de vaches maigres.";
             break;
         case 'ethical':
             ImgCover = ImgCoverEthical;
@@ -85,7 +86,7 @@ const Footer = React.createClass({
             <img id="cover" src={ ImgCover } onClick={ this.toggleMovingLp }/>
             <img id="lp" src={ ImgLp } className={ this.state.onLoad ? "lp" : this.state.movedLp ? "lp lp-moved lp-moving" : "lp lp-moving" }/>
             <img id="scrolling-line" src={ ImgScrollingLine } className={ this.state.movedLp ? "line line-moving" : "line" }/>
-            <div className={ this.state.movedLp ? "text text-moving" : "text" }><marquee><span>{ TextCategory }</span></marquee></div>
+            <div className={ this.state.movedLp ? "text text-moving" : "text" }><Marquee text={ TextCategory } loop={true} hoverToStop={true} leading={4000} trailing={2000} /></div>
         </div>
         );
     }

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Nav, Navbar, Collapse } from 'react-bootstrap';
 import Link from '../Link';
-import { dispatch } from '../helpers/pubsub';
 
 import ImgLogoInsta        from '../../images/instagram-logo.png';
 import ImgLogoFb           from '../../images/facebook-logo.png';
@@ -19,9 +18,6 @@ import ImgMenuB3Selected from '../../images/menu_categories/B3_selected.png';
 import ImgMenuB4Selected from '../../images/menu_categories/B4_selected.png';
 import ImgMenuB5Selected from '../../images/menu_categories/B5_selected.png';
 import ImgMenuB6Selected from '../../images/menu_categories/B6_selected.png';
-
-import ImgFlagFr from '../../images/flag_fr.png';
-import ImgFlagEn from '../../images/flag_en.png';
 
 Array.prototype.shuffle = function() {
     const input = this;
@@ -52,7 +48,6 @@ const Menu = React.createClass({
             menu5: menus[4],
             menu6: menus[5],
             hover: false,
-            language: (window.navigator.userLanguage||window.navigator.language).substr(0,2),
         };
     },
     toggleSubMenu: function(parent) {
@@ -120,9 +115,6 @@ const Menu = React.createClass({
             menu6: menus[5],
         });
     },
-    handleLanguage: function(language) {
-      dispatch("languageChanged", language);
-    },
     render: function() {
         return (
         <Navbar.Collapse>
@@ -146,11 +138,6 @@ const Menu = React.createClass({
                 <Link to={ pathname+"/goodies" } className="menu menu-goodies" onClick={ this.changeColor } style={{ backgroundImage : 'url(' + this.state.menu5 + ')' }} onMouseEnter={this.onEnterHover.bind(null, 'menu5', this.state.menu5)} onMouseLeave={this.onLeaveHover}>Goodies</Link>
 
                 <Link to={ pathname+"/contact" } className="menu menu-contact" onClick={ this.changeColor } style={{ backgroundImage : 'url(' + this.state.menu6 + ')' }} onMouseEnter={this.onEnterHover.bind(null, 'menu6', this.state.menu6)} onMouseLeave={this.onLeaveHover}>Contact</Link>
-
-                <li>
-                  <span onClick={ this.handleLanguage.bind(null, 'fr') }><img src={ImgFlagFr} width="30" /></span>&nbsp;&nbsp;
-                  <span onClick={ this.handleLanguage.bind(null, 'en') }><img src={ImgFlagEn} width="30" /></span>
-                </li>
 
                 <li role="presentation" className="menu-facebook menu-desktop text-center"><a href="http://www.facebook.com/cadavresky">Facebook</a></li>
                 <li role="presentation" className="menu-instagram menu-desktop text-center"><a href="http://www.instagram.com/cadavresky">Instagram</a></li>

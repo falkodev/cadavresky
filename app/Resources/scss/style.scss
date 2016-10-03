@@ -8,6 +8,10 @@ $icon-font-path: "../fonts/";
     src: url("../fonts/5by7.ttf");
 }
 
+html {
+  overflow-y: scroll;
+}
+
 body {
   font-family: sans-serif;
   background-color: white;
@@ -27,6 +31,16 @@ form {
     flex-direction: row;
     align-items: center;
     justify-content: center;
+}
+
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 7px;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, .5);
+  -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, .5);
 }
 
 .media {
@@ -448,7 +462,7 @@ form {
 @media (min-width: $screen-sm-min) {
     .content {
         margin-top: 50px;
-        margin-right: 16.66667%;
+        margin-right: 30px;
         height: 83vh;
     }
 
@@ -528,7 +542,7 @@ form {
     }
 
     .text-moving {
-        width: 78%;
+        width: 75%;
     }
 
     .image-gallery-slide img {
@@ -576,7 +590,8 @@ form {
     .content {
         position: fixed;
         top: 100px;
-        height: 67vh;
+        height: 39vh;
+        margin-right: 40px;
 
         &.transparent {
             opacity: 0.5;
