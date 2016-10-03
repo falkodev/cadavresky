@@ -20,6 +20,9 @@ import ImgMenuB4Selected from '../../images/menu_categories/B4_selected.png';
 import ImgMenuB5Selected from '../../images/menu_categories/B5_selected.png';
 import ImgMenuB6Selected from '../../images/menu_categories/B6_selected.png';
 
+import ImgFlagFr from '../../images/flag_fr.png';
+import ImgFlagEn from '../../images/flag_en.png';
+
 Array.prototype.shuffle = function() {
     const input = this;
 
@@ -145,8 +148,8 @@ const Menu = React.createClass({
                 <Link to={ pathname+"/contact" } className="menu menu-contact" onClick={ this.changeColor } style={{ backgroundImage : 'url(' + this.state.menu6 + ')' }} onMouseEnter={this.onEnterHover.bind(null, 'menu6', this.state.menu6)} onMouseLeave={this.onLeaveHover}>Contact</Link>
 
                 <li>
-                  <span className="flag flag-fr flag-2x" onClick={ this.handleLanguage.bind(null, 'fr') }></span>&nbsp;&nbsp;
-                  <span className="flag flag-gb flag-2x" onClick={ this.handleLanguage.bind(null, 'en') }></span>
+                  <span onClick={ this.handleLanguage.bind(null, 'fr') }><img src={ImgFlagFr} width="30" /></span>&nbsp;&nbsp;
+                  <span onClick={ this.handleLanguage.bind(null, 'en') }><img src={ImgFlagEn} width="30" /></span>
                 </li>
 
                 <li role="presentation" className="menu-facebook menu-desktop text-center"><a href="http://www.facebook.com/cadavresky">Facebook</a></li>

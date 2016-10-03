@@ -2,7 +2,6 @@
 @import '_color.scss';
 $icon-font-path: "../fonts/";
 @import "~bootstrap-sass/assets/stylesheets/bootstrap";
-@import "flag-css";
 
 @font-face {
     font-family: "5by7";
@@ -10,7 +9,9 @@ $icon-font-path: "../fonts/";
 }
 
 body {
-    font-family: sans-serif;
+  font-family: sans-serif;
+  background-color: white;
+  background-image: url('../images/background.jpg');
 }
 
 form {
@@ -154,6 +155,11 @@ form {
    }
 }
 
+.blur {
+    color: transparent;
+    text-shadow: 0 0 2px rgba(0,0,0,0.5);
+}
+
 #logo-default {
     margin: 25px 25px 100px -15px;
     width: 180px;
@@ -228,8 +234,8 @@ form {
 }
 
 .navbar-default {
-    background-color: white;
-    border-color: white;
+    background-color: transparent;
+    border-color: transparent;
 
     .menu {
         text-transform: uppercase;

@@ -142,5 +142,3 @@ const Page = React.createClass({
 });
 
 export default Page;
-
-//              {this.props.project ? <ProjectPreview project={ this.props.project } editable={ this.state.isAdminLoggedIn } /> : null}
