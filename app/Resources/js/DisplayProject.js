@@ -59,6 +59,7 @@ const DisplayProject = React.createClass({
     this.refs[name].style.display = 'block';
   },
   goFullScreen: function(name) {
+    document.getElementById('description').style.display = 'none';
     // hide every media
     Object.keys(this.refs).map((ref) => {
       this.refs[ref].style.display = 'none';
@@ -81,6 +82,7 @@ const DisplayProject = React.createClass({
     this.changePositions(name);
   },
   goNormalScreen: function() {
+    document.getElementById('description').style.display = 'block';
     // display every media again
     Object.keys(this.refs).map((ref) => {
       if(ref !== 'container') {
@@ -115,7 +117,7 @@ const DisplayProject = React.createClass({
     return (
       this.state.mediasOnServer ?
         <div>
-          <div style={{ height: "35vh", overflowY: "auto" }}>
+          <div id="description" style={{ height: "35vh", overflowY: "auto" }}>
             <EditableContent initialContent={ this.state.content } page={ this.props.page } editable={ false } language={ this.state.language } />
           </div>
           <div className="inlineBlock" ref="container">
