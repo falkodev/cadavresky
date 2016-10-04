@@ -22,6 +22,8 @@ export default function render(location, isAdminLoggedIn=false) {
     urlMatch = '/'+location.pathname;
   }
 
+  console.log('path', path, 'urlMatch', urlMatch);
+
   switch (true) {
     case (/^$/).test(urlMatch): // regex: urlMatch empty -> homepage
       component = <Page page={2} />;

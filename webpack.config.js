@@ -51,7 +51,7 @@ function setOutput() {
     var output = {
         path: path.join(__dirname, 'web/dist'),
         filename: 'bundle.js',
-        publicPath: 'http://www.cadavresky.com/dev/web/dist/'
+        publicPath: 'http://www.cadavresky.com/web/dist/'
     };
     if (process.env.NODE_ENV !== 'production') {
         output.publicPath = 'http://127.0.0.1:3000/static/';
