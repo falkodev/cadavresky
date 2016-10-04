@@ -1,6 +1,12 @@
 import render from '../app';
 
-let pathname = location.protocol + '//' + location.host + '/' + process.env.host;
+let pathname;
+if (process.env.host === '/') { //prod server
+  pathname = location.protocol + '//' + location.host;
+}
+else {
+  pathname = location.protocol + '//' + location.host + '/' + process.env.host;
+}
 if (process.env.NODE_ENV === 'production' && process.env.localhost) {
   pathname += '/web';
 }

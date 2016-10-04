@@ -36,7 +36,13 @@ Array.prototype.shuffle = function() {
 const menus = [ImgMenuGreenYellow, ImgMenuRedOrange, ImgMenuLightGreenPurple, ImgMenuLightPinkOrange, ImgMenuGreenLightBlue, ImgMenuRedYellow];
 menus.shuffle();
 
-const pathname = location.protocol + '//' + location.host + '/' + process.env.host;
+let pathname;
+if (process.env.host === '/') { //prod server
+  pathname = location.protocol + '//' + location.host;
+}
+else {
+  pathname = location.protocol + '//' + location.host + '/' + process.env.host;
+}
 
 const Menu = React.createClass({
     getInitialState: function() {
