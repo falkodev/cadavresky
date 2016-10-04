@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "host=symfony-react/web/app_dev.php node webpack.dev-server.js",
-    "build": "NODE_ENV=production host=dev/web webpack -p",
+    "build": "NODE_ENV=production host=/ webpack -p",
     "local": "NODE_ENV=production localhost=true host=symfony-react webpack -p && rm -rf app/cache/"
   },
   "dependencies": {
