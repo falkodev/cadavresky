@@ -3,7 +3,7 @@ import { Navbar, Collapse } from 'react-bootstrap';
 import Menu from './Menu';
 
 //images
-import ImgLogo             from '../../images/CADAVRESKY-logo-mobile-opened.png';
+import ImgLogo             from '../../images/CADAVRESKY-logo-fullscreen.png';
 import ImgLogoMobileOpened from '../../images/CADAVRESKY-logo-mobile-opened.png';
 import ImgLogoMobileClosed from '../../images/CADAVRESKY-logo-mobile-closed.png';
 

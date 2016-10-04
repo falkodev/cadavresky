@@ -8,10 +8,6 @@ $icon-font-path: "../fonts/";
     src: url("../fonts/5by7.ttf");
 }
 
-html {
-  overflow-y: scroll;
-}
-
 body {
   font-family: sans-serif;
   background-color: white;
@@ -31,16 +27,6 @@ form {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-}
-
-::-webkit-scrollbar {
-  -webkit-appearance: none;
-  width: 7px;
-}
-::-webkit-scrollbar-thumb {
-  border-radius: 4px;
-  background-color: rgba(0, 0, 0, .5);
-  -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, .5);
 }
 
 .media {
@@ -169,10 +155,10 @@ form {
    }
 }
 
-.blur {
-    color: transparent;
-    text-shadow: 0 0 2px rgba(0,0,0,0.5);
-}
+//.blur {
+//    color: transparent;
+//    text-shadow: 0 0 2px rgba(0,0,0,0.5);
+//}
 
 #logo-default {
     margin: 25px 25px 100px -15px;
@@ -437,14 +423,14 @@ form {
     height: 50px;
     width: 0%;
     bottom: 10px;
-    right: 100px;
+    right: 180px;
     z-index: 2;
     transition: width 4s;
 }
 
 .text-moving {
     transition: width 4s;
-    width: 77%;
+    width: 60%;
 }
 
 .text span {
@@ -542,11 +528,15 @@ form {
     }
 
     .text-moving {
-        width: 75%;
+        width: 69%;
     }
 
     .image-gallery-slide img {
         max-width: 500px;
+    }
+
+    #fanion {
+      display: block;
     }
 }
 
@@ -695,5 +685,9 @@ form {
 
     .image-gallery-slide img {
         max-width: 200px;
+    }
+
+    #fanion {
+      display: none;
     }
 }

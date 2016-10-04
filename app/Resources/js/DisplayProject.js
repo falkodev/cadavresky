@@ -4,6 +4,10 @@ import { Glyphicon } from 'react-bootstrap';
 import { getMedias } from './helpers/ajax';
 import Spinner from './Layout/Spinner';
 
+import ImgArrowLeft from '../images/arrow-left.png';
+import ImgArrowRight from '../images/arrow-right.png';
+import ImgClose from '../images/close-menu.png';
+
 let index = 0;
 
 const DisplayProject = React.createClass({
@@ -100,8 +104,8 @@ const DisplayProject = React.createClass({
     return (
       this.state.mediasOnServer ?
         <div className="inlineBlock" ref="container">
-          <Glyphicon id="close" glyph="remove" style={{ display:"none", fontSize: "30px", position: "fixed", top: "50px", right: "25px" }} onClick={ this.goNormalScreen } />
-          <Glyphicon id="left" glyph="chevron-left" style={{display:"none", fontSize: "30px"}} onClick={ this.displayPreviousFullScreen } />
+          <img id="close" src={ImgClose} style={{ display:"none", width: "30px", position: "fixed", top: "40px", right: "85px" }} onClick={ this.goNormalScreen } />
+          <img id="left" src={ImgArrowLeft} style={{display:"none", width: "30px"}} onClick={ this.displayPreviousFullScreen } />
           { this.state.mediasOnServer.map((file) => {
             const name = 'media_'+index;
             index++;
@@ -111,7 +115,7 @@ const DisplayProject = React.createClass({
               <img src={file} key={file} className="media" onClick={ this.goFullScreen.bind(this, name) } ref={name} />
             );
           }) }
-          <Glyphicon id="right" glyph="chevron-right" style={{display:"none", fontSize: "30px"}} onClick={ this.displayNextFullScreen } />
+          <img id="right" src={ImgArrowRight} style={{display:"none", width: "30px"}} onClick={ this.displayNextFullScreen } />
         </div>
       : <Spinner />
     );

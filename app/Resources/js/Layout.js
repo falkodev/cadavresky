@@ -6,6 +6,7 @@ import { dispatch } from './helpers/pubsub';
 
 import ImgFlagFr from '../images/flag_fr.png';
 import ImgFlagEn from '../images/flag_en.png';
+import ImgFanion from '../images/fanion_fix.png';
 
 const Layout = React.createClass({
     getInitialState: function() {
@@ -28,9 +29,10 @@ const Layout = React.createClass({
                         <Header transparentContent={ this.state.transparentContent } onToggle={this.handleToggleMenu} />
                     </Col>
                     <Col sm={10}>
-                        <div style={{ position: "fixed", top:"10px", right: "10px" }}>
-                          <span onClick={ this.handleLanguage.bind(null, 'fr') }><img src={ImgFlagFr} width="30" /></span>&nbsp;&nbsp;
-                          <span onClick={ this.handleLanguage.bind(null, 'en') }><img src={ImgFlagEn} width="30" /></span>
+                        <img id="fanion" src={ImgFanion} style={{ position: "fixed", width: "100px", top: "0px", right: "0px" }} />
+                        <div style={{ position: "fixed", top:"40px", right: "10px" }}>
+                          <span onClick={ this.handleLanguage.bind(null, 'fr') } style={{ cursor: "pointer" }}><img src={ImgFlagFr} width="30" /></span>&nbsp;&nbsp;
+                          <span onClick={ this.handleLanguage.bind(null, 'en') } style={{ cursor: "pointer" }}><img src={ImgFlagEn} width="30" /></span>
                         </div>
                         <div id="main" className={ this.state.transparentContent ?  "content transparent" : "content" }>
                           { this.props.children }

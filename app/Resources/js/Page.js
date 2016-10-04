@@ -88,7 +88,8 @@ const Page = React.createClass({
         <div>
           { this.state.isLoading ?
             <Spinner />:
-            <div>
+            <div style={{ height: "35vh", overflowY: "auto" }}>
+
               <EditableContent initialContent={ this.state.content } page={ this.props.page } editable={ this.state.isAdminLoggedIn } language={ this.state.language } />
 
               { this.props.project && this.state.isAdminLoggedIn ? <Button onClick={ this.handleClick } style={{ marginTop:'15px', marginBottom:'15px' }}>Ajouter projet <Glyphicon glyph="plus" /></Button> : null }
@@ -145,3 +146,4 @@ const Page = React.createClass({
 });
 
 export default Page;
+//<EditableContent initialContent={ this.state.content } page={ this.props.page } editable={ this.state.isAdminLoggedIn } language={ this.state.language } />
