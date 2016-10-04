@@ -174,7 +174,7 @@ export function getMedias(that, page, folder) {
       const jsonCover2 = JSON.parse(response).cover2;
       const jsonMedias = JSON.parse(response).medias;
 //      const path = pathname+'/../projects/'+page+'/'+folder; // localhost (dev et prod)
-      const path = pathname+'/projects/'+page+'/'+folder; // serveur ovh
+      const path = 'projects/'+page+'/'+folder; // serveur ovh
 
       const cover1 = typeof jsonCover1[Object.keys(jsonCover1)[0]] == 'undefined' ? false : path+'/cover1/'+jsonCover1[Object.keys(jsonCover1)[0]];
       const cover2 = typeof jsonCover2[Object.keys(jsonCover2)[0]] == 'undefined' ? false : path+'/cover2/'+jsonCover2[Object.keys(jsonCover2)[0]];
@@ -250,6 +250,7 @@ export function deleteProject(that, page, project) {
 }
 
 export function deleteFile(that, file) {
+  console.log('file', file);
   const path = file.replace('../../', '').split('/').join('@@');
   const page = path.split('@@')[1];
   const folder = path.split('@@')[2];

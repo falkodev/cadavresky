@@ -108,11 +108,12 @@ const DisplayProject = React.createClass({
           <img id="left" src={ImgArrowLeft} style={{display:"none", width: "30px"}} onClick={ this.displayPreviousFullScreen } />
           { this.state.mediasOnServer.map((file) => {
             const name = 'media_'+index;
+            const src = '/'+file;
             index++;
             return (
               file.split(".").pop() === 'avi' || file.split(".").pop() === 'mp4' ?
-              <video src={file} key={file} className="media video" onClick={ this.goFullScreen.bind(this, name) } ref={name} controls />:
-              <img src={file} key={file} className="media" onClick={ this.goFullScreen.bind(this, name) } ref={name} />
+              <video src={src} key={file} className="media video" onClick={ this.goFullScreen.bind(this, name) } ref={name} controls />:
+              <img src={src} key={file} className="media" onClick={ this.goFullScreen.bind(this, name) } ref={name} />
             );
           }) }
           <img id="right" src={ImgArrowRight} style={{display:"none", width: "30px"}} onClick={ this.displayNextFullScreen } />
