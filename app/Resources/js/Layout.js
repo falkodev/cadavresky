@@ -29,7 +29,7 @@ const Layout = React.createClass({
                         <Header transparentContent={ this.state.transparentContent } onToggle={this.handleToggleMenu} />
                     </Col>
                     <Col sm={10}>
-                        <img id="fanion" src={ImgFanion} style={{ position: "fixed", width: "100px", top: "0px", right: "0px" }} />
+                        <img id="fanion" src={ImgFanion} style={{ position: "fixed", width: "35%", top: "0px", right: "0px" }} />
                         <div style={{ position: "fixed", top:"40px", right: "10px" }}>
                           <span onClick={ this.handleLanguage.bind(null, 'fr') } style={{ cursor: "pointer" }}><img src={ImgFlagFr} width="30" /></span>&nbsp;&nbsp;
                           <span onClick={ this.handleLanguage.bind(null, 'en') } style={{ cursor: "pointer" }}><img src={ImgFlagEn} width="30" /></span>

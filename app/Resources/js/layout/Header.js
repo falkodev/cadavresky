@@ -42,7 +42,7 @@ const Header = React.createClass({
                         </div>
                         </div>
                     </Navbar.Header>
-                    <Navbar.Toggle onClick={ this.toggleMenu }><Menu /></Navbar.Toggle>
+                    <Menu />
                 </Navbar>
             </div>
         </div>
