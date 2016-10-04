@@ -19,15 +19,13 @@ export default function render(location, isAdminLoggedIn=false) {
     let transformedPathname = process.env.host.split('/').join('\\/');
     transformedPathname = '/\\/' + transformedPathname + '(.*)/';
     const path = location.pathname.match(eval(transformedPathname));
-    console.log('path', path);
+
     if(path) { //from url
       urlMatch = path[1];
     } else { //from Link
       urlMatch = '/'+location.pathname;
     }
   }
-
-  console.log('urlMatch', urlMatch);
 
   switch (true) {
     case (/^$/).test(urlMatch): // regex: urlMatch empty -> homepage

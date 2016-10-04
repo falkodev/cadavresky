@@ -128,7 +128,7 @@ let isAdminLoggedIn;
 export function connectionHandler(log) {
   isAdminLoggedIn = log;
   window.history.pushState({}, null, "whoswho"); //change url
-  render({pathname: 'whoswho'}, isAdminLoggedIn); //render page in editable mode with isAdminLoggedIn = true
+  render({pathname: '/whoswho'}, isAdminLoggedIn); //render page in editable mode with isAdminLoggedIn = true
 }
 
 export function addFolder(that, page, folder) {
