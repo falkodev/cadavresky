@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import { Glyphicon } from 'react-bootstrap';
-import { getMedias } from './helpers/ajax';
+import EditableContent from './EditableContent';
 import Spinner from './Layout/Spinner';
+import { Glyphicon } from 'react-bootstrap';
+import { loadData, getMedias } from './helpers/ajax';
+import { subscribe } from './helpers/pubsub';
 
 import ImgArrowLeft from '../images/arrow-left.png';
 import ImgArrowRight from '../images/arrow-right.png';
@@ -12,14 +14,23 @@ let index = 0;
 
 const DisplayProject = React.createClass({
   getInitialState: function() {
+    subscribe("languageChanged", (language) => {
+      this.setState({
+        mediasOnServer: null,
+        language: language,
+      });
+      loadData(this, this.props.page, language);
+    });
     return {
       currentMedia: null,
       previousMedia: null,
       nextMedia: null,
+      language: (window.navigator.userLanguage||window.navigator.language).substr(0,2),
     };
   },
   componentDidMount: function() {
     getMedias(this, this.props.page, location.pathname.split('/').pop());
+    loadData(this, this.props.page, this.state.language);
   },
   changePositions: function(name) {
     const position = parseInt(name.split('media_').pop(), 10);
@@ -103,20 +114,25 @@ const DisplayProject = React.createClass({
     index = 0;
     return (
       this.state.mediasOnServer ?
-        <div className="inlineBlock" ref="container">
-          <img id="close" src={ImgClose} style={{ display:"none", width: "30px", position: "fixed", top: "40px", right: "85px" }} onClick={ this.goNormalScreen } />
-          <img id="left" src={ImgArrowLeft} style={{display:"none", width: "30px"}} onClick={ this.displayPreviousFullScreen } />
-          { this.state.mediasOnServer.map((file) => {
-            const name = 'media_'+index;
-            const src = '/'+file;
-            index++;
-            return (
-              file.split(".").pop() === 'avi' || file.split(".").pop() === 'mp4' ?
-              <video src={src} key={file} className="media video" onClick={ this.goFullScreen.bind(this, name) } ref={name} controls />:
-              <img src={src} key={file} className="media" onClick={ this.goFullScreen.bind(this, name) } ref={name} />
-            );
-          }) }
-          <img id="right" src={ImgArrowRight} style={{display:"none", width: "30px"}} onClick={ this.displayNextFullScreen } />
+        <div>
+          <div style={{ height: "35vh", overflowY: "auto" }}>
+            <EditableContent initialContent={ this.state.content } page={ this.props.page } editable={ false } language={ this.state.language } />
+          </div>
+          <div className="inlineBlock" ref="container">
+            <img id="close" src={ImgClose} style={{ display:"none", width: "30px", position: "fixed", top: "40px", right: "85px" }} onClick={ this.goNormalScreen } />
+            <img id="left" src={ImgArrowLeft} style={{display:"none", width: "30px"}} onClick={ this.displayPreviousFullScreen } />
+            { this.state.mediasOnServer.map((file) => {
+              const name = 'media_'+index;
+              const src = '/'+file;
+              index++;
+              return (
+                file.split(".").pop() === 'avi' || file.split(".").pop() === 'mp4' ?
+                <video src={src} key={file} className="media video" onClick={ this.goFullScreen.bind(this, name) } ref={name} controls />:
+                <img src={src} key={file} className="media" onClick={ this.goFullScreen.bind(this, name) } ref={name} />
+              );
+            }) }
+            <img id="right" src={ImgArrowRight} style={{display:"none", width: "30px"}} onClick={ this.displayNextFullScreen } />
+          </div>
         </div>
       : <Spinner />
     );
