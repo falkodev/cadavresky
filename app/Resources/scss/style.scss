@@ -18,6 +18,15 @@ form {
   margin-bottom: 15px;
 }
 
+.fade-bottom {
+    width: 2000px;
+    height: 150px;
+    z-index: 3;
+    background: url(http://127.0.0.1:3000/static/images/bottom-fade.png) bottom center repeat;
+    position: absolute;
+    top: 100px;
+}
+
 .inlineBlock {
   display: inline-block;
 }

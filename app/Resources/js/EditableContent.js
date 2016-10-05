@@ -95,6 +95,7 @@ const EditableContent = React.createClass({
                 readOnly={ this.state.editMode ? false:true }
               />
             </div>
+            {/*<div className="fade-bottom"></div>*/}
           </div>
         );
     }

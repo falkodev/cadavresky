@@ -59,7 +59,6 @@ function ajaxDelete(file, callback) {
 
 let cache = [];
 export function loadData(that, page, language) {
-  console.log('page', page, 'language', language);
   if(cache.hasOwnProperty(page) && cache[page].id === page && cache[page].language === language) {
     that.setState({
       isLoading: false,
@@ -69,7 +68,6 @@ export function loadData(that, page, language) {
     let data;
     ajaxGet(pathname+'/api/get/pages/'+page+'/'+language,
       function(response){
-        console.log('response', response);
         const jsonContent = JSON.parse(response).data;
         that.setState({
           isLoading: false,
