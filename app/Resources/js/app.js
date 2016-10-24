@@ -84,9 +84,11 @@ export default function render(location, isAdminLoggedIn=false) {
     case (/dev/).test(urlMatch):
       component = <Page page={2} />;
       break;
-    /***** fin ajout dev *****/
-    default: // error 404
-      component = <Page page={1} />;
+    default:
+      component = <Page page={2} isAdminLoggedIn={isAdminLoggedIn}/>;
+      /***** fin ajout dev *****/
+//    default: // error 404
+//      component = <Page page={1} />;
   }
 
   ReactDom.render((
