@@ -38,10 +38,10 @@ menus.shuffle();
 
 let pathname;
 if (process.env.host === '/') { //prod server
-  pathname = location.protocol + '//' + location.host;
+  pathname = location.protocol + '//' + location.host + '/dev';
 }
 else {
-  pathname = location.protocol + '//' + location.host + '/' + process.env.host;
+  pathname = location.protocol + '//' + location.host + '/' + process.env.host + '/dev';
 }
 
 const Menu = React.createClass({

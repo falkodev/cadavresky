@@ -28,57 +28,63 @@ export default function render(location, isAdminLoggedIn=false) {
   }
 
   switch (true) {
-    case (/^$/).test(urlMatch): // regex: urlMatch empty -> homepage
-      component = <Page page={2} />;
-      break;
-    case (/^\/$/).test(urlMatch): // regex: urlMatch = '/' -> homepage
-      component = <Page page={2} />;
-      break;
-    case (/\/login/).test(urlMatch):
+//    case (/^$/).test(urlMatch): // regex: urlMatch empty -> homepage
+//      component = <Page page={2} />;
+//      break;
+//    case (/^\/$/).test(urlMatch): // regex: urlMatch = '/' -> homepage
+//      component = <Page page={2} />;
+//      break;
+    // prod: /\/login/
+    case (/dev\/login/).test(urlMatch):
       component = <Login callbackParent={connectionHandler} />;
       break;
-    case (/\/whoswho/).test(urlMatch): // regex -> allow '/whoswho' and '/whoswho/'
+    case (/dev\/whoswho/).test(urlMatch): // regex -> allow '/whoswho' and '/whoswho/'
       component = <Page page={2} isAdminLoggedIn={isAdminLoggedIn} />;
       break;
-    case (/\/projectology/).test(urlMatch):
+    case (/dev\/projectology/).test(urlMatch):
       component = <Page page={3} isAdminLoggedIn={isAdminLoggedIn} />;
       break;
-    case (/\/zoo/).test(urlMatch):
+    case (/dev\/zoo/).test(urlMatch):
       component = <Page page={4} isAdminLoggedIn={isAdminLoggedIn} />;
       break;
-    case (/\/shop/).test(urlMatch):
+    case (/dev\/shop/).test(urlMatch):
       component = <Page page={5} isAdminLoggedIn={isAdminLoggedIn} />;
       break;
-    case (/\/goodies/).test(urlMatch):
+    case (/dev\/goodies/).test(urlMatch):
       component = <Page page={6} isAdminLoggedIn={isAdminLoggedIn} />;
       break;
-    case (/\/wear\/\w/).test(urlMatch): // regex:\w -> any alphanumeric character (in order to test /wear/xxx for example)
+    case (/dev\/wear\/\w/).test(urlMatch): // regex:\w -> any alphanumeric character (in order to test /wear/xxx for example)
       component = <DisplayProject page={7} />;
       break;
-    case (/\/wear/).test(urlMatch):
+    case (/dev\/wear/).test(urlMatch):
       component = <Page page={7} isAdminLoggedIn={isAdminLoggedIn} project="true" />;
       break;
-    case (/\/adorn\/\w/).test(urlMatch): // regex:\w -> any alphanumeric character (in order to test /adorn/xxx for example)
+    case (/dev\/adorn\/\w/).test(urlMatch): // regex:\w -> any alphanumeric character (in order to test /adorn/xxx for example)
       component = <DisplayProject page={8} />;
       break;
-    case (/\/adorn/).test(urlMatch):
+    case (/dev\/adorn/).test(urlMatch):
       component = <Page page={8} isAdminLoggedIn={isAdminLoggedIn} project="true" />;
       break;
-    case (/\/collaboratory\/\w/).test(urlMatch): // regex:\w -> any alphanumeric character (in order to test /collaboratory/xxx for example)
+    case (/dev\/collaboratory\/\w/).test(urlMatch): // regex:\w -> any alphanumeric character (in order to test /collaboratory/xxx for example)
       component = <DisplayProject page={9} />;
       break;
-    case (/\/collaboratory/).test(urlMatch):
+    case (/dev\/collaboratory/).test(urlMatch):
       component = <Page page={9} isAdminLoggedIn={isAdminLoggedIn} project="true" />;
       break;
-    case (/\/buddies\/\w/).test(urlMatch): // regex:\w -> any alphanumeric character (in order to test /buddies/xxx for example)
+    case (/dev\/buddies\/\w/).test(urlMatch): // regex:\w -> any alphanumeric character (in order to test /buddies/xxx for example)
       component = <DisplayProject page={10} />;
       break;
-    case (/\/buddies/).test(urlMatch):
+    case (/dev\/buddies/).test(urlMatch):
       component = <Page page={10} isAdminLoggedIn={isAdminLoggedIn} project="true" />;
       break;
-    case (/\/contact/).test(urlMatch):
+    case (/dev\/contact/).test(urlMatch):
       component = <Contact />;
       break;
+    /******* ajout dev *******/
+    case (/dev/).test(urlMatch):
+      component = <Page page={2} />;
+      break;
+    /***** fin ajout dev *****/
     default: // error 404
       component = <Page page={1} />;
   }
